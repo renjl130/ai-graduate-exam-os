@@ -1,0 +1,55 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Databases and user state
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.sqlite-*
+data/uploads/
+backend/data/
+.runtime-ports
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+venv/
+.venv/
+**/venv/
+
+# Node / Next.js
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+out/
+**/out/
+
+# Logs and build output
+*.log
+*.out.log
+*.err.log
+dist/
+build/
+
+# Local tools / IDE / OS
+.claude/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Obsolete prototype (production UI is frontend-next)
+frontend/

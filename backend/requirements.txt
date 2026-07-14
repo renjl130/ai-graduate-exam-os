@@ -1,0 +1,28 @@
+# AI 考研学习操作系统 - 生产级依赖
+# ========================================
+
+# 核心框架
+fastapi>=0.115.6
+uvicorn[standard]>=0.34.0
+pydantic>=2.13.4
+pydantic-settings>=2.10.1
+
+# 数据库
+sqlalchemy>=2.0.41
+alembic>=1.15.2
+
+# 认证与安全
+python-jose[cryptography]>=3.4.0
+passlib[bcrypt]>=1.7.4
+python-dotenv>=1.0.1
+
+# AI服务
+httpx>=0.28.1
+
+# 文件处理
+python-multipart>=0.0.18
+PyPDF2>=3.0.1
+
+# 工具
+loguru>=0.7.3
+tenacity>=9.1.2
