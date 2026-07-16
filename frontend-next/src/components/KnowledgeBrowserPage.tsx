@@ -57,6 +57,7 @@ export default function KnowledgeBrowserPage() {
   const [loading, setLoading] = useState(false);
   const [aiExplanation, setAiExplanation] = useState("");
   const [aiLoading, setAiLoading] = useState(false);
+  const [loadError, setLoadError] = useState("");
 
   const headers = () => {
     const token = getToken();
@@ -68,43 +69,58 @@ export default function KnowledgeBrowserPage() {
 
   // 加载学科
   useEffect(() => {
-    fetch(`${API_BASE}/api/knowledge/subjects`)
-      .then((r) => r.json())
+    setLoadError("");
+    fetch(`${API_BASE}/api/knowledge/subjects`, { headers: headers() })
+      .then(async (r) => {
+        if (!r.ok) throw new Error((await r.json().catch(() => ({}))).detail || `\u77e5\u8bc6\u5e93\u8bf7\u6c42\u5931\u8d25 (${r.status})`);
+        return r.json();
+      })
       .then((data) => {
         setSubjects(data.subjects || []);
         if (data.subjects?.length > 0) {
           setSelectedSubject(data.subjects[0].id);
         }
       })
-      .catch(() => {});
+      .catch((error) => setLoadError(error instanceof Error ? error.message : "\u77e5\u8bc6\u5e93\u8bf7\u6c42\u5931\u8d25"));
   }, []);
 
   // 加载章节
   useEffect(() => {
     if (!selectedSubject) return;
-    fetch(`${API_BASE}/api/knowledge/subjects/${selectedSubject}/chapters`)
-      .then((r) => r.json())
+    setLoadError("");
+    fetch(`${API_BASE}/api/knowledge/subjects/${selectedSubject}/chapters`, { headers: headers() })
+      .then(async (r) => {
+        if (!r.ok) throw new Error((await r.json().catch(() => ({}))).detail || `\u77e5\u8bc6\u5e93\u8bf7\u6c42\u5931\u8d25 (${r.status})`);
+        return r.json();
+      })
       .then((data) => {
         setChapters(data.chapters || []);
         if (data.chapters?.length > 0) {
           setSelectedChapter(data.chapters[0].id);
         }
       })
-      .catch(() => {});
+      .catch((error) => setLoadError(error instanceof Error ? error.message : "\u77e5\u8bc6\u5e93\u8bf7\u6c42\u5931\u8d25"));
   }, [selectedSubject]);
 
   // 加载知识点
   useEffect(() => {
     if (!selectedChapter) return;
     setLoading(true);
-    fetch(`${API_BASE}/api/knowledge/chapters/${selectedChapter}/points`)
-      .then((r) => r.json())
+    setLoadError("");
+    fetch(`${API_BASE}/api/knowledge/chapters/${selectedChapter}/points`, { headers: headers() })
+      .then(async (r) => {
+        if (!r.ok) throw new Error((await r.json().catch(() => ({}))).detail || `\u77e5\u8bc6\u5e93\u8bf7\u6c42\u5931\u8d25 (${r.status})`);
+        return r.json();
+      })
       .then((data) => {
         setPoints(data.knowledge_points || []);
         setSelectedPoint(null);
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch((error) => {
+        setLoadError(error instanceof Error ? error.message : "\u77e5\u8bc6\u5e93\u8bf7\u6c42\u5931\u8d25");
+        setLoading(false);
+      });
   }, [selectedChapter]);
 
   // 搜索知识点
@@ -112,13 +128,17 @@ export default function KnowledgeBrowserPage() {
     if (!searchQuery.trim()) return;
     setLoading(true);
     try {
+      setLoadError("");
       const res = await fetch(
-        `${API_BASE}/api/knowledge/search?q=${encodeURIComponent(searchQuery)}&limit=20`
+        `${API_BASE}/api/knowledge/search?q=${encodeURIComponent(searchQuery)}&limit=20`,
+        { headers: headers() }
       );
+      if (!res.ok) throw new Error((await res.json().catch(() => ({}))).detail || `\u77e5\u8bc6\u5e93\u8bf7\u6c42\u5931\u8d25 (${res.status})`);
       const data = await res.json();
       setSearchResults(data.results || []);
-    } catch {
+    } catch (error) {
       setSearchResults([]);
+      setLoadError(error instanceof Error ? error.message : "\u77e5\u8bc6\u5e93\u8bf7\u6c42\u5931\u8d25");
     }
     setLoading(false);
   };
@@ -166,6 +186,11 @@ export default function KnowledgeBrowserPage() {
             结构化知识管理 · 点击知识点查看详细内容
           </p>
         </div>
+        {loadError && (
+          <div className="rounded-xl border border-red-400/20 bg-red-500/10 px-4 py-2 text-sm text-red-200">
+            {loadError}
+          </div>
+        )}
         <div className="flex w-full gap-2 lg:w-auto">
           <input
             type="text"
