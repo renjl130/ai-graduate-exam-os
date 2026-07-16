@@ -155,3 +155,94 @@ body { font-size: var(--type-body); line-height: 1.6; }
 .back-to-top.is-visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
 .back-to-top:hover { color: var(--brand-500); border-color: var(--brand-300); transform: translateY(-2px); }
 @media (max-width: 760px) { .back-to-top { right: 14px; bottom: 82px; } }
+
+/* Header overflow and knowledge readability fixes */
+.app-topbar {
+  grid-template-columns: minmax(180px, 1fr) minmax(240px, 480px) max-content;
+}
+.topbar-actions {
+  min-width: 0;
+  flex-wrap: nowrap;
+}
+.topbar-actions > * {
+  flex: 0 0 auto;
+}
+.header-study-status,
+.header-points,
+.exam-reminder,
+.ai-entry,
+.focus-pill {
+  white-space: nowrap;
+}
+.header-study-status span,
+.header-points span,
+.exam-reminder span,
+.ai-entry span,
+.focus-pill span {
+  white-space: nowrap;
+}
+.ai-entry {
+  display: flex;
+  justify-content: center;
+}
+
+.knowledge-browser-page {
+  color: var(--text-primary);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+.knowledge-browser-page .knowledge-reading-text,
+.knowledge-browser-page .knowledge-callout {
+  line-height: 1.75;
+  letter-spacing: 0.005em;
+}
+.knowledge-browser-page .knowledge-callout {
+  font-weight: 450;
+}
+
+@media (max-width: 1699px) {
+  .header-study-status,
+  .user-menu-copy,
+  .user-menu-chevron {
+    display: none !important;
+  }
+}
+@media (max-width: 1499px) {
+  .header-points {
+    display: none !important;
+  }
+}
+@media (max-width: 1440px) {
+  .app-topbar {
+    grid-template-columns: minmax(160px, 0.8fr) minmax(210px, 360px) max-content;
+    gap: 12px;
+  }
+}
+@media (max-width: 1320px) {
+  .header-action-label,
+  .focus-label {
+    display: none !important;
+  }
+}
+@media (max-width: 1180px) {
+  .app-topbar {
+    grid-template-columns: minmax(150px, 0.8fr) minmax(180px, 320px) max-content;
+  }
+}
+@media (max-width: 1023px) {
+  .app-topbar {
+    grid-template-columns: 1fr minmax(180px, 320px) max-content;
+    height: 64px;
+    padding: 0 14px;
+  }
+  .topbar-actions .ai-entry,
+  .topbar-actions .focus-pill {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  .app-topbar {
+    grid-template-columns: 1fr 40px max-content;
+    gap: 7px;
+  }
+}

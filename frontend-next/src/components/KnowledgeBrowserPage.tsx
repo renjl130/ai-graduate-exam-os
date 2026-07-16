@@ -177,17 +177,17 @@ export default function KnowledgeBrowserPage() {
   const displayPoints = searchQuery.trim() ? searchResults : points;
 
   return (
-    <div className="animate-fade-in mx-auto max-w-[1600px]">
+    <div className="knowledge-browser-page animate-fade-in mx-auto max-w-[1600px]">
       {/* Header */}
       <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-white">📚 知识库</h2>
-          <p className="text-sm text-gray-400 mt-1">
+          <h2 className="text-2xl font-bold text-[var(--text-primary)]">📚 知识库</h2>
+          <p className="mt-1 text-sm text-[var(--text-secondary)]">
             结构化知识管理 · 点击知识点查看详细内容
           </p>
         </div>
         {loadError && (
-          <div className="rounded-xl border border-red-400/20 bg-red-500/10 px-4 py-2 text-sm text-red-200">
+          <div className="rounded-xl border border-red-400/20 bg-red-500/10 px-4 py-2 text-sm text-[var(--red-500)]">
             {loadError}
           </div>
         )}
@@ -198,7 +198,7 @@ export default function KnowledgeBrowserPage() {
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             placeholder="搜索知识点..."
-            className="px-4 py-2 rounded-xl text-sm text-white placeholder-gray-500 outline-none"
+            className="rounded-xl px-4 py-2 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)]"
             style={{
               background: "var(--glass-06)",
               border: "1px solid var(--glass-10)",
@@ -245,7 +245,7 @@ export default function KnowledgeBrowserPage() {
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-12" style={{ minHeight: "70vh" }}>
         {/* 左栏：章节列表 */}
         <div className="min-w-0 rounded-2xl p-4 xl:col-span-3 xl:max-h-[calc(100dvh-220px)] xl:overflow-y-auto" style={cardStyle}>
-          <h3 className="text-sm font-semibold text-gray-300 mb-3">📑 章节</h3>
+          <h3 className="mb-3 text-sm font-semibold text-[var(--text-primary)]">📑 章节</h3>
           <div className="space-y-1">
             {chapters.map((ch) => (
               <button
@@ -258,10 +258,10 @@ export default function KnowledgeBrowserPage() {
                       ? "color-mix(in srgb,var(--brand-500) 12%,transparent)"
                       : "transparent",
                   color:
-                    selectedChapter === ch.id ? "var(--surface-subtle)" : "var(--text-muted)",
+                    selectedChapter === ch.id ? "var(--brand-600)" : "var(--text-secondary)",
                 }}
               >
-                <div className="flex items-center justify-between gap-2"><span className="font-medium">{ch.name}</span><span className="shrink-0 rounded-full bg-white/[0.05] px-2 py-0.5 text-[10px] text-slate-500">{ch.point_count ?? 0}</span></div>
+                <div className="flex items-center justify-between gap-2"><span className="font-medium">{ch.name}</span><span className="shrink-0 rounded-full bg-[var(--surface-subtle)] px-2 py-0.5 text-[10px] text-[var(--text-muted)]">{ch.point_count ?? 0}</span></div>
                 {ch.description && (
                   <div className="text-xs mt-0.5 opacity-60 truncate">
                     {ch.description}
@@ -270,7 +270,7 @@ export default function KnowledgeBrowserPage() {
               </button>
             ))}
             {chapters.length === 0 && (
-              <p className="text-sm text-gray-500 px-3">暂无章节</p>
+              <p className="px-3 text-sm text-[var(--text-muted)]">暂无章节</p>
             )}
           </div>
         </div>
@@ -278,14 +278,14 @@ export default function KnowledgeBrowserPage() {
         {/* 中栏：知识点列表 */}
         <div className="min-w-0 rounded-2xl p-4 xl:col-span-4 xl:max-h-[calc(100dvh-220px)] xl:overflow-y-auto" style={cardStyle}>
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-sm font-semibold text-gray-300">
+            <h3 className="text-sm font-semibold text-[var(--text-primary)]">
               📝 知识点 {displayPoints.length > 0 && `(${displayPoints.length})`}
             </h3>
           </div>
           {loading ? (
             <div className="text-center py-8">
               <div className="text-2xl animate-spin">⏳</div>
-              <p className="text-sm text-gray-500 mt-2">加载中...</p>
+              <p className="mt-2 text-sm text-[var(--text-muted)]">加载中...</p>
             </div>
           ) : (
             <div className="space-y-2">
@@ -315,7 +315,7 @@ export default function KnowledgeBrowserPage() {
                         background: importanceColors[p.importance] || "var(--text-muted)",
                       }}
                     />
-                    <span className="text-sm font-medium text-white truncate">
+                    <span className="truncate text-sm font-medium text-[var(--text-primary)]">
                       {p.title}
                     </span>
                   </div>
@@ -333,7 +333,7 @@ export default function KnowledgeBrowserPage() {
                       </span>
                     ))}
                     {p.mastery > 0 && (
-                      <span className="text-[10px] text-gray-500 ml-auto">
+                      <span className="ml-auto text-[10px] text-[var(--text-muted)]">
                         掌握 {p.mastery}%
                       </span>
                     )}
@@ -342,7 +342,7 @@ export default function KnowledgeBrowserPage() {
               ))}
               {displayPoints.length === 0 && (
                 <div className="text-center py-8">
-                  <p className="text-gray-500 text-sm">
+                  <p className="text-sm text-[var(--text-muted)]">
                     {searchQuery.trim() ? "未找到匹配的知识点" : "暂无知识点"}
                   </p>
                 </div>
@@ -371,7 +371,7 @@ export default function KnowledgeBrowserPage() {
                     : "🟢 低频考点"}
                 </span>
                 {selectedPoint.quality_version && selectedPoint.quality_version >= 2 && (
-                  <span className="rounded-full border border-cyan-400/20 bg-cyan-500/10 px-2 py-0.5 text-xs font-medium text-cyan-200">
+                  <span className="rounded-full border border-cyan-400/20 bg-cyan-500/10 px-2 py-0.5 text-xs font-medium text-[var(--cyan-500)]">
                     ✨ 深度整理版
                   </span>
                 )}
@@ -389,24 +389,24 @@ export default function KnowledgeBrowserPage() {
                 ))}
               </div>
 
-              <h2 className="text-xl font-bold text-white mb-4">
+              <h2 className="mb-4 text-xl font-bold text-[var(--text-primary)]">
                 {selectedPoint.title}
               </h2>
 
               {selectedPoint.summary && (
-                <div className="mb-5 rounded-xl border border-blue-400/10 bg-blue-500/[0.05] p-4 text-sm leading-relaxed text-blue-100/80">
-                  <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-blue-300/70">一句话掌握</div>
+                <div className="knowledge-callout mb-5 rounded-xl border border-blue-400/10 bg-blue-500/[0.05] p-4 text-sm leading-relaxed text-[var(--text-secondary)]">
+                  <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-[var(--brand-600)]">一句话掌握</div>
                   {selectedPoint.summary}
                 </div>
               )}
 
               {/* 核心内容 */}
               <div className="mb-6">
-                <h3 className="text-sm font-semibold text-gray-300 mb-2">
+                <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-2">
                   📖 核心内容
                 </h3>
                 <div
-                  className="text-sm text-gray-300 leading-relaxed whitespace-pre-wrap"
+                  className="knowledge-reading-text whitespace-pre-wrap text-sm leading-relaxed text-[var(--text-secondary)]"
                   style={{
                     background: "var(--glass-02)",
                     borderRadius: "12px",
@@ -420,8 +420,8 @@ export default function KnowledgeBrowserPage() {
               {/* 深度知识模块 */}
               {selectedPoint.key_points && (
                 <div className="mb-6">
-                  <h3 className="mb-2 text-sm font-semibold text-gray-300">🧭 关键要点</h3>
-                  <div className="whitespace-pre-wrap rounded-xl border border-cyan-400/10 bg-cyan-500/[0.05] p-4 text-sm leading-relaxed text-cyan-100/80">
+                  <h3 className="mb-2 text-sm font-semibold text-[var(--text-primary)]">🧭 关键要点</h3>
+                  <div className="knowledge-callout whitespace-pre-wrap rounded-xl border border-cyan-400/10 bg-cyan-500/[0.05] p-4 text-sm leading-relaxed text-[var(--text-secondary)]">
                     {selectedPoint.key_points}
                   </div>
                 </div>
@@ -429,8 +429,8 @@ export default function KnowledgeBrowserPage() {
 
               {selectedPoint.case_analysis && (
                 <div className="mb-6">
-                  <h3 className="mb-2 text-sm font-semibold text-gray-300">🔍 案例与应用</h3>
-                  <div className="whitespace-pre-wrap rounded-xl border border-sky-400/10 bg-sky-500/[0.05] p-4 text-sm leading-relaxed text-sky-100/80">
+                  <h3 className="mb-2 text-sm font-semibold text-[var(--text-primary)]">🔍 案例与应用</h3>
+                  <div className="knowledge-callout whitespace-pre-wrap rounded-xl border border-sky-400/10 bg-sky-500/[0.05] p-4 text-sm leading-relaxed text-[var(--text-secondary)]">
                     {selectedPoint.case_analysis}
                   </div>
                 </div>
@@ -438,8 +438,8 @@ export default function KnowledgeBrowserPage() {
 
               {selectedPoint.common_mistakes && (
                 <div className="mb-6">
-                  <h3 className="mb-2 text-sm font-semibold text-gray-300">⚠️ 易错与辨析</h3>
-                  <div className="whitespace-pre-wrap rounded-xl border border-rose-400/10 bg-rose-500/[0.05] p-4 text-sm leading-relaxed text-rose-100/80">
+                  <h3 className="mb-2 text-sm font-semibold text-[var(--text-primary)]">⚠️ 易错与辨析</h3>
+                  <div className="knowledge-callout whitespace-pre-wrap rounded-xl border border-rose-400/10 bg-rose-500/[0.05] p-4 text-sm leading-relaxed text-[var(--text-secondary)]">
                     {selectedPoint.common_mistakes}
                   </div>
                 </div>
@@ -447,8 +447,8 @@ export default function KnowledgeBrowserPage() {
 
               {selectedPoint.training_steps && (
                 <div className="mb-6">
-                  <h3 className="mb-2 text-sm font-semibold text-gray-300">🏋️ 专项训练</h3>
-                  <div className="whitespace-pre-wrap rounded-xl border border-orange-400/10 bg-orange-500/[0.05] p-4 text-sm leading-relaxed text-orange-100/80">
+                  <h3 className="mb-2 text-sm font-semibold text-[var(--text-primary)]">🏋️ 专项训练</h3>
+                  <div className="knowledge-callout whitespace-pre-wrap rounded-xl border border-orange-400/10 bg-orange-500/[0.05] p-4 text-sm leading-relaxed text-[var(--text-secondary)]">
                     {selectedPoint.training_steps}
                   </div>
                 </div>
@@ -456,8 +456,8 @@ export default function KnowledgeBrowserPage() {
 
               {selectedPoint.self_test && (
                 <div className="mb-6">
-                  <h3 className="mb-2 text-sm font-semibold text-gray-300">✅ 自测题</h3>
-                  <div className="whitespace-pre-wrap rounded-xl border border-emerald-400/10 bg-emerald-500/[0.05] p-4 text-sm leading-relaxed text-emerald-100/80">
+                  <h3 className="mb-2 text-sm font-semibold text-[var(--text-primary)]">✅ 自测题</h3>
+                  <div className="knowledge-callout whitespace-pre-wrap rounded-xl border border-emerald-400/10 bg-emerald-500/[0.05] p-4 text-sm leading-relaxed text-[var(--text-secondary)]">
                     {selectedPoint.self_test}
                   </div>
                 </div>
@@ -466,11 +466,11 @@ export default function KnowledgeBrowserPage() {
               {/* 考试要点 */}
               {selectedPoint.exam_tips && (
                 <div className="mb-6">
-                  <h3 className="text-sm font-semibold text-gray-300 mb-2">
+                  <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-2">
                     🎯 考试要点
                   </h3>
                   <div
-                    className="text-sm text-yellow-200/80 leading-relaxed whitespace-pre-wrap"
+                    className="knowledge-callout whitespace-pre-wrap text-sm leading-relaxed text-[var(--text-secondary)]"
                     style={{
                       background: "color-mix(in srgb,var(--orange-500) 5%,transparent)",
                       borderRadius: "12px",
@@ -486,11 +486,11 @@ export default function KnowledgeBrowserPage() {
               {/* 答题模板 */}
               {selectedPoint.answer_template && (
                 <div className="mb-6">
-                  <h3 className="text-sm font-semibold text-gray-300 mb-2">
+                  <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-2">
                     📝 答题模板
                   </h3>
                   <div
-                    className="text-sm text-green-200/80 leading-relaxed whitespace-pre-wrap"
+                    className="knowledge-callout whitespace-pre-wrap text-sm leading-relaxed text-[var(--text-secondary)]"
                     style={{
                       background: "color-mix(in srgb,var(--green-500) 5%,transparent)",
                       borderRadius: "12px",
@@ -505,8 +505,8 @@ export default function KnowledgeBrowserPage() {
 
               {selectedPoint.memory_tips && (
                 <div className="mb-6">
-                  <h3 className="mb-2 text-sm font-semibold text-gray-300">🧠 速记与辨析</h3>
-                  <div className="rounded-xl border border-violet-400/10 bg-violet-500/[0.05] p-4 text-sm leading-relaxed text-violet-100/80 whitespace-pre-wrap">
+                  <h3 className="mb-2 text-sm font-semibold text-[var(--text-primary)]">🧠 速记与辨析</h3>
+                  <div className="knowledge-callout whitespace-pre-wrap rounded-xl border border-violet-400/10 bg-violet-500/[0.05] p-4 text-sm leading-relaxed text-[var(--text-secondary)]">
                     {selectedPoint.memory_tips}
                   </div>
                 </div>
@@ -514,7 +514,7 @@ export default function KnowledgeBrowserPage() {
 
               {/* AI 讲解按钮 */}
               <div className="mb-6">
-                <h3 className="text-sm font-semibold text-gray-300 mb-2">
+                <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-2">
                   🤖 AI 讲解
                 </h3>
                 <div className="mb-3 flex flex-wrap gap-2">
@@ -554,7 +554,7 @@ export default function KnowledgeBrowserPage() {
                 </div>
                 {aiExplanation && (
                   <div
-                    className="text-sm text-blue-200/80 leading-relaxed whitespace-pre-wrap"
+                    className="knowledge-callout whitespace-pre-wrap text-sm leading-relaxed text-[var(--text-secondary)]"
                     style={{
                       background: "color-mix(in srgb,var(--brand-500) 5%,transparent)",
                       borderRadius: "12px",
@@ -570,10 +570,10 @@ export default function KnowledgeBrowserPage() {
           ) : (
             <div className="flex flex-col items-center justify-center h-full text-center">
               <div className="text-5xl mb-4">📚</div>
-              <p className="text-gray-400 text-sm">
+              <p className="text-sm text-[var(--text-secondary)]">
                 选择一个知识点查看详情
               </p>
-              <p className="text-gray-500 text-xs mt-2">
+              <p className="mt-2 text-xs text-[var(--text-muted)]">
                 点击左侧知识点列表中的任意一项
               </p>
             </div>

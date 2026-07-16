@@ -78,7 +78,7 @@ export default function AppHeader({ activeItem, onMenu, onCommand, onNavigate }:
         </button>
 
         <button className="ai-entry" onClick={() => onNavigate("tutor")} title="打开 AI 学习助手">
-          <Bot size={18} /><span className="hidden xl:inline">AI 助手</span>
+          <Bot size={18} /><span className="header-action-label hidden xl:inline">AI 助手</span>
         </button>
 
         <FocusTimer />
@@ -100,8 +100,8 @@ export default function AppHeader({ activeItem, onMenu, onCommand, onNavigate }:
         <div className="header-popover-wrap">
           <button className="user-menu-trigger" aria-label="打开用户菜单" aria-expanded={userOpen} onClick={() => { setUserOpen((value) => !value); setNotificationsOpen(false); }}>
             <span className="user-avatar">{displayName.slice(0, 1)}</span>
-            <span className="hidden min-w-0 text-left xl:block"><strong>{displayName}</strong><small>备考学习者</small></span>
-            <ChevronDown size={14} className="hidden xl:block" />
+            <span className="user-menu-copy hidden min-w-0 text-left xl:block"><strong>{displayName}</strong><small>备考学习者</small></span>
+            <ChevronDown size={14} className="user-menu-chevron hidden xl:block" />
           </button>
           {userOpen && (
             <div className="header-popover user-popover">

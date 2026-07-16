@@ -131,7 +131,7 @@ export default function FocusTimer() {
     <>
       <button className={`focus-pill ${timer.status === "running" ? "is-running" : ""}`} onClick={() => setOpen(true)}>
         <Clock3 size={16} />
-        <span className="hidden sm:inline">{timer.status === "idle" ? "开始专注" : formatTime(elapsed)}</span>
+        <span className="focus-label hidden sm:inline">{timer.status === "idle" ? "开始专注" : formatTime(elapsed)}</span>
         {timer.status === "running" && <span className="focus-live-dot" />}
       </button>
 
