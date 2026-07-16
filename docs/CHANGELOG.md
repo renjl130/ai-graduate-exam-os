@@ -12,7 +12,7 @@
 ### Changed
 
 - 加固 `cloud-functions/api/[[default]].js`：支持 Node.js 流式请求体、上传、NDJSON 响应流、PDF Range 和同源重定向；
-- 清理 hop-by-hop 与失效传输头，API 响应强制 `no-store`，并在 `edgeone.json` 为 `/api/*` 增加禁止缓存标头；
+- 清理 hop-by-hop、请求 `content-length` 与失效传输头，避免 EdgeOne 转发 POST/上传时出现长度不匹配；API 响应强制 `no-store`，并在 `edgeone.json` 为 `/api/*` 增加禁止缓存标头；
 - 上游配置错误或连接失败时返回结构化 502，不暴露内部异常。
 
 ### Verified

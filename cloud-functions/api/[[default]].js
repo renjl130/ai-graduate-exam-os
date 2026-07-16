@@ -35,6 +35,7 @@ export default async function onRequest({ request, env }) {
     const requestHeaders = new Headers(request.headers);
     stripHopByHopHeaders(requestHeaders);
     requestHeaders.delete("host");
+    requestHeaders.delete("content-length");
     requestHeaders.set("x-forwarded-host", incoming.host);
     requestHeaders.set("x-forwarded-proto", incoming.protocol.slice(0, -1));
 
