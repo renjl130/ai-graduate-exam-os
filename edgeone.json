@@ -1,0 +1,11 @@
+{
+  "installCommand": "npm ci && npm ci --prefix frontend-next",
+  "buildCommand": "npm run check && npm run build",
+  "outputDirectory": "frontend-next/out",
+  "nodeVersion": "22.11.0",
+  "cloudFunctions": {
+    "nodejs": {
+      "maxDuration": 120
+    }
+  }
+}

@@ -1,4 +1,4 @@
-﻿# 架构与产品决策记录（DECISIONS / ADR）
+# 架构与产品决策记录（DECISIONS / ADR）
 
 > 批准日期：2026-07-16
 
@@ -72,6 +72,14 @@
 - 决策：工具栏控件禁止收缩和换行，按可用宽度隐藏低优先级信息。
 - 原因：viewport 断点与侧栏占用叠加会使操作列小于内容自然宽度，造成竖排和裁切。
 
+## ADR-013：EdgeOne 仅作为国内访问镜像
+
+- 状态：Accepted
+- 决策：EdgeOne Pages 托管相同静态前端，并通过同源 `/api/*` 代理 Cloudflare Worker。
+- 原因：改善中国大陆用户对 `workers.dev` 入口的可达性，同时避免数据库迁移和双写。
+- 数据权威：Cloudflare Worker、D1、KV 和 Workers AI 仍是唯一商业生产数据面。
+- 约束：镜像不得保存用户密码、JWT 密钥、D1 或 KV 凭据；只配置公开上游 Origin。
+- 回滚：停止或删除 EdgeOne 项目即可，Cloudflare 主站不受影响。
 ## ADR 模板
 
 ```markdown

@@ -1,9 +1,10 @@
-﻿# 佳乐考研长期项目上下文（PROJECT MEMORY）
+# 佳乐考研长期项目上下文（PROJECT MEMORY）
 
 > 状态：已批准并正式生效
 > 最近更新：2026-07-16
 > 项目路径：`C:\Users\jd-liverr\Desktop\ai-graduate-exam-os`
 > 生产主线：Cloudflare
+> 国内访问镜像：EdgeOne Pages
 > 自托管兼容：FastAPI
 
 ## 1. 文档读取顺序
@@ -47,6 +48,7 @@
 
 - 登录后产品壳和主要功能页面已完成；
 - Cloudflare 商业生产链路已上线；
+- EdgeOne Pages 国内访问镜像配置已纳入仓库，线上项目待创建；
 - FastAPI 自托管链路保留；
 - 知识库、词汇、题库和学习数据已具备真实结构；
 - 自动化测试、安全防滥用、监控、备份和管理后台仍需建设。
@@ -71,6 +73,13 @@
 - Cloudflare D1、KV、Workers AI
 - Wrangler + GitHub Actions
 
+### 国内访问镜像（不改变数据权威）
+
+- Tencent EdgeOne Pages 托管相同 Next.js 静态导出；
+- EdgeOne Cloud Functions 将同源 `/api/*` 流式转发到 Cloudflare Worker；
+- D1、KV、Workers AI 和认证仍由 Cloudflare 生产主线负责；
+- 国内镜像不复制数据库，不形成双写或第二生产数据源。
+
 ### Tier B 自托管兼容
 
 - FastAPI + Uvicorn
@@ -83,11 +92,13 @@
 ```text
 frontend-next/     当前生产前端
 cloudflare/        Cloudflare Worker 与 D1 迁移
+cloud-functions/   EdgeOne `/api/*` 同源代理
 backend/           FastAPI 自托管兼容后端
 data/              知识原始资料
 docs/              长期项目文档
 scripts/           数据与部署辅助脚本
 wrangler.jsonc     Cloudflare 绑定
+edgeone.json       EdgeOne 构建与 Functions 配置
 Dockerfile         FastAPI 兼容部署镜像
 ```
 
@@ -134,7 +145,8 @@ D1 迁移验证后的基线：
 - FastAPI 不是 Cloudflare 的无损实时热备；
 - 新功能是否同步 FastAPI 必须在任务分析中明确；
 - D1 已发布迁移不可回写，只能追加补偿迁移或修复脚本；
-- 大规模重构前必须先建立测试和契约保护。
+- 大规模重构前必须先建立测试和契约保护；
+- EdgeOne 仅作为国内访问镜像，Cloudflare 仍是唯一数据与 API 权威。
 
 ## 10. Design System 摘要
 
@@ -171,7 +183,8 @@ D1 迁移验证后的基线：
 - 2026-07-16：长期治理文档获批准；
 - 2026-07-16：Cloudflare 确认为 Tier A，FastAPI 确认为 Tier B；
 - 2026-07-16：GitHub `main` 与 Cloudflare 生产环境完成同步；
-- 2026-07-16：修复顶部工具栏竖排/溢出和知识库文字可读性，已部署到 Cloudflare 生产环境。
+- 2026-07-16：修复顶部工具栏竖排/溢出和知识库文字可读性，已部署到 Cloudflare 生产环境；
+- 2026-07-16：加入 EdgeOne 国内镜像可复现构建配置并加固 `/api/*` 流式代理，线上项目待创建。
 
 ## 14. 验证基线
 
@@ -182,4 +195,5 @@ D1 迁移验证后的基线：
 - Next.js 生产构建；
 - D1 迁移顺序执行；
 - 桌面多断点和 390px 移动端；
-- 登录页、Dashboard、知识库深浅主题。
+- 登录页、Dashboard、知识库深浅主题；
+- EdgeOne 代理 GET/POST、流式响应、压缩响应、重定向和 PDF Range 兼容性。

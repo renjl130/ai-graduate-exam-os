@@ -1,4 +1,4 @@
-﻿# 系统架构（ARCHITECTURE）
+# 系统架构（ARCHITECTURE）
 
 > 最近更新：2026-07-16
 
@@ -6,14 +6,16 @@
 
 ```mermaid
 flowchart LR
-  U["考研学习者"] --> FE["Next.js 静态前端"]
-  FE --> CF["Cloudflare Worker / Hono"]
+  U["考研学习者"] --> CFA["Cloudflare Worker Assets"]
+  U --> EO["EdgeOne Pages 国内镜像"]
+  CFA --> CF["Cloudflare Worker / Hono"]
+  EO --> EOP["EdgeOne /api 同源代理"]
+  EOP --> CF
   CF --> D1["Cloudflare D1"]
   CF --> KV["Cloudflare KV"]
   CF --> AI["Cloudflare Workers AI"]
-  CF --> ASSETS["Static Assets"]
 
-  FE -. "自托管兼容" .-> PY["FastAPI"]
+  U -. "自托管兼容" .-> PY["FastAPI"]
   PY --> SQLITE["SQLite"]
   PY --> FS["文件系统"]
   PY --> PROVIDERS["DeepSeek / OpenRouter / Ollama"]
@@ -27,6 +29,14 @@ flowchart LR
 - 新功能默认实现位置；
 - 生产 API、D1 迁移、安全、监控和备份的权威来源；
 - 前端静态资源由 Worker Assets 提供。
+
+### 国内访问镜像：EdgeOne Pages
+
+- 托管与 Cloudflare 同一 Git Commit 生成的 Next.js 静态导出；
+- `cloud-functions/api/[[default]].js` 将同源 `/api/*` 转发到 Cloudflare Worker；
+- 透传 Authorization、请求体、NDJSON 响应流和 PDF Range；
+- API 响应强制 `no-store`，避免边缘缓存用户数据；
+- 仅改善访问入口，不复制 D1/KV，不改变生产数据权威。
 
 ### Tier B：FastAPI
 
@@ -124,6 +134,21 @@ npm run build
 wrangler d1 migrations apply DB --remote
 wrangler deploy
 ```
+
+### EdgeOne Pages
+
+```text
+GitHub main
+  -> edgeone.json（Node 22.11.0）
+  -> npm ci + frontend npm ci
+  -> npm run check + npm run build
+  -> frontend-next/out
+  -> cloud-functions/api/[[default]].js
+```
+
+- `CLOUDFLARE_UPSTREAM` 只保存 Cloudflare Worker 公网源站；
+- 镜像故障不会修改 D1/KV 数据；
+- 正式国内自定义域名按适用要求完成 ICP 备案。
 
 ### FastAPI
 

@@ -26,14 +26,15 @@
 - 浏览器不再直接访问 `workers.dev`；
 - 登录令牌、知识库、文件、学习进度仍保存在现有 D1/KV。
 
-EdgeOne 项目设置建议：
+仓库根目录已经提供 `edgeone.json`，EdgeOne Git 部署应直接读取该配置：
 
 ```text
 仓库：renjl130/ai-graduate-exam-os
 安装命令：npm ci && npm ci --prefix frontend-next
-构建命令：npm run build
+构建命令：npm run check && npm run build
 输出目录：frontend-next/out
-Node.js：22
+Node.js：22.11.0
+Cloud Functions 最大时限：120 秒
 环境变量 CLOUDFLARE_UPSTREAM：现有 Worker 或其自有域名
 ```
 
@@ -53,6 +54,27 @@ COS                   -> 文件与导入资料
 ```
 
 这需要数据库迁移和云资源账户，不再是纯 Cloudflare 免费架构。若必须面向中国大陆长期稳定运营，这是最可靠的方向。
+
+
+## 当前实施状态（2026-07-16）
+
+已完成：
+
+- `edgeone.json` 可复现构建配置；
+- `/api/*` Node Functions 同源代理；
+- JWT Authorization 透传；
+- POST/上传流式请求体转发；
+- NDJSON 流式响应、PDF Range 和上游重定向兼容；
+- API `no-store` 和结构化 502 降级；
+- 本地代理兼容性测试、Cloudflare 类型检查和 Next.js 生产构建。
+
+待完成：
+
+- 在 EdgeOne Pages 控制台创建线上项目；
+- 连接 GitHub `renjl130/ai-graduate-exam-os` 的 `main` 分支；
+- 配置 `CLOUDFLARE_UPSTREAM`；
+- 验证国内网络、登录、知识库、AI、上传和 PDF；
+- 绑定长期自定义域名并按适用范围完成 ICP 备案。
 
 ## 安全要求
 
