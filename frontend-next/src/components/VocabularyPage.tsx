@@ -33,6 +33,11 @@ export default function VocabularyPage() {
   const [filter, setFilter] = useState<"all" | "unmastered" | "mastered">("all");
   const [loading, setLoading] = useState(true);
   const [seeded, setSeeded] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [searchInput, setSearchInput] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [category, setCategory] = useState("");
 
   useEffect(() => {
     loadData();
@@ -62,15 +67,24 @@ export default function VocabularyPage() {
     }
   }
 
-  async function fetchWords() {
+  async function fetchWords(nextPage = page, nextQuery = searchQuery, nextCategory = category) {
     const token = getToken();
     const headers: Record<string, string> = {};
     if (token) headers["Authorization"] = `Bearer ${token}`;
+    const params = new URLSearchParams({ page: String(nextPage), limit: "100" });
+    if (nextQuery) params.set("q", nextQuery);
+    if (nextCategory) params.set("category", nextCategory);
 
-    const response = await fetch(`${API_BASE}/api/vocabulary?limit=200`, { headers });
+    const response = await fetch(`${API_BASE}/api/vocabulary?${params.toString()}`, { headers });
     if (response.ok) {
       const data = await response.json();
       setWords(data.vocabulary || []);
+      setPage(data.page || nextPage);
+      setTotalPages(data.pages || 1);
+      setSearchQuery(nextQuery);
+      setCategory(nextCategory);
+      setCurrentIndex(0);
+      setShowMeaning(false);
     }
   }
 
@@ -199,6 +213,32 @@ export default function VocabularyPage() {
         </div>
       </div>
 
+      <div className="mb-4 grid gap-3 sm:grid-cols-[1fr_180px_auto]">
+        <input
+          value={searchInput}
+          onChange={(event) => setSearchInput(event.target.value)}
+          onKeyDown={(event) => event.key === "Enter" && fetchWords(1, searchInput.trim(), category)}
+          placeholder={"\u641c\u7d22\u5355\u8bcd\u3001\u4e2d\u6587\u91ca\u4e49\u6216\u82f1\u82f1\u91ca\u4e49"}
+          className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm text-white outline-none placeholder:text-slate-500"
+        />
+        <select
+          value={category}
+          onChange={(event) => fetchWords(1, searchQuery, event.target.value)}
+          className="rounded-xl border border-white/10 bg-slate-900 px-3 py-2.5 text-sm text-white"
+        >
+          <option value="">{"\u5168\u90e8\u8bcd\u6c47\u7c7b\u522b"}</option>
+          {Object.keys(stats?.by_category || {}).map((item) => (
+            <option key={item} value={item}>{item} ({stats?.by_category[item]})</option>
+          ))}
+        </select>
+        <button
+          onClick={() => fetchWords(1, searchInput.trim(), category)}
+          className="rounded-xl bg-blue-500/20 px-5 py-2.5 text-sm font-medium text-blue-200 hover:bg-blue-500/30"
+        >
+          {"\u641c\u7d22"}
+        </button>
+      </div>
+
       <div className="flex gap-2 mb-6">
         {[
           { key: "all" as const, label: "全部" },
@@ -322,6 +362,22 @@ export default function VocabularyPage() {
             {w.mastery >= 80 && <span className="text-xs" style={{ color: "#10B981" }}>✓</span>}
           </div>
         ))}
+        <div className="flex items-center justify-center gap-3 pt-4">
+          <button
+            disabled={page <= 1}
+            onClick={() => fetchWords(page - 1, searchQuery, category)}
+            className="rounded-lg bg-white/[0.06] px-4 py-2 text-xs text-slate-300 disabled:cursor-not-allowed disabled:opacity-30"
+          >
+            {"\u4e0a\u4e00\u9875"}
+          </button>
+          <button
+            disabled={page >= totalPages}
+            onClick={() => fetchWords(page + 1, searchQuery, category)}
+            className="rounded-lg bg-white/[0.06] px-4 py-2 text-xs text-slate-300 disabled:cursor-not-allowed disabled:opacity-30"
+          >
+            {"\u4e0b\u4e00\u9875"}
+          </button>
+        </div>
       </div>
     </div>
   );
