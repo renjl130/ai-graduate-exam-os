@@ -60,21 +60,22 @@ COS                   -> 文件与导入资料
 
 已完成：
 
-- `edgeone.json` 可复现构建配置；
+- `edgeone.json` 可复现构建配置及 `/api/*` 禁止缓存标头；
 - `/api/*` Node Functions 同源代理；
 - JWT Authorization 透传；
 - POST/上传流式请求体转发；
 - NDJSON 流式响应、PDF Range 和上游重定向兼容；
 - API `no-store` 和结构化 502 降级；
-- 本地代理兼容性测试、Cloudflare 类型检查和 Next.js 生产构建。
+- 本地代理兼容性测试、Cloudflare 类型检查和 Next.js 生产构建；
+- EdgeOne Makers 项目 `makers-dxck1pbhtpet` 已创建并连接 GitHub `main`；
+- 已配置 `CLOUDFLARE_UPSTREAM`；
+- 首次生产部署成功，线上首页与 `/api/health` 已通过验证。
 
 待完成：
 
-- 在 EdgeOne Pages 控制台创建线上项目；
-- 连接 GitHub `renjl130/ai-graduate-exam-os` 的 `main` 分支；
-- 配置 `CLOUDFLARE_UPSTREAM`；
-- 验证国内网络、登录、知识库、AI、上传和 PDF；
-- 绑定长期自定义域名并按适用范围完成 ICP 备案。
+- 绑定长期自定义域名并按适用范围完成 ICP 备案；
+- 在永久域名下验证国内网络、登录、知识库、AI、上传和 PDF；
+- 建立 EdgeOne Functions 用量与错误率监控。
 
 ## 安全要求
 

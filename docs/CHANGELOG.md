@@ -12,7 +12,7 @@
 ### Changed
 
 - 加固 `cloud-functions/api/[[default]].js`：支持 Node.js 流式请求体、上传、NDJSON 响应流、PDF Range 和同源重定向；
-- 清理 hop-by-hop 与失效传输头，API 响应强制 `no-store`；
+- 清理 hop-by-hop 与失效传输头，API 响应强制 `no-store`，并在 `edgeone.json` 为 `/api/*` 增加禁止缓存标头；
 - 上游配置错误或连接失败时返回结构化 502，不暴露内部异常。
 
 ### Verified
@@ -20,7 +20,9 @@
 - Cloudflare Worker TypeScript 检查通过；
 - Next.js 15.5.18 生产静态导出通过；
 - EdgeOne 代理 GET、POST、流式响应、压缩响应、重定向、PDF Range 和错误降级测试通过；
-- EdgeOne 线上项目仍待创建和国内网络验收。
+- EdgeOne Makers 项目已创建，首次生产部署成功并连接 GitHub `main` 自动部署；
+- EdgeOne 线上首页和 `/api/health` 验证通过，D1 返回 `connected`；
+- 平台默认域名仅提供 3 小时带签名预览，永久公开入口仍需绑定自定义域名。
 
 ## [2026-07-16] 顶部工具栏与知识库可读性修复
 

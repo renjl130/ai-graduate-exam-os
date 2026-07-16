@@ -12,8 +12,10 @@
 - [x] 修复长期项目文档 UTF-8 中文编码
 - [x] 建立 EdgeOne 国内镜像可复现构建配置
 - [x] 加固并测试 EdgeOne `/api/*` 同源代理
-- [ ] 创建 EdgeOne Pages 线上项目并连接 GitHub `main`
-- [ ] 验证国内镜像登录、知识库、AI、上传和 PDF
+- [x] 创建 EdgeOne Pages 线上项目并连接 GitHub `main`
+- [x] 验证国内镜像首页、健康检查和 `/api` 代理
+- [ ] 绑定永久自定义域名
+- [ ] 在永久域名下验证登录、知识库、AI、上传和 PDF
 - [ ] 统一 README、package、Worker 和后端版本号
 - [ ] 建立 88 个共享 API 契约
 - [ ] 建立最小测试和 CI 门禁

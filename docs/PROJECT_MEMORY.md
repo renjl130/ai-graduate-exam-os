@@ -48,7 +48,7 @@
 
 - 登录后产品壳和主要功能页面已完成；
 - Cloudflare 商业生产链路已上线；
-- EdgeOne Pages 国内访问镜像配置已纳入仓库，线上项目待创建；
+- EdgeOne Pages 国内访问镜像已创建并连接 GitHub `main`，永久自定义域名待绑定；
 - FastAPI 自托管链路保留；
 - 知识库、词汇、题库和学习数据已具备真实结构；
 - 自动化测试、安全防滥用、监控、备份和管理后台仍需建设。
@@ -184,7 +184,7 @@ D1 迁移验证后的基线：
 - 2026-07-16：Cloudflare 确认为 Tier A，FastAPI 确认为 Tier B；
 - 2026-07-16：GitHub `main` 与 Cloudflare 生产环境完成同步；
 - 2026-07-16：修复顶部工具栏竖排/溢出和知识库文字可读性，已部署到 Cloudflare 生产环境；
-- 2026-07-16：加入 EdgeOne 国内镜像可复现构建配置并加固 `/api/*` 流式代理，线上项目待创建。
+- 2026-07-16：EdgeOne 国内镜像项目已创建并完成首次生产部署，GitHub `main` 后续自动同步；永久入口待绑定自定义域名。
 
 ## 14. 验证基线
 
@@ -196,4 +196,5 @@ D1 迁移验证后的基线：
 - D1 迁移顺序执行；
 - 桌面多断点和 390px 移动端；
 - 登录页、Dashboard、知识库深浅主题；
-- EdgeOne 代理 GET/POST、流式响应、压缩响应、重定向和 PDF Range 兼容性。
+- EdgeOne 代理 GET/POST、流式响应、压缩响应、重定向和 PDF Range 兼容性；
+- EdgeOne 线上首页与 `/api/health`，D1 健康且响应包含 `x-ai-exam-proxy: edgeone-pages`。
