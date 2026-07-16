@@ -69,7 +69,7 @@ COS                   -> 文件与导入资料
 - 本地代理兼容性测试、Cloudflare 类型检查和 Next.js 生产构建；
 - EdgeOne Makers 项目 `makers-dxck1pbhtpet` 已创建并连接 GitHub `main`；
 - 已配置 `CLOUDFLARE_UPSTREAM`；
-- 首次生产部署成功，线上首页与 `/api/health` 已通过验证。
+- 生产部署成功，线上首页、`/api/health`、未认证 401 和登录 POST 转发均已通过验证。
 
 待完成：
 

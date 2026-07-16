@@ -67,3 +67,4 @@
 - [x] 知识库深色主题文字清晰
 - [x] TypeScript 和生产构建通过
 - [x] EdgeOne 代理 GET/POST、响应流、压缩、重定向和 Range 测试通过
+- [x] EdgeOne 线上健康检查、未认证保护和登录 POST 转发通过

@@ -22,6 +22,7 @@
 - EdgeOne 代理 GET、POST、流式响应、压缩响应、重定向、PDF Range 和错误降级测试通过；
 - EdgeOne Makers 项目已创建，首次生产部署成功并连接 GitHub `main` 自动部署；
 - EdgeOne 线上首页和 `/api/health` 验证通过，D1 返回 `connected`；
+- 修复 EdgeOne POST 请求 `content-length` 不匹配后，登录请求已正确转发并返回上游预期 401；
 - 平台默认域名仅提供 3 小时带签名预览，永久公开入口仍需绑定自定义域名。
 
 ## [2026-07-16] 顶部工具栏与知识库可读性修复

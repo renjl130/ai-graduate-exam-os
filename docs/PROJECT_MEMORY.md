@@ -197,4 +197,5 @@ D1 迁移验证后的基线：
 - 桌面多断点和 390px 移动端；
 - 登录页、Dashboard、知识库深浅主题；
 - EdgeOne 代理 GET/POST、流式响应、压缩响应、重定向和 PDF Range 兼容性；
-- EdgeOne 线上首页与 `/api/health`，D1 健康且响应包含 `x-ai-exam-proxy: edgeone-pages`。
+- EdgeOne 线上首页与 `/api/health`，D1 健康且响应包含 `x-ai-exam-proxy: edgeone-pages`；
+- EdgeOne 线上 POST 登录请求已正确转发，上游无效凭据返回预期 401。
