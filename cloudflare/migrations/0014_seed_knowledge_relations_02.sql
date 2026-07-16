@@ -1,0 +1,98 @@
+PRAGMA foreign_keys = ON;
+
+-- Seed knowledge_relations chunk 2/2
+
+INSERT OR REPLACE INTO "knowledge_relations" ("id", "source_id", "target_id", "relation_type", "description", "weight", "created_at") VALUES
+  ('kr_comp_abf0f38c85953b33', 'kp_comp_0f988464ec358284', 'kp_comp_5cb636c6941718fe', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_838a23dd305b18e6', 'kp_comp_c4390fd055c1b4cf', 'kp_comp_a37c2c9a1ea50439', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_e0db30afae391a0c', 'kp_comp_a37c2c9a1ea50439', 'kp_comp_0c9dd8ad3b68ec23', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_8efaf6684d5aaa56', 'kp_comp_0c9dd8ad3b68ec23', 'kp_comp_d89f9e894f770d6c', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_4fb9f0e9c1ea6c96', 'kp_comp_d89f9e894f770d6c', 'kp_comp_c360370b1525ca64', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_97c254ff36f9d414', 'kp_comp_c360370b1525ca64', 'kp_comp_17f0085e0bb9e098', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_7b01ca7509a36a9e', 'kp_comp_17f0085e0bb9e098', 'kp_comp_3e6402e81b92e9b8', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_1c9b707b787b4a7d', 'kp_comp_3e6402e81b92e9b8', 'kp_comp_f13a119adf7216c9', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_53b05956f7c26ee2', 'kp_comp_12ea4dc9df766c75', 'kp_comp_e35fd115f2d4006e', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_3d04391f6b831f15', 'kp_comp_e35fd115f2d4006e', 'kp_comp_d425fea56cc6340e', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_c97bf4b95ea71705', 'kp_comp_d425fea56cc6340e', 'kp_comp_1cc23cc470d91b1a', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_e4416686794d8a23', 'kp_comp_1cc23cc470d91b1a', 'kp_comp_f0cee308ab533d00', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_c92169a797c0c516', 'kp_comp_f0cee308ab533d00', 'kp_comp_f0af830c8c3f38c1', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_8459a67cc2de4fbb', 'kp_comp_f0af830c8c3f38c1', 'kp_comp_492edd2c0ad9eba3', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_13271ae754c35793', 'kp_comp_492edd2c0ad9eba3', 'kp_comp_ed292a42f5bce352', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_5c45ded53110092e', 'kp_comp_ed292a42f5bce352', 'kp_comp_9b97627a57dbdfe6', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_20aa644786a20967', 'kp_comp_9b97627a57dbdfe6', 'kp_comp_34ff236231e09281', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_835e08897082a66f', 'kp_comp_874facb87885e11f', 'kp_comp_ba2f86db2205f1a4', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_b336d2c76fc8a485', 'kp_comp_ba2f86db2205f1a4', 'kp_comp_0614098d736413cb', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_5471aed31ebf1e86', 'kp_comp_0614098d736413cb', 'kp_comp_19a5ee24698458d4', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02');
+
+INSERT OR REPLACE INTO "knowledge_relations" ("id", "source_id", "target_id", "relation_type", "description", "weight", "created_at") VALUES
+  ('kr_comp_103b1c2554e59df8', 'kp_comp_19a5ee24698458d4', 'kp_comp_595726a2fc03ba40', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_34d0e682177ad2f1', 'kp_comp_595726a2fc03ba40', 'kp_comp_b42adfa15472a46d', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_1ce24f1552a7ab25', 'kp_comp_b42adfa15472a46d', 'kp_comp_d13c007ebf537676', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_903c985ec9e08c61', 'kp_comp_d13c007ebf537676', 'kp_comp_44f6ebeb3934462e', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_523e001afc5b9f73', 'kp_comp_77e5df5bed43c26e', 'kp_comp_00fa27d174569474', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_1d6b1bac30b581ae', 'kp_comp_00fa27d174569474', 'kp_comp_8a2b79dec8bfdafb', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_ff497f8f56011400', 'kp_comp_8a2b79dec8bfdafb', 'adc86671-6259-406e-9291-7a74e429d689', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_2b85a4bf55d282b2', 'adc86671-6259-406e-9291-7a74e429d689', '43a8c1bf-1f18-46cc-95f1-2742271cf4d6', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_660a977afc7cee3e', '43a8c1bf-1f18-46cc-95f1-2742271cf4d6', 'a96e3617-4120-4d2f-9517-9c21f6824803', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_a07ea550c6cebab3', 'a96e3617-4120-4d2f-9517-9c21f6824803', 'kp_comp_605dd7bc69144533', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_512a41b9c2ae577b', 'kp_comp_605dd7bc69144533', 'kp_comp_97de0b0df24add2c', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_4f0f311ebf8fe245', 'kp_comp_97de0b0df24add2c', 'kp_comp_478bbb9586777126', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_e52437e23c276d2e', 'kp_comp_478bbb9586777126', 'kp_comp_c4c3bb45b7fcc932', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_c0f9d98f913fa617', 'kp_comp_c4c3bb45b7fcc932', 'kp_comp_5b6a963ef69a07c3', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_bd05aeed78bbe381', 'kp_comp_5b6a963ef69a07c3', 'kp_comp_25d0c9ced2472c11', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_22875c4707b4cdd0', 'kp_comp_7aa8e8a1131f96fc', 'kp_comp_ca30b75b00a789f9', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_4962cc1c2cbd8bd5', 'kp_comp_ca30b75b00a789f9', 'kp_comp_3c19874f7dce3299', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_831e7a62a352f1ff', 'kp_comp_3c19874f7dce3299', 'kp_comp_97859d61f7b8697b', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_407727f5c033faf0', 'kp_comp_97859d61f7b8697b', 'kp_comp_26ea305aa011360a', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_baf1a28a479f8c9c', 'kp_comp_26ea305aa011360a', 'kp_comp_00de0783baf297a3', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02');
+
+INSERT OR REPLACE INTO "knowledge_relations" ("id", "source_id", "target_id", "relation_type", "description", "weight", "created_at") VALUES
+  ('kr_comp_9d8ee08cde062a5f', 'kp_comp_00de0783baf297a3', 'kp_comp_34ae350df7ce8ccf', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_c5a079dba5316a44', 'kp_comp_34ae350df7ce8ccf', 'kp_comp_4d67084e82aef0e3', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_1e25d1f0346a43a1', 'kp_comp_4d67084e82aef0e3', 'kp_comp_111fcc403f843c48', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_6208f44fa22d1217', 'kp_comp_111fcc403f843c48', 'kp_comp_204d57a0e19b199f', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_17b55148378412cf', 'kp_comp_378144906b6640ea', 'kp_comp_7ff307212cdccf6e', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_af4c07603f205329', 'kp_comp_7ff307212cdccf6e', 'kp_comp_b4490713a3bdd61c', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_e64b8071bfc0e069', 'kp_comp_b4490713a3bdd61c', 'kp_comp_f7cebc2e7d9a6fed', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_ec62e1873c6e452b', 'kp_comp_f7cebc2e7d9a6fed', 'kp_comp_970a89ea725a159c', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_b669d23a7eaa06a5', 'kp_comp_970a89ea725a159c', 'kp_comp_9e13cd657e538082', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_748c13e965ad28ef', 'kp_comp_9e13cd657e538082', 'kp_comp_b592a8c48d42c014', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_fe48d80067a92a7e', 'kp_comp_b592a8c48d42c014', 'kp_comp_d14f0e726a925b3b', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_f31bfa486b7647c3', 'kp_comp_d14f0e726a925b3b', 'kp_comp_b6fb0fd97d2a2cae', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_dd88ebc81a8dc267', 'kp_comp_b6fb0fd97d2a2cae', 'kp_comp_dde2fe81d9976adf', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_a698b29df97c4805', 'kp_comp_96e9c4954929e692', 'kp_comp_f607e12db50a4710', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_4f867bd8253c79ca', 'kp_comp_f607e12db50a4710', 'kp_comp_b73889ae7ef38c7b', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_45104c2697472afc', 'kp_comp_b73889ae7ef38c7b', 'kp_comp_ec3f7980aeb6b317', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_6e067487a9753059', 'kp_comp_ec3f7980aeb6b317', 'kp_comp_75623bc4cd9f0a53', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_3e451712cc247d84', 'kp_comp_75623bc4cd9f0a53', 'kp_comp_b326e21929d36988', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_9345199f7b43a48a', 'kp_comp_b326e21929d36988', 'kp_comp_fb4581b281abaff6', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_6c68a05dedac98d5', 'kp_comp_fb4581b281abaff6', 'kp_comp_60c695479f2aa124', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02');
+
+INSERT OR REPLACE INTO "knowledge_relations" ("id", "source_id", "target_id", "relation_type", "description", "weight", "created_at") VALUES
+  ('kr_comp_d9cfb6fc9846f2fc', 'kp_comp_2ceaf3b6f69076b7', 'kp_comp_3b6617e389756b0f', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_e3d36454de67f9dc', 'kp_comp_3b6617e389756b0f', 'kp_comp_9026d5dec0b7dabc', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_94136407380eaea4', 'kp_comp_9026d5dec0b7dabc', 'kp_comp_a7ffa59c813ec1ae', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_b31b0070c30b90ac', 'kp_comp_a7ffa59c813ec1ae', 'kp_comp_6fef9bc813be8d4e', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_193f7b83637b0a33', 'kp_comp_6fef9bc813be8d4e', 'kp_comp_cc7c6e5a369d70bb', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_bc0c8b66c89c74a0', 'kp_comp_cc7c6e5a369d70bb', 'kp_comp_b5ed86a9b9a693d0', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_151d8d40cb3b096c', 'kp_comp_b5ed86a9b9a693d0', 'kp_comp_61437fc259b1ba78', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_916026f86edc5012', 'kp_comp_4da15225310d4172', 'kp_comp_b2237d9efb4accbe', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_dfc0cca03db32d40', 'kp_comp_b2237d9efb4accbe', 'kp_comp_de990ba7cfdff3ed', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_2e7b341fdbbc870c', 'kp_comp_de990ba7cfdff3ed', 'kp_comp_489bf97d92e2c7b3', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_93c7096884bc83af', 'kp_comp_489bf97d92e2c7b3', 'kp_comp_5db440d3094795dd', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_c51b540d89545fe2', 'kp_comp_5db440d3094795dd', 'kp_comp_582b23a2392902e5', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_e0340a88cfb70813', 'kp_comp_582b23a2392902e5', 'kp_comp_716b9021c84e4755', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_0040caa9c9fce13f', 'kp_comp_716b9021c84e4755', 'kp_comp_1f9d5d3a9b801b75', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_7928a1045945ef11', 'kp_comp_1f9d5d3a9b801b75', 'kp_comp_d5b9c2cf6f0edba3', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_ff8d54c8be545150', 'kp_comp_d5b9c2cf6f0edba3', 'kp_comp_6c125b55d83eb5a7', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_7321ed348a45dc08', 'kp_comp_6c125b55d83eb5a7', 'kp_comp_a1bb819aff4ac30e', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_6841714db3a77fd3', 'kp_comp_a1bb819aff4ac30e', 'kp_comp_b67a9ebd224b1bfd', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_dd5eac046c28c6a5', 'kp_comp_967d4193f619e55d', 'kp_comp_20b3425142665e0a', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_31c42d6ec0a243c3', 'kp_comp_20b3425142665e0a', 'kp_comp_b5b77d58a5a8fed9', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02');
+
+INSERT OR REPLACE INTO "knowledge_relations" ("id", "source_id", "target_id", "relation_type", "description", "weight", "created_at") VALUES
+  ('kr_comp_602c54506717b155', 'kp_comp_b5b77d58a5a8fed9', 'kp_comp_53f4abc6aa775c50', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_8436846211495a00', 'kp_comp_53f4abc6aa775c50', 'kp_comp_9f343a9e26ae11f1', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_28a164fc701955da', 'kp_comp_9f343a9e26ae11f1', 'kp_comp_381380cd9b16de23', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_d3e99a2212d91142', 'kp_comp_381380cd9b16de23', 'kp_comp_74831aba8f04ba8c', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02'),
+  ('kr_comp_800ff8d8cb93ebfb', 'kp_comp_74831aba8f04ba8c', 'kp_comp_071851b8d76ca522', 'related', '同一章节中的递进或关联知识点', 0.72, '2026-07-14 14:04:02');

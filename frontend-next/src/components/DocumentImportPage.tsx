@@ -13,6 +13,39 @@ interface ImportJob {
   created_at: string;
 }
 
+interface SubjectOption { id: string; name: string; code?: string; }
+interface ChapterOption { id: string; name: string; }
+
+async function extractDocumentText(file: File): Promise<string> {
+  const extension = file.name.split(".").pop()?.toLowerCase() || "";
+  if (file.size > 25 * 1024 * 1024) {
+    throw new Error("\u5355\u4e2a\u6587\u4ef6\u4e0d\u80fd\u8d85\u8fc7 25MB");
+  }
+  if (["txt", "md", "markdown", "csv", "json"].includes(extension)) {
+    return file.text();
+  }
+  if (extension === "pdf") {
+    const { pdfjs } = await import("react-pdf");
+    pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
+    const document = await pdfjs.getDocument({ data: await file.arrayBuffer() }).promise;
+    const pages: string[] = [];
+    for (let pageNumber = 1; pageNumber <= document.numPages; pageNumber += 1) {
+      const page = await document.getPage(pageNumber);
+      const text = await page.getTextContent();
+      pages.push(text.items.map((item) => ("str" in item ? item.str : "")).join(" "));
+    }
+    const content = pages.join("\n\n").trim();
+    if (!content) throw new Error("\u8be5 PDF \u53ef\u80fd\u662f\u626b\u63cf\u56fe\u7247\uff0c\u672a\u8bc6\u522b\u5230\u53ef\u5bfc\u5165\u6587\u5b57");
+    return content;
+  }
+  if (extension === "docx") {
+    const mammoth = await import("mammoth");
+    const result = await mammoth.extractRawText({ arrayBuffer: await file.arrayBuffer() });
+    return result.value;
+  }
+  throw new Error("\u6682\u4e0d\u652f\u6301\u8be5\u6587\u4ef6\u683c\u5f0f\uff0c\u8bf7\u4f7f\u7528 PDF\u3001DOCX\u3001MD\u3001TXT\u3001CSV \u6216 JSON");
+}
+
 export default function DocumentImportPage() {
   const [file, setFile] = useState<File | null>(null);
   const [subjectId, setSubjectId] = useState("subject_xinchuan");
@@ -21,10 +54,17 @@ export default function DocumentImportPage() {
   const [result, setResult] = useState<{ message: string; knowledge_count: number } | null>(null);
   const [error, setError] = useState("");
   const [history, setHistory] = useState<ImportJob[]>([]);
+  const [subjects, setSubjects] = useState<SubjectOption[]>([]);
+  const [chapters, setChapters] = useState<ChapterOption[]>([]);
 
   useEffect(() => {
     fetchHistory();
+    fetchSubjects();
   }, []);
+
+  useEffect(() => {
+    if (subjectId) fetchChapters(subjectId);
+  }, [subjectId]);
 
   async function fetchHistory() {
     try {
@@ -42,6 +82,30 @@ export default function DocumentImportPage() {
     }
   }
 
+
+  async function fetchSubjects() {
+    const token = getToken();
+    const response = await fetch(`${API_BASE}/api/knowledge/subjects`, {
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+    });
+    if (!response.ok) return;
+    const data = await response.json();
+    const list: SubjectOption[] = data.subjects || [];
+    setSubjects(list);
+    if (list.length && !list.some((subject) => subject.id === subjectId)) setSubjectId(list[0].id);
+  }
+
+  async function fetchChapters(nextSubjectId: string) {
+    const token = getToken();
+    const response = await fetch(`${API_BASE}/api/knowledge/subjects/${encodeURIComponent(nextSubjectId)}/chapters`, {
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+    });
+    if (!response.ok) return;
+    const data = await response.json();
+    setChapters(data.chapters || []);
+    setChapterId("");
+  }
+
   async function handleImport() {
     if (!file) {
       setError("请选择文件");
@@ -54,18 +118,15 @@ export default function DocumentImportPage() {
 
     try {
       const token = getToken();
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("subject_id", subjectId);
-      if (chapterId) formData.append("chapter_id", chapterId);
-
-      const headers: Record<string, string> = {};
-      if (token) headers['Authorization'] = `Bearer ${token}`;
-
+      const content = (await extractDocumentText(file)).trim();
+      if (!content) throw new Error("\u6587\u6863\u4e2d\u6ca1\u6709\u53ef\u5bfc\u5165\u7684\u6587\u5b57");
       const response = await fetch(`${API_BASE}/api/knowledge/import`, {
-        method: 'POST',
-        headers,
-        body: formData,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({ filename: file.name, subject_id: subjectId, chapter_id: chapterId || undefined, content }),
       });
 
       if (response.ok) {
@@ -113,7 +174,7 @@ export default function DocumentImportPage() {
             <label className="block text-sm text-gray-400 mb-2">选择文件</label>
             <input
               type="file"
-              accept=".pdf,.docx,.doc,.md,.txt"
+              accept=".pdf,.docx,.md,.txt,.csv,.json"
               onChange={(e) => setFile(e.target.files?.[0] || null)}
               className="w-full px-4 py-3 rounded-xl text-sm text-white"
               style={inputStyle}
@@ -134,23 +195,24 @@ export default function DocumentImportPage() {
               className="w-full px-4 py-3 rounded-xl text-sm text-white"
               style={inputStyle}
             >
-              <option value="subject_xinchuan">新传 (334/440)</option>
-              <option value="subject_politics">政治 (101)</option>
-              <option value="subject_english">英语 (204)</option>
+              {subjects.map((subject) => (
+                <option key={subject.id} value={subject.id}>{subject.name}{subject.code ? ` (${subject.code})` : ""}</option>
+              ))}
             </select>
           </div>
 
           {/* 章节选择（可选） */}
           <div>
             <label className="block text-sm text-gray-400 mb-2">目标章节（可选）</label>
-            <input
-              type="text"
+            <select
               value={chapterId}
               onChange={(e) => setChapterId(e.target.value)}
-              placeholder="留空则自动匹配"
-              className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-gray-500"
+              className="w-full px-4 py-3 rounded-xl text-sm text-white"
               style={inputStyle}
-            />
+            >
+              <option value="">???????????</option>
+              {chapters.map((chapter) => <option key={chapter.id} value={chapter.id}>{chapter.name}</option>)}
+            </select>
           </div>
 
           {/* 导入按钮 */}

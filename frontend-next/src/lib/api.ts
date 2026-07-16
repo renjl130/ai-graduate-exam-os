@@ -419,7 +419,9 @@ export const fileApi = {
 
   getPdfUrl: (path: string) => {
     const encoded = path.split("/").map(encodeURIComponent).join("/");
-    return `${API_BASE}/api/files/pdf/${encoded}`;
+    const token = getToken();
+    const query = token ? `?token=${encodeURIComponent(token)}` : "";
+    return `${API_BASE}/api/files/pdf/${encoded}${query}`;
   },
 
   upload: async (file: File) => {

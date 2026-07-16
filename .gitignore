@@ -53,3 +53,8 @@ Thumbs.db
 
 # Obsolete prototype (production UI is frontend-next)
 frontend/
+# Cloudflare local state and secrets
+.wrangler/
+.dev.vars
+.dev.vars.*
+.wrangler-*.pid

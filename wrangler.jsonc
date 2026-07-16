@@ -1,0 +1,41 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "ai-graduate-exam-os",
+  "main": "cloudflare/src/index.ts",
+  "compatibility_date": "2026-07-14",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": true,
+  "preview_urls": true,
+  "assets": {
+    "directory": "./frontend-next/out",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": [
+      "/api/*"
+    ]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "ai-graduate-exam-os",
+      "database_id": "6a145c99-d337-47cb-a441-ae42645019c6",
+      "migrations_dir": "cloudflare/migrations"
+    }
+  ],
+  "ai": {
+    "binding": "AI"
+  },
+  "vars": {
+    "APP_NAME": "AI 考研学习操作系统",
+    "APP_VERSION": "3.2.0",
+    "AI_MODEL": "@cf/meta/llama-3.2-3b-instruct"
+  },
+  "kv_namespaces": [
+    {
+      "binding": "FILES",
+      "id": "bf805a3283064998a5d406579660bf02"
+    }
+  ]
+}

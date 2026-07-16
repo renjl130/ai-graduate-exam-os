@@ -125,7 +125,7 @@ export default function AiTutorPage() {
           </div>
           <div>
             <h2 className="text-base font-semibold text-white">AI 导师</h2>
-            <span className="text-xs text-gray-400">{isStreaming ? "处理中..." : "DeepSeek V3"}</span>
+            <span className="text-xs text-gray-400">{isStreaming ? "处理中..." : "Cloudflare Workers AI"}</span>
           </div>
         </div>
         <button
@@ -171,7 +171,7 @@ export default function AiTutorPage() {
               {mode === "chat" ? "AI 考研导师" : "AI 资料整理"}
             </h3>
             <p className="text-sm text-center max-w-sm text-gray-400">
-              {mode === "chat" ? "基于 DeepSeek 大模型，支持知识点讲解、真题分析、答题指导" : "粘贴笔记内容，AI 生成结构化复习笔记"}
+              {mode === "chat" ? "基于 Cloudflare 免费 AI 与系统知识库，支持知识点讲解、真题分析、答题指导" : "粘贴笔记内容，AI 生成结构化复习笔记"}
             </p>
           </div>
         )}
