@@ -22,6 +22,7 @@
 - 390px 知识库无水平溢出；
 - 知识库浅色、深色主题检查通过；
 - Cloudflare TypeScript、前端 strict 类型检查和生产构建通过。
+- 已部署 Cloudflare 生产环境并通过健康检查与首页构建哈希验证。
 
 ### Documentation
 
