@@ -1,4 +1,4 @@
-# AI 考研学习操作系统 - 后端 Dockerfile
+# 佳乐考研 - 后端 Dockerfile
 FROM python:3.11-slim
 
 WORKDIR /app

@@ -28,7 +28,7 @@
     "binding": "AI"
   },
   "vars": {
-    "APP_NAME": "AI 考研学习操作系统",
+    "APP_NAME": "佳乐考研",
     "APP_VERSION": "3.2.0",
     "AI_MODEL": "@cf/meta/llama-3.2-3b-instruct"
   },

@@ -127,14 +127,14 @@ export default function CoreTheoriesPage() {
   }
 
   const cardStyle = {
-    background: 'rgba(255, 255, 255, 0.03)',
-    border: '1px solid rgba(255, 255, 255, 0.06)',
+    background: "var(--surface)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: '16px',
   };
 
   const inputStyle = {
-    background: 'rgba(255, 255, 255, 0.06)',
-    border: '1px solid rgba(255, 255, 255, 0.1)',
+    background: 'var(--glass-06)',
+    border: '1px solid var(--glass-10)',
     borderRadius: '12px',
   };
 
@@ -183,8 +183,8 @@ export default function CoreTheoriesPage() {
             onClick={() => setFilterSubject(s)}
             className="px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
             style={filterSubject === s ? {
-              background: 'linear-gradient(135deg, #3b82f6, #2563eb)', color: '#fff',
-            } : { background: 'rgba(255,255,255,0.05)', color: '#9ca3af' }}
+              background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))', color: 'var(--on-brand)',
+            } : { background: 'var(--glass-05)', color: 'var(--text-muted)' }}
           >
             {s === "all" ? "全部科目" : s === "440" ? "440 传播学" : "334 新闻学"}
           </button>
@@ -199,8 +199,8 @@ export default function CoreTheoriesPage() {
             onClick={() => setFilterImportance(n)}
             className="px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
             style={filterImportance === n ? {
-              background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: '#fff',
-            } : { background: 'rgba(255,255,255,0.05)', color: '#9ca3af' }}
+              background: 'linear-gradient(135deg, var(--orange-500), var(--orange-500))', color: 'var(--on-brand)',
+            } : { background: 'var(--glass-05)', color: 'var(--text-muted)' }}
           >
             {n === 0 ? "全部" : `${n}★以上`}
           </button>
@@ -222,8 +222,8 @@ export default function CoreTheoriesPage() {
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
                   style={{
-                    background: theory.subject === "440" ? 'rgba(139,92,246,0.15)' : 'rgba(16,185,129,0.15)',
-                    color: theory.subject === "440" ? '#a78bfa' : '#34d399',
+                    background: theory.subject === "440" ? 'color-mix(in srgb,var(--violet-500) 15%,transparent)' : 'color-mix(in srgb,var(--green-500) 15%,transparent)',
+                    color: theory.subject === "440" ? 'var(--violet-500)' : 'var(--green-500)',
                   }}>
                   <span className="text-lg font-bold">{theory.name.charAt(0)}</span>
                 </div>
@@ -232,8 +232,8 @@ export default function CoreTheoriesPage() {
                     <h3 className="text-base font-semibold text-white">{theory.name}</h3>
                     <span className="text-xs px-2 py-0.5 rounded-lg"
                       style={{
-                        background: theory.subject === "440" ? 'rgba(139,92,246,0.15)' : 'rgba(16,185,129,0.15)',
-                        color: theory.subject === "440" ? '#a78bfa' : '#34d399',
+                        background: theory.subject === "440" ? 'color-mix(in srgb,var(--violet-500) 15%,transparent)' : 'color-mix(in srgb,var(--green-500) 15%,transparent)',
+                        color: theory.subject === "440" ? 'var(--violet-500)' : 'var(--green-500)',
                       }}>
                       {theory.subject}
                     </span>
@@ -255,11 +255,11 @@ export default function CoreTheoriesPage() {
 
             {expandedId === theory.id && (
               <div className="px-5 pb-5 space-y-4 animate-fade-in">
-                <div className="p-4 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)' }}>
+                <div className="p-4 rounded-xl" style={{ background: 'var(--glass-03)' }}>
                   <h4 className="text-sm font-semibold text-white mb-2">详细内容</h4>
                   <p className="text-sm text-gray-300 leading-relaxed whitespace-pre-line">{theory.detail}</p>
                 </div>
-                <div className="p-4 rounded-xl" style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.2)' }}>
+                <div className="p-4 rounded-xl" style={{ background: 'color-mix(in srgb,var(--orange-500) 8%,transparent)', border: '1px solid color-mix(in srgb,var(--orange-500) 20%,transparent)' }}>
                   <h4 className="text-sm font-semibold text-yellow-400 mb-2">📝 考试提示</h4>
                   <p className="text-sm text-gray-300">{theory.examTip}</p>
                 </div>

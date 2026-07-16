@@ -27,8 +27,8 @@ const typeIcons: Record<string, React.ReactNode> = {
 };
 
 const typeColors: Record<string, string> = {
-  markdown: "#8b5cf6", text: "#3b82f6", pdf: "#ef4444",
-  data: "#10b981", other: "#6b7280",
+  markdown: "var(--violet-500)", text: "var(--brand-500)", pdf: "var(--red-500)",
+  data: "var(--green-500)", other: "var(--text-muted)",
 };
 
 export default function ResourceLibraryPage() {
@@ -47,14 +47,14 @@ export default function ResourceLibraryPage() {
   const [aiLoading, setAiLoading] = useState(false);
 
   const cardStyle = {
-    background: 'rgba(255, 255, 255, 0.03)',
-    border: '1px solid rgba(255, 255, 255, 0.06)',
+    background: "var(--surface)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: '16px',
   };
 
   const inputStyle = {
-    background: 'rgba(255, 255, 255, 0.06)',
-    border: '1px solid rgba(255, 255, 255, 0.1)',
+    background: 'var(--glass-06)',
+    border: '1px solid var(--glass-10)',
     borderRadius: '12px',
   };
 
@@ -167,13 +167,13 @@ export default function ResourceLibraryPage() {
             <button
               onClick={() => setViewingFile(null)}
               className="px-4 py-2 rounded-xl text-xs font-medium text-gray-300 hover:text-white transition-all"
-              style={{ background: 'rgba(255,255,255,0.05)' }}
+              style={{ background: 'var(--glass-05)' }}
             >
               ← 返回
             </button>
             <span className="font-medium text-sm text-white">{viewingFile.name}</span>
             <span className="text-xs px-2 py-1 rounded-lg text-gray-400"
-              style={{ background: 'rgba(255,255,255,0.05)' }}>
+              style={{ background: 'var(--glass-05)' }}>
               {viewingFile.size_display}
             </span>
           </div>
@@ -183,8 +183,8 @@ export default function ResourceLibraryPage() {
               disabled={aiLoading}
               className="px-4 py-2 rounded-xl text-xs font-medium text-white transition-all disabled:opacity-50"
               style={{
-                background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-                boxShadow: '0 4px 15px rgba(59,130,246,0.4)',
+                background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))',
+                boxShadow: '0 4px 15px color-mix(in srgb,var(--brand-500) 40%,transparent)',
               }}
             >
               {aiLoading ? "分析中..." : "AI 分析"}
@@ -214,7 +214,7 @@ export default function ResourceLibraryPage() {
 
           {(aiResult || aiLoading) && (
             <div className="w-80 flex-shrink-0 overflow-y-auto p-5 rounded-2xl"
-              style={{ ...cardStyle, borderColor: 'rgba(59,130,246,0.3)' }}>
+              style={{ ...cardStyle, borderColor: 'color-mix(in srgb,var(--brand-500) 30%,transparent)' }}>
               <div className="flex items-center gap-2 mb-3">
                 <span className="text-sm">🤖</span>
                 <span className="text-sm font-medium text-blue-400">AI 分析</span>
@@ -248,8 +248,8 @@ export default function ResourceLibraryPage() {
           disabled={uploading}
           className="px-5 py-2.5 rounded-xl text-sm font-medium text-white transition-all disabled:opacity-50"
           style={{
-            background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-            boxShadow: '0 4px 15px rgba(59,130,246,0.4)',
+            background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))',
+            boxShadow: '0 4px 15px color-mix(in srgb,var(--brand-500) 40%,transparent)',
           }}
         >
           {uploading ? "上传中..." : "+ 上传"}
@@ -267,9 +267,9 @@ export default function ResourceLibraryPage() {
       {uploadMsg && (
         <div className="mb-4 p-4 rounded-xl text-sm"
           style={{
-            background: uploadMsg.includes("成功") ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)',
-            border: `1px solid ${uploadMsg.includes("成功") ? 'rgba(16,185,129,0.2)' : 'rgba(239,68,68,0.2)'}`,
-            color: uploadMsg.includes("成功") ? '#34d399' : '#f87171',
+            background: uploadMsg.includes("成功") ? 'color-mix(in srgb,var(--green-500) 10%,transparent)' : 'color-mix(in srgb,var(--red-500) 10%,transparent)',
+            border: `1px solid ${uploadMsg.includes("成功") ? 'color-mix(in srgb,var(--green-500) 20%,transparent)' : 'color-mix(in srgb,var(--red-500) 20%,transparent)'}`,
+            color: uploadMsg.includes("成功") ? 'var(--green-500)' : 'var(--red-500)',
           }}>
           {uploadMsg}
         </div>
@@ -282,8 +282,8 @@ export default function ResourceLibraryPage() {
         onDrop={handleDrop}
         className="mb-6 p-8 rounded-2xl text-center transition-all cursor-pointer"
         style={{
-          background: dragOver ? 'rgba(59,130,246,0.08)' : 'rgba(255,255,255,0.02)',
-          border: `2px dashed ${dragOver ? 'rgba(59,130,246,0.5)' : 'rgba(255,255,255,0.1)'}`,
+          background: dragOver ? 'color-mix(in srgb,var(--brand-500) 8%,transparent)' : 'var(--glass-02)',
+          border: `2px dashed ${dragOver ? 'color-mix(in srgb,var(--brand-500) 50%,transparent)' : 'var(--glass-10)'}`,
           borderRadius: '20px',
         }}
         onClick={() => fileInputRef.current?.click()}
@@ -310,11 +310,11 @@ export default function ResourceLibraryPage() {
           onClick={() => setFilterType("all")}
           className="px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
           style={filterType === "all" ? {
-            background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-            color: '#fff',
+            background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))',
+            color: 'var(--on-brand)',
           } : {
-            background: 'rgba(255,255,255,0.05)',
-            color: '#9ca3af',
+            background: 'var(--glass-05)',
+            color: 'var(--text-muted)',
           }}
         >
           全部 ({files.length})
@@ -328,8 +328,8 @@ export default function ResourceLibraryPage() {
               background: `${typeColors[t]}20`,
               color: typeColors[t],
             } : {
-              background: 'rgba(255,255,255,0.05)',
-              color: '#9ca3af',
+              background: 'var(--glass-05)',
+              color: 'var(--text-muted)',
             }}
           >
             {t} ({files.filter((f) => f.type === t).length})
@@ -357,7 +357,7 @@ export default function ResourceLibraryPage() {
             >
               <div className="flex items-start gap-3">
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                  style={{ background: `${typeColors[file.type] || '#6b7280'}20`, color: typeColors[file.type] || '#6b7280' }}>
+                  style={{ background: `${typeColors[file.type] || 'var(--text-muted)'}20`, color: typeColors[file.type] || 'var(--text-muted)' }}>
                   {typeIcons[file.type] || typeIcons.other}
                 </div>
                 <div className="flex-1 min-w-0">
@@ -372,7 +372,7 @@ export default function ResourceLibraryPage() {
                   <button
                     onClick={(e) => { e.stopPropagation(); deleteFile(file); }}
                     className="opacity-0 group-hover:opacity-100 px-2 py-1 rounded-lg text-xs text-red-400 hover:text-red-300 transition-all"
-                    style={{ background: 'rgba(239,68,68,0.1)' }}
+                    style={{ background: 'color-mix(in srgb,var(--red-500) 10%,transparent)' }}
                   >
                     删除
                   </button>

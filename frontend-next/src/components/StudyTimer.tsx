@@ -130,9 +130,9 @@ export default function StudyTimer({ knowledgePointId, subjectId, onTimeUpdate }
 
   const buttonStyle = {
     background: isRunning
-      ? 'linear-gradient(135deg, #ef4444, #dc2626)'
-      : 'linear-gradient(135deg, #10b981, #059669)',
-    color: '#fff',
+      ? 'linear-gradient(135deg, var(--red-500), var(--red-500))'
+      : 'linear-gradient(135deg, var(--green-500), var(--green-500))',
+    color: 'var(--on-brand)',
     border: 'none',
     borderRadius: '12px',
     padding: '12px 24px',
@@ -146,7 +146,7 @@ export default function StudyTimer({ knowledgePointId, subjectId, onTimeUpdate }
     <div className="flex items-center gap-4">
       {/* 计时器显示 */}
       <div className="text-center">
-        <div className="text-3xl font-mono font-bold" style={{ color: isRunning ? '#10b981' : '#9ca3af' }}>
+        <div className="text-3xl font-mono font-bold" style={{ color: isRunning ? 'var(--green-500)' : 'var(--text-muted)' }}>
           {formatTime(seconds)}
         </div>
         <div className="text-xs text-gray-500 mt-1">
@@ -178,7 +178,7 @@ export default function StudyTimer({ knowledgePointId, subjectId, onTimeUpdate }
           <button
             onClick={resetTimer}
             className="px-4 py-3 rounded-xl text-sm font-medium transition-all"
-            style={{ background: 'rgba(255,255,255,0.1)', color: '#9ca3af' }}
+            style={{ background: 'var(--glass-10)', color: 'var(--text-muted)' }}
           >
             ↻ 重置
           </button>
@@ -218,8 +218,8 @@ export function StudyStats() {
   }
 
   const cardStyle = {
-    background: 'rgba(255, 255, 255, 0.03)',
-    border: '1px solid rgba(255, 255, 255, 0.06)',
+    background: "var(--surface)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: '16px',
   };
 

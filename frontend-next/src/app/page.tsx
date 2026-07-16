@@ -2,14 +2,15 @@
 
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Bot, CalendarDays, Home, Menu, NotebookPen, Search } from "lucide-react";
+import { ArrowUp, Bot, CalendarDays, Home, Menu, NotebookPen } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import AuthPage from "@/components/AuthPage";
 import Sidebar from "@/components/Sidebar";
 import DashboardPage from "@/components/DashboardPage";
 import CommandPalette from "@/components/CommandPalette";
-import FocusTimer from "@/components/FocusTimer";
+import AppHeader from "@/components/AppHeader";
+import { JialeMark } from "@/components/BrandLogo";
 import { getNavItem, NAV_ITEMS } from "@/lib/navigation";
 
 const pageLoader = () => <div className="page-skeleton"><span /><span /><span /></div>;
@@ -66,10 +67,11 @@ export default function HomePage() {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [commandOpen, setCommandOpen] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {
     const hash = window.location.hash.replace("#", "");
-    const saved = window.localStorage.getItem("exam_os_active_tab");
+    const saved = window.localStorage.getItem("jiale-active-tab") ?? window.localStorage.getItem("exam_os_active_tab");
     const initial = [hash, saved].find((value) => value && NAV_ITEMS.some((item) => item.id === value));
     if (initial) setActiveTab(initial);
   }, []);
@@ -78,7 +80,7 @@ export default function HomePage() {
     if (!NAV_ITEMS.some((item) => item.id === tab)) tab = "dashboard";
     setActiveTab(tab);
     setMobileOpen(false);
-    window.localStorage.setItem("exam_os_active_tab", tab);
+    window.localStorage.setItem("jiale-active-tab", tab);
     window.history.replaceState(null, "", `#${tab}`);
     document.querySelector("main")?.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
@@ -99,15 +101,25 @@ export default function HomePage() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
+  useEffect(() => {
+    const main = document.querySelector<HTMLElement>(".app-main");
+    if (!main) return;
+    const onScroll = () => setShowBackToTop(main.scrollTop > 480);
+    main.addEventListener("scroll", onScroll, { passive: true });
+    return () => main.removeEventListener("scroll", onScroll);
+  }, [isAuthenticated]);
+
   const activeItem = useMemo(() => getNavItem(activeTab), [activeTab]);
   const ActivePage = PAGE_COMPONENTS[activeTab];
 
   if (isLoading) {
     return (
       <div className="app-loading">
-        <span className="brand-mark brand-mark-lg">研</span>
-        <div className="mt-5 h-1 w-32 overflow-hidden rounded-full bg-white/[0.06]"><span className="loading-bar block h-full" /></div>
-        <p className="mt-3 text-sm text-slate-500">正在载入你的学习空间…</p>
+        <JialeMark className="loading-brand-mark" />
+        <strong className="mt-4 text-lg">佳乐考研</strong>
+        <span className="mt-1 text-xs text-[var(--text-muted)]">Jiale Graduate</span>
+        <div className="loading-track"><span className="loading-bar" /></div>
+        <p className="mt-3 text-sm text-[var(--text-secondary)]">正在为你准备学习驾驶舱…</p>
       </div>
     );
   }
@@ -115,32 +127,24 @@ export default function HomePage() {
   if (!isAuthenticated) return <AuthPage />;
 
   return (
-    <div className="app-shell">
+    <>
+      <a className="skip-link" href="#main-content">跳到主要内容</a>
+      <div className="app-shell">
       <Sidebar activeTab={activeTab} onTabChange={navigate} mobileOpen={mobileOpen} onMobileClose={() => setMobileOpen(false)} />
 
       <div className="app-content flex min-h-0 min-w-0 flex-1 flex-col">
-        <header className="app-topbar">
-          <div className="flex min-w-0 items-center gap-3">
-            <button className="icon-button lg:hidden" onClick={() => setMobileOpen(true)} aria-label="打开导航"><Menu size={20} /></button>
-            <div className="min-w-0">
-              <h1 className="truncate text-sm font-semibold text-slate-100">{activeItem.label}</h1>
-              <p className="hidden truncate text-xs text-slate-500 sm:block">{activeItem.description}</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <button className="search-trigger" onClick={() => setCommandOpen(true)}>
-              <Search size={16} />
-              <span className="hidden md:inline">搜索功能</span>
-              <kbd className="hidden lg:inline">Ctrl K</kbd>
-            </button>
-            <FocusTimer />
-          </div>
-        </header>
+        <AppHeader
+          activeItem={activeItem}
+          onMenu={() => setMobileOpen(true)}
+          onCommand={() => setCommandOpen(true)}
+          onNavigate={navigate}
+        />
 
-        <main className="app-main">
+        <main id="main-content" className="app-main" tabIndex={-1}>
           <ErrorBoundary key={activeTab}>
             {activeTab === "dashboard" ? <DashboardPage onNavigate={navigate} /> : ActivePage ? <ActivePage /> : <DashboardPage onNavigate={navigate} />}
           </ErrorBoundary>
+          <footer className="product-footer"><span>佳乐考研 · Jiale Graduate</span><span>AI驱动的新一代考研学习平台</span><span>专业 · 高效 · 陪伴 · 成长</span></footer>
         </main>
       </div>
 
@@ -159,6 +163,8 @@ export default function HomePage() {
       </nav>
 
       <CommandPalette open={commandOpen} onClose={() => setCommandOpen(false)} onNavigate={navigate} />
-    </div>
+      <button className={`back-to-top ${showBackToTop ? "is-visible" : ""}`} aria-label="返回顶部" title="返回顶部" onClick={() => document.querySelector<HTMLElement>(".app-main")?.scrollTo({ top: 0, behavior: "smooth" })}><ArrowUp size={18} /></button>
+      </div>
+    </>
   );
 }

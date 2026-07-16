@@ -162,16 +162,16 @@ export default function KnowledgeBrowserPage() {
   };
 
   const cardStyle = {
-    background: "rgba(255, 255, 255, 0.05)",
+    background: "var(--surface)",
     backdropFilter: "blur(20px) saturate(180%)",
-    border: "1px solid rgba(255, 255, 255, 0.08)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: "16px",
   };
 
   const importanceColors: Record<string, string> = {
-    high: "#EF4444",
-    medium: "#F59E0B",
-    low: "#10B981",
+    high: "var(--red-500)",
+    medium: "var(--orange-500)",
+    low: "var(--green-500)",
   };
 
   const displayPoints = searchQuery.trim() ? searchResults : points;
@@ -200,15 +200,15 @@ export default function KnowledgeBrowserPage() {
             placeholder="搜索知识点..."
             className="px-4 py-2 rounded-xl text-sm text-white placeholder-gray-500 outline-none"
             style={{
-              background: "rgba(255,255,255,0.06)",
-              border: "1px solid rgba(255,255,255,0.1)",
+              background: "var(--glass-06)",
+              border: "1px solid var(--glass-10)",
               width: "min(100%, 320px)",
             }}
           />
           <button
             onClick={handleSearch}
             className="px-4 py-2 rounded-xl text-sm text-white transition-all"
-            style={{ background: "linear-gradient(135deg, #3B82F6, #8B5CF6)" }}
+            style={{ background: "linear-gradient(135deg, var(--brand-500), var(--violet-500))" }}
           >
             搜索
           </button>
@@ -226,9 +226,9 @@ export default function KnowledgeBrowserPage() {
               background:
                 selectedSubject === s.id
                   ? `${s.color}20`
-                  : "rgba(255,255,255,0.04)",
-              border: `1px solid ${selectedSubject === s.id ? s.color + "40" : "rgba(255,255,255,0.06)"}`,
-              color: selectedSubject === s.id ? s.color : "#9CA3AF",
+                  : "var(--glass-04)",
+              border: `1px solid ${selectedSubject === s.id ? s.color + "40" : "var(--glass-06)"}`,
+              color: selectedSubject === s.id ? s.color : "var(--text-muted)",
             }}
           >
             <span>{s.icon}</span>
@@ -255,10 +255,10 @@ export default function KnowledgeBrowserPage() {
                 style={{
                   background:
                     selectedChapter === ch.id
-                      ? "rgba(59, 130, 246, 0.12)"
+                      ? "color-mix(in srgb,var(--brand-500) 12%,transparent)"
                       : "transparent",
                   color:
-                    selectedChapter === ch.id ? "#F9FAFB" : "#9CA3AF",
+                    selectedChapter === ch.id ? "var(--surface-subtle)" : "var(--text-muted)",
                 }}
               >
                 <div className="flex items-center justify-between gap-2"><span className="font-medium">{ch.name}</span><span className="shrink-0 rounded-full bg-white/[0.05] px-2 py-0.5 text-[10px] text-slate-500">{ch.point_count ?? 0}</span></div>
@@ -300,11 +300,11 @@ export default function KnowledgeBrowserPage() {
                   style={{
                     background:
                       selectedPoint?.id === p.id
-                        ? "rgba(59, 130, 246, 0.12)"
-                        : "rgba(255,255,255,0.02)",
+                        ? "color-mix(in srgb,var(--brand-500) 12%,transparent)"
+                        : "var(--glass-02)",
                     border:
                       selectedPoint?.id === p.id
-                        ? "1px solid rgba(59, 130, 246, 0.3)"
+                        ? "1px solid color-mix(in srgb,var(--brand-500) 30%,transparent)"
                         : "1px solid transparent",
                   }}
                 >
@@ -312,7 +312,7 @@ export default function KnowledgeBrowserPage() {
                     <span
                       className="w-2 h-2 rounded-full flex-shrink-0"
                       style={{
-                        background: importanceColors[p.importance] || "#6B7280",
+                        background: importanceColors[p.importance] || "var(--text-muted)",
                       }}
                     />
                     <span className="text-sm font-medium text-white truncate">
@@ -325,8 +325,8 @@ export default function KnowledgeBrowserPage() {
                         key={i}
                         className="text-[10px] px-2 py-0.5 rounded-full"
                         style={{
-                          background: "rgba(59, 130, 246, 0.1)",
-                          color: "#60A5FA",
+                          background: "color-mix(in srgb,var(--brand-500) 10%,transparent)",
+                          color: "var(--brand-400)",
                         }}
                       >
                         {tag}
@@ -380,8 +380,8 @@ export default function KnowledgeBrowserPage() {
                     key={i}
                     className="text-xs px-2 py-0.5 rounded-full"
                     style={{
-                      background: "rgba(139, 92, 246, 0.1)",
-                      color: "#A78BFA",
+                      background: "color-mix(in srgb,var(--violet-500) 10%,transparent)",
+                      color: "var(--violet-500)",
                     }}
                   >
                     {tag}
@@ -408,7 +408,7 @@ export default function KnowledgeBrowserPage() {
                 <div
                   className="text-sm text-gray-300 leading-relaxed whitespace-pre-wrap"
                   style={{
-                    background: "rgba(255,255,255,0.02)",
+                    background: "var(--glass-02)",
                     borderRadius: "12px",
                     padding: "16px",
                   }}
@@ -472,10 +472,10 @@ export default function KnowledgeBrowserPage() {
                   <div
                     className="text-sm text-yellow-200/80 leading-relaxed whitespace-pre-wrap"
                     style={{
-                      background: "rgba(245, 158, 11, 0.05)",
+                      background: "color-mix(in srgb,var(--orange-500) 5%,transparent)",
                       borderRadius: "12px",
                       padding: "16px",
-                      border: "1px solid rgba(245, 158, 11, 0.1)",
+                      border: "1px solid color-mix(in srgb,var(--orange-500) 10%,transparent)",
                     }}
                   >
                     {selectedPoint.exam_tips}
@@ -492,10 +492,10 @@ export default function KnowledgeBrowserPage() {
                   <div
                     className="text-sm text-green-200/80 leading-relaxed whitespace-pre-wrap"
                     style={{
-                      background: "rgba(16, 185, 129, 0.05)",
+                      background: "color-mix(in srgb,var(--green-500) 5%,transparent)",
                       borderRadius: "12px",
                       padding: "16px",
-                      border: "1px solid rgba(16, 185, 129, 0.1)",
+                      border: "1px solid color-mix(in srgb,var(--green-500) 10%,transparent)",
                     }}
                   >
                     {selectedPoint.answer_template}
@@ -523,7 +523,7 @@ export default function KnowledgeBrowserPage() {
                     disabled={aiLoading}
                     className="px-4 py-2 rounded-xl text-xs text-white transition-all"
                     style={{
-                      background: "linear-gradient(135deg, #3B82F6, #8B5CF6)",
+                      background: "linear-gradient(135deg, var(--brand-500), var(--violet-500))",
                       opacity: aiLoading ? 0.6 : 1,
                     }}
                   >
@@ -534,7 +534,7 @@ export default function KnowledgeBrowserPage() {
                     disabled={aiLoading}
                     className="px-4 py-2 rounded-xl text-xs text-white transition-all"
                     style={{
-                      background: "linear-gradient(135deg, #F59E0B, #EF4444)",
+                      background: "linear-gradient(135deg, var(--orange-500), var(--red-500))",
                       opacity: aiLoading ? 0.6 : 1,
                     }}
                   >
@@ -545,7 +545,7 @@ export default function KnowledgeBrowserPage() {
                     disabled={aiLoading}
                     className="px-4 py-2 rounded-xl text-xs text-white transition-all"
                     style={{
-                      background: "linear-gradient(135deg, #10B981, #059669)",
+                      background: "linear-gradient(135deg, var(--green-500), var(--green-500))",
                       opacity: aiLoading ? 0.6 : 1,
                     }}
                   >
@@ -556,10 +556,10 @@ export default function KnowledgeBrowserPage() {
                   <div
                     className="text-sm text-blue-200/80 leading-relaxed whitespace-pre-wrap"
                     style={{
-                      background: "rgba(59, 130, 246, 0.05)",
+                      background: "color-mix(in srgb,var(--brand-500) 5%,transparent)",
                       borderRadius: "12px",
                       padding: "16px",
-                      border: "1px solid rgba(59, 130, 246, 0.1)",
+                      border: "1px solid color-mix(in srgb,var(--brand-500) 10%,transparent)",
                     }}
                   >
                     {aiExplanation}

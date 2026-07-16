@@ -114,17 +114,17 @@ export default function KnowledgeReviewPage() {
   }
 
   const cardStyle = {
-    background: 'rgba(255, 255, 255, 0.03)',
-    border: '1px solid rgba(255, 255, 255, 0.06)',
+    background: "var(--surface)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: '16px',
   };
 
   const currentReview = dueReviews[currentIndex];
 
   const subjectColors: Record<string, { bg: string; text: string }> = {
-    "subject_xinchuan": { bg: 'rgba(16,185,129,0.15)', text: '#34d399' },
-    "subject_politics": { bg: 'rgba(239,68,68,0.15)', text: '#f87171' },
-    "subject_english": { bg: 'rgba(59,130,246,0.15)', text: '#60a5fa' },
+    "subject_xinchuan": { bg: 'color-mix(in srgb,var(--green-500) 15%,transparent)', text: 'var(--green-500)' },
+    "subject_politics": { bg: 'color-mix(in srgb,var(--red-500) 15%,transparent)', text: 'var(--red-500)' },
+    "subject_english": { bg: 'color-mix(in srgb,var(--brand-500) 15%,transparent)', text: 'var(--brand-400)' },
   };
 
   const subjectNames: Record<string, string> = {
@@ -172,8 +172,8 @@ export default function KnowledgeReviewPage() {
             onClick={() => setSubjectFilter(s)}
             className="px-4 py-2 rounded-xl text-xs font-medium transition-all"
             style={subjectFilter === s ? {
-              background: 'linear-gradient(135deg, #3b82f6, #2563eb)', color: '#fff',
-            } : { background: 'rgba(255,255,255,0.05)', color: '#9ca3af' }}
+              background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))', color: 'var(--on-brand)',
+            } : { background: 'var(--glass-05)', color: 'var(--text-muted)' }}
           >
             {s === "" ? "全部" : subjectNames[s] || s}
           </button>
@@ -198,7 +198,7 @@ export default function KnowledgeReviewPage() {
             <div className="flex items-center gap-2 mb-4">
               <h3 className="text-lg font-semibold text-white">{currentReview.title}</h3>
               {currentReview.tags?.map((tag) => (
-                <span key={tag} className="text-xs px-2 py-0.5 rounded-md" style={{ background: 'rgba(255,255,255,0.05)', color: '#6b7280' }}>
+                <span key={tag} className="text-xs px-2 py-0.5 rounded-md" style={{ background: 'var(--glass-05)', color: 'var(--text-muted)' }}>
                   {tag}
                 </span>
               ))}
@@ -210,14 +210,14 @@ export default function KnowledgeReviewPage() {
                 <button
                   onClick={() => setShowAnswer(true)}
                   className="px-6 py-3 rounded-xl text-sm font-medium transition-all"
-                  style={{ background: 'linear-gradient(135deg, #3b82f6, #2563eb)', color: '#fff' }}
+                  style={{ background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))', color: 'var(--on-brand)' }}
                 >
                   显示答案
                 </button>
               </div>
             ) : (
               <div className="animate-fade-in">
-                <div className="p-4 rounded-xl mb-4" style={{ background: 'rgba(255,255,255,0.03)' }}>
+                <div className="p-4 rounded-xl mb-4" style={{ background: 'var(--glass-03)' }}>
                   <h4 className="text-sm font-semibold text-white mb-2">详细内容</h4>
                   <p className="text-sm text-gray-300 leading-relaxed whitespace-pre-line">{currentReview.content}</p>
                 </div>
@@ -228,7 +228,7 @@ export default function KnowledgeReviewPage() {
                     onClick={() => handleReview(1)}
                     disabled={reviewing}
                     className="flex-1 px-4 py-3 rounded-xl text-sm font-medium transition-all"
-                    style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#f87171' }}
+                    style={{ background: 'color-mix(in srgb,var(--red-500) 15%,transparent)', color: 'var(--red-500)' }}
                   >
                     😕 忘记了
                   </button>
@@ -236,7 +236,7 @@ export default function KnowledgeReviewPage() {
                     onClick={() => handleReview(2)}
                     disabled={reviewing}
                     className="flex-1 px-4 py-3 rounded-xl text-sm font-medium transition-all"
-                    style={{ background: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24' }}
+                    style={{ background: 'color-mix(in srgb,var(--orange-500) 15%,transparent)', color: 'var(--orange-500)' }}
                   >
                     🤔 模糊
                   </button>
@@ -244,7 +244,7 @@ export default function KnowledgeReviewPage() {
                     onClick={() => handleReview(3)}
                     disabled={reviewing}
                     className="flex-1 px-4 py-3 rounded-xl text-sm font-medium transition-all"
-                    style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#34d399' }}
+                    style={{ background: 'color-mix(in srgb,var(--green-500) 15%,transparent)', color: 'var(--green-500)' }}
                   >
                     😊 记得
                   </button>
@@ -252,7 +252,7 @@ export default function KnowledgeReviewPage() {
                     onClick={() => handleReview(4)}
                     disabled={reviewing}
                     className="flex-1 px-4 py-3 rounded-xl text-sm font-medium transition-all"
-                    style={{ background: 'rgba(59, 130, 246, 0.15)', color: '#60a5fa' }}
+                    style={{ background: 'color-mix(in srgb,var(--brand-500) 15%,transparent)', color: 'var(--brand-400)' }}
                   >
                     🎯 熟练
                   </button>

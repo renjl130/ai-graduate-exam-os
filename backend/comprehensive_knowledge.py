@@ -1,5 +1,5 @@
 """
-研途 AI 综合知识库补全脚本。
+佳乐考研 综合知识库补全脚本。
 
 原则：
 - 只补充缺失章节和缺失知识点，不删除用户数据、不重置掌握度。
@@ -15,7 +15,7 @@ import sqlite3
 from pathlib import Path
 
 from database import DB_PATH
-SOURCE = "研途AI综合考研知识框架；动态范围以报考年度正式大纲与招生目录为准"
+SOURCE = "佳乐考研综合考研知识框架；动态范围以报考年度正式大纲与招生目录为准"
 
 EXTRA_CHAPTERS = [
     ("ch_xc_method", "subject_xinchuan", "新闻传播研究方法", "定量、定性、数字方法与研究设计", 22),

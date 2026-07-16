@@ -102,12 +102,12 @@ export default function KnowledgeGraphPage() {
 
     // 边类型颜色
     const edgeColors: Record<string, string> = {
-      related: "#3B82F6",
-      contrast: "#EF4444",
-      evolution: "#10B981",
-      prerequisite: "#F59E0B",
-      includes: "#8B5CF6",
-      parent_child: "#6B7280",
+      related: "var(--brand-500)",
+      contrast: "var(--red-500)",
+      evolution: "var(--green-500)",
+      prerequisite: "var(--orange-500)",
+      includes: "var(--violet-500)",
+      parent_child: "var(--text-muted)",
     };
 
     // 重要性 -> 节点大小
@@ -184,7 +184,7 @@ export default function KnowledgeGraphPage() {
       .data(edges)
       .enter()
       .append("line")
-      .attr("stroke", (d) => edgeColors[(d as any).type] || "#4B5563")
+      .attr("stroke", (d) => edgeColors[(d as any).type] || "var(--text-muted)")
       .attr("stroke-opacity", (d) => ((d as any).type === "parent_child" ? 0.2 : 0.4))
       .attr("stroke-width", (d) => ((d as any).type === "parent_child" ? 1 : 1.5))
       .attr("stroke-dasharray", (d) => ((d as any).type === "parent_child" ? "4,4" : "none"));
@@ -224,7 +224,7 @@ export default function KnowledgeGraphPage() {
     const nodeCircles = nodeGroup.append("circle")
       .attr("r", (d) => importanceSize[d.importance] || 12)
       .attr("fill", (d) => d.subject_color)
-      .attr("stroke", "#fff")
+      .attr("stroke", "var(--on-brand)")
       .attr("stroke-width", 1.5)
       .attr("stroke-opacity", 0.3)
       .attr("filter", "url(#glow)");
@@ -237,7 +237,7 @@ export default function KnowledgeGraphPage() {
       })
       .attr("dy", (d) => (importanceSize[d.importance] || 12) + 14)
       .attr("text-anchor", "middle")
-      .attr("fill", "#D1D5DB")
+      .attr("fill", "var(--text-secondary)")
       .attr("font-size", (d) => d.importance === "high" ? "12px" : "10px")
       .attr("font-weight", (d) => d.importance === "high" ? "600" : "400");
 
@@ -330,9 +330,9 @@ export default function KnowledgeGraphPage() {
   }, [nodes, edges, searchQuery, chapters, subjects]);
 
   const cardStyle = {
-    background: "rgba(255, 255, 255, 0.05)",
+    background: "var(--surface)",
     backdropFilter: "blur(20px) saturate(180%)",
-    border: "1px solid rgba(255, 255, 255, 0.08)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: "16px",
   };
 
@@ -370,8 +370,8 @@ export default function KnowledgeGraphPage() {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-8 pr-3 py-2 rounded-xl text-sm text-white placeholder-gray-500 outline-none"
               style={{
-                background: "rgba(255,255,255,0.06)",
-                border: "1px solid rgba(255,255,255,0.08)",
+                background: "var(--glass-06)",
+                border: "1px solid var(--glass-08)",
                 width: 180,
               }}
             />
@@ -389,9 +389,9 @@ export default function KnowledgeGraphPage() {
           onClick={() => { setSubjectFilter(""); setChapterFilter(""); }}
           className="px-3 py-1.5 rounded-lg text-xs transition-all"
           style={{
-            background: !subjectFilter ? "rgba(139, 92, 246, 0.2)" : "rgba(255,255,255,0.04)",
-            color: !subjectFilter ? "#A78BFA" : "#9CA3AF",
-            border: "1px solid rgba(255,255,255,0.06)",
+            background: !subjectFilter ? "color-mix(in srgb,var(--violet-500) 20%,transparent)" : "var(--glass-04)",
+            color: !subjectFilter ? "var(--violet-500)" : "var(--text-muted)",
+            border: "1px solid var(--glass-06)",
           }}
         >
           全部
@@ -402,9 +402,9 @@ export default function KnowledgeGraphPage() {
             onClick={() => { setSubjectFilter(id); setChapterFilter(""); }}
             className="px-3 py-1.5 rounded-lg text-xs transition-all"
             style={{
-              background: subjectFilter === id ? `${info.color}30` : "rgba(255,255,255,0.04)",
-              color: subjectFilter === id ? info.color : "#9CA3AF",
-              border: `1px solid ${subjectFilter === id ? `${info.color}40` : "rgba(255,255,255,0.06)"}`,
+              background: subjectFilter === id ? `${info.color}30` : "var(--glass-04)",
+              color: subjectFilter === id ? info.color : "var(--text-muted)",
+              border: `1px solid ${subjectFilter === id ? `${info.color}40` : "var(--glass-06)"}`,
             }}
           >
             {info.name}
@@ -420,9 +420,9 @@ export default function KnowledgeGraphPage() {
             onClick={() => setChapterFilter("")}
             className="px-2.5 py-1 rounded-lg text-xs transition-all"
             style={{
-              background: !chapterFilter ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.03)",
-              color: !chapterFilter ? "#fff" : "#6B7280",
-              border: "1px solid rgba(255,255,255,0.06)",
+              background: !chapterFilter ? "var(--glass-10)" : "var(--glass-03)",
+              color: !chapterFilter ? "var(--on-brand)" : "var(--text-muted)",
+              border: "1px solid var(--glass-06)",
             }}
           >
             全部章节
@@ -433,9 +433,9 @@ export default function KnowledgeGraphPage() {
               onClick={() => setChapterFilter(ch.id)}
               className="px-2.5 py-1 rounded-lg text-xs transition-all"
               style={{
-                background: chapterFilter === ch.id ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.03)",
-                color: chapterFilter === ch.id ? "#fff" : "#6B7280",
-                border: "1px solid rgba(255,255,255,0.06)",
+                background: chapterFilter === ch.id ? "var(--glass-10)" : "var(--glass-03)",
+                color: chapterFilter === ch.id ? "var(--on-brand)" : "var(--text-muted)",
+                border: "1px solid var(--glass-06)",
               }}
             >
               {ch.name}
@@ -477,8 +477,8 @@ export default function KnowledgeGraphPage() {
                     left: "50%",
                     bottom: 16,
                     transform: "translateX(-50%)",
-                    background: "rgba(17, 24, 39, 0.95)",
-                    border: "1px solid rgba(255,255,255,0.1)",
+                    background: "var(--surface-elevated)",
+                    border: "1px solid var(--glass-10)",
                     backdropFilter: "blur(12px)",
                   }}
                 >
@@ -505,9 +505,9 @@ export default function KnowledgeGraphPage() {
             {Object.entries(edgeTypeLabels).map(([type, label]) => (
               <div key={type} className="flex items-center gap-1.5">
                 <span className="w-6 h-0.5 rounded" style={{ background: {
-                  related: "#3B82F6", contrast: "#EF4444", evolution: "#10B981",
-                  prerequisite: "#F59E0B", includes: "#8B5CF6", parent_child: "#6B7280",
-                }[type] || "#6B7280" }} />
+                  related: "var(--brand-500)", contrast: "var(--red-500)", evolution: "var(--green-500)",
+                  prerequisite: "var(--orange-500)", includes: "var(--violet-500)", parent_child: "var(--text-muted)",
+                }[type] || "var(--text-muted)" }} />
                 <span className="text-xs text-gray-500">{label}</span>
               </div>
             ))}
@@ -529,7 +529,7 @@ export default function KnowledgeGraphPage() {
                   <div className="flex justify-between">
                     <span className="text-gray-400">重要性</span>
                     <span style={{
-                      color: selectedNode.importance === "high" ? "#EF4444" : selectedNode.importance === "medium" ? "#F59E0B" : "#10B981"
+                      color: selectedNode.importance === "high" ? "var(--red-500)" : selectedNode.importance === "medium" ? "var(--orange-500)" : "var(--green-500)"
                     }}>
                       {selectedNode.importance === "high" ? "⭐ 高" : selectedNode.importance === "medium" ? "中" : "低"}
                     </span>
@@ -544,13 +544,13 @@ export default function KnowledgeGraphPage() {
                   </div>
                 </div>
                 {selectedNode.summary && (
-                  <div className="mt-3 p-3 rounded-lg text-xs text-gray-300" style={{ background: "rgba(255,255,255,0.03)" }}>
+                  <div className="mt-3 p-3 rounded-lg text-xs text-gray-300" style={{ background: "var(--glass-03)" }}>
                     {selectedNode.summary}
                   </div>
                 )}
                 <button
                   className="w-full mt-4 px-4 py-2 rounded-xl text-sm text-white transition-all hover:opacity-90"
-                  style={{ background: "linear-gradient(135deg, #3B82F6, #8B5CF6)" }}
+                  style={{ background: "linear-gradient(135deg, var(--brand-500), var(--violet-500))" }}
                   onClick={() => {
                     window.dispatchEvent(new CustomEvent("navigate", { detail: "knowledge" }));
                   }}

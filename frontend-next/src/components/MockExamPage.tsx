@@ -83,14 +83,14 @@ export default function MockExamPage() {
   }, []);
 
   const cardStyle = {
-    background: 'rgba(255, 255, 255, 0.03)',
-    border: '1px solid rgba(255, 255, 255, 0.06)',
+    background: "var(--surface)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: '20px',
   };
 
   const inputStyle = {
-    background: 'rgba(255, 255, 255, 0.06)',
-    border: '1px solid rgba(255, 255, 255, 0.1)',
+    background: 'var(--glass-06)',
+    border: '1px solid var(--glass-10)',
     borderRadius: '12px',
   };
 
@@ -221,18 +221,18 @@ export default function MockExamPage() {
           <h3 className="text-lg font-bold mb-4 text-white">深大新传MJC模拟考试</h3>
           <div className="grid grid-cols-2 gap-4 mb-4">
             {[
-              { label: "题目数量", value: `${questions.length}题`, color: "#3b82f6" },
-              { label: "满分", value: `${totalScore}分`, color: "#10b981" },
-              { label: "考试时间", value: "180分钟", color: "#f59e0b" },
-              { label: "题型", value: "选择+简答+论述", color: "#8b5cf6" },
+              { label: "题目数量", value: `${questions.length}题`, color: "var(--brand-500)" },
+              { label: "满分", value: `${totalScore}分`, color: "var(--green-500)" },
+              { label: "考试时间", value: "180分钟", color: "var(--orange-500)" },
+              { label: "题型", value: "选择+简答+论述", color: "var(--violet-500)" },
             ].map((s) => (
-              <div key={s.label} className="p-4 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)' }}>
+              <div key={s.label} className="p-4 rounded-xl" style={{ background: 'var(--glass-03)' }}>
                 <div className="text-xs text-gray-400">{s.label}</div>
                 <div className="text-xl font-bold mt-1" style={{ color: s.color }}>{s.value}</div>
               </div>
             ))}
           </div>
-          <div className="p-4 rounded-xl mb-4" style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.2)' }}>
+          <div className="p-4 rounded-xl mb-4" style={{ background: 'color-mix(in srgb,var(--orange-500) 8%,transparent)', border: '1px solid color-mix(in srgb,var(--orange-500) 20%,transparent)' }}>
             <p className="text-xs text-yellow-400">注意：开始考试后计时器将启动，时间到自动提交。选择题自动评分，简答题/论述题按关键词匹配评分。</p>
           </div>
           <div className="flex gap-3">
@@ -240,8 +240,8 @@ export default function MockExamPage() {
               onClick={() => startExam()}
               className="flex-1 py-3.5 rounded-xl text-base font-semibold text-white transition-all"
               style={{
-                background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-                boxShadow: '0 4px 15px rgba(59,130,246,0.4)',
+                background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))',
+                boxShadow: '0 4px 15px color-mix(in srgb,var(--brand-500) 40%,transparent)',
               }}
             >
               默认试卷
@@ -260,8 +260,8 @@ export default function MockExamPage() {
               disabled={generating}
               className="flex-1 py-3.5 rounded-xl text-base font-semibold text-white transition-all disabled:opacity-50"
               style={{
-                background: 'linear-gradient(135deg, #10b981, #059669)',
-                boxShadow: '0 4px 15px rgba(16,185,129,0.4)',
+                background: 'linear-gradient(135deg, var(--green-500), var(--green-500))',
+                boxShadow: '0 4px 15px color-mix(in srgb,var(--green-500) 40%,transparent)',
               }}
             >
               {generating ? "加载中..." : "📚 题库抽题"}
@@ -271,8 +271,8 @@ export default function MockExamPage() {
               disabled={generating}
               className="flex-1 py-3.5 rounded-xl text-base font-semibold text-white transition-all disabled:opacity-50"
               style={{
-                background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
-                boxShadow: '0 4px 15px rgba(139,92,246,0.4)',
+                background: 'linear-gradient(135deg, var(--violet-500), var(--violet-500))',
+                boxShadow: '0 4px 15px color-mix(in srgb,var(--violet-500) 40%,transparent)',
               }}
             >
               {generating ? "AI 生成中..." : "🤖 AI 出题"}
@@ -333,22 +333,22 @@ export default function MockExamPage() {
           <div className="flex items-center gap-4">
             <span className="text-sm font-semibold text-white">模拟考试</span>
             <span className="text-xs px-3 py-1 rounded-lg"
-              style={{ background: 'rgba(139,92,246,0.15)', color: '#a78bfa' }}>
+              style={{ background: 'color-mix(in srgb,var(--violet-500) 15%,transparent)', color: 'var(--violet-500)' }}>
               {typeLabel[question.type]}
             </span>
             <span className="text-xs text-gray-400">{question.subject} · {question.score}分</span>
           </div>
           <div className="flex items-center gap-4">
             <span className="text-xl font-mono font-bold"
-              style={{ color: timeLeft < 600 ? '#ef4444' : '#3b82f6' }}>
+              style={{ color: timeLeft < 600 ? 'var(--red-500)' : 'var(--brand-500)' }}>
               {formatTime(timeLeft)}
             </span>
             <button
               onClick={handleSubmit}
               className="px-5 py-2.5 rounded-xl text-sm font-medium text-white transition-all"
               style={{
-                background: 'linear-gradient(135deg, #ef4444, #dc2626)',
-                boxShadow: '0 4px 15px rgba(239,68,68,0.4)',
+                background: 'linear-gradient(135deg, var(--red-500), var(--red-500))',
+                boxShadow: '0 4px 15px color-mix(in srgb,var(--red-500) 40%,transparent)',
               }}
             >
               交卷
@@ -361,7 +361,7 @@ export default function MockExamPage() {
           <div className="flex items-center gap-2 mb-4">
             <span className="text-lg font-bold text-blue-400">第 {currentIdx + 1} 题</span>
             <span className="text-xs px-3 py-1 rounded-lg"
-              style={{ background: 'rgba(59,130,246,0.15)', color: '#60a5fa' }}>
+              style={{ background: 'color-mix(in srgb,var(--brand-500) 15%,transparent)', color: 'var(--brand-400)' }}>
               {question.score}分
             </span>
           </div>
@@ -376,10 +376,10 @@ export default function MockExamPage() {
                   className="w-full p-4 rounded-xl text-left text-sm transition-all duration-200"
                   style={{
                     background: answers[question.id] === opt.charAt(0)
-                      ? 'rgba(59,130,246,0.15)'
-                      : 'rgba(255,255,255,0.03)',
-                    border: `1px solid ${answers[question.id] === opt.charAt(0) ? 'rgba(59,130,246,0.5)' : 'rgba(255,255,255,0.06)'}`,
-                    color: answers[question.id] === opt.charAt(0) ? '#60a5fa' : '#d1d5db',
+                      ? 'color-mix(in srgb,var(--brand-500) 15%,transparent)'
+                      : 'var(--glass-03)',
+                    border: `1px solid ${answers[question.id] === opt.charAt(0) ? 'color-mix(in srgb,var(--brand-500) 50%,transparent)' : 'var(--glass-06)'}`,
+                    color: answers[question.id] === opt.charAt(0) ? 'var(--brand-400)' : 'var(--text-secondary)',
                   }}
                 >
                   {opt}
@@ -406,7 +406,7 @@ export default function MockExamPage() {
             onClick={() => setCurrentIdx(Math.max(0, currentIdx - 1))}
             disabled={currentIdx === 0}
             className="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-300 transition-all disabled:opacity-50"
-            style={{ background: 'rgba(255,255,255,0.05)' }}
+            style={{ background: 'var(--glass-05)' }}
           >
             上一题
           </button>
@@ -418,11 +418,11 @@ export default function MockExamPage() {
                 className="w-9 h-9 rounded-lg text-xs font-medium transition-all"
                 style={{
                   background: i === currentIdx
-                    ? 'linear-gradient(135deg, #3b82f6, #2563eb)'
+                    ? 'linear-gradient(135deg, var(--brand-500), var(--brand-500))'
                     : answers[q.id]
-                    ? 'rgba(16,185,129,0.2)'
-                    : 'rgba(255,255,255,0.05)',
-                  color: i === currentIdx || answers[q.id] ? '#fff' : '#6b7280',
+                    ? 'color-mix(in srgb,var(--green-500) 20%,transparent)'
+                    : 'var(--glass-05)',
+                  color: i === currentIdx || answers[q.id] ? 'var(--on-brand)' : 'var(--text-muted)',
                 }}
               >
                 {i + 1}
@@ -434,8 +434,8 @@ export default function MockExamPage() {
               onClick={handleSubmit}
               className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all"
               style={{
-                background: 'linear-gradient(135deg, #ef4444, #dc2626)',
-                boxShadow: '0 4px 15px rgba(239,68,68,0.4)',
+                background: 'linear-gradient(135deg, var(--red-500), var(--red-500))',
+                boxShadow: '0 4px 15px color-mix(in srgb,var(--red-500) 40%,transparent)',
               }}
             >
               交卷
@@ -445,8 +445,8 @@ export default function MockExamPage() {
               onClick={() => setCurrentIdx(Math.min(questions.length - 1, currentIdx + 1))}
               className="px-5 py-2.5 rounded-xl text-sm font-medium text-white transition-all"
               style={{
-                background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-                boxShadow: '0 4px 15px rgba(59,130,246,0.4)',
+                background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))',
+                boxShadow: '0 4px 15px color-mix(in srgb,var(--brand-500) 40%,transparent)',
               }}
             >
               下一题
@@ -469,8 +469,8 @@ export default function MockExamPage() {
           onClick={() => startExam()}
           className="px-5 py-2.5 rounded-xl text-sm font-medium text-white transition-all"
           style={{
-            background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-            boxShadow: '0 4px 15px rgba(59,130,246,0.4)',
+            background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))',
+            boxShadow: '0 4px 15px color-mix(in srgb,var(--brand-500) 40%,transparent)',
           }}
         >
           重新考试
@@ -480,22 +480,22 @@ export default function MockExamPage() {
       <div className="p-8 rounded-2xl mb-6" style={cardStyle}>
         <div className="text-center mb-6">
           <div className="text-7xl font-bold mb-2"
-            style={{ color: score >= totalScore * 0.6 ? '#10b981' : '#ef4444' }}>
+            style={{ color: score >= totalScore * 0.6 ? 'var(--green-500)' : 'var(--red-500)' }}>
             {score}
           </div>
           <div className="text-sm text-gray-400">满分 {totalScore} 分</div>
           <div className="text-xl font-semibold mt-3"
-            style={{ color: score >= totalScore * 0.6 ? '#10b981' : '#ef4444' }}>
+            style={{ color: score >= totalScore * 0.6 ? 'var(--green-500)' : 'var(--red-500)' }}>
             {score >= totalScore * 0.8 ? "🎉 优秀" : score >= totalScore * 0.6 ? "✅ 及格" : "⚠️ 需加强"}
           </div>
         </div>
         <div className="grid grid-cols-3 gap-4">
           {[
-            { value: `${questions.filter((q) => q.type === "choice" && answers[q.id] === q.answer).length}/${questions.filter((q) => q.type === "choice").length}`, label: "选择题正确", color: "#10b981" },
-            { value: `${questions.filter((q) => q.type === "short_answer").length}题`, label: "简答题", color: "#f59e0b" },
-            { value: `${questions.filter((q) => q.type === "essay").length}题`, label: "论述题", color: "#3b82f6" },
+            { value: `${questions.filter((q) => q.type === "choice" && answers[q.id] === q.answer).length}/${questions.filter((q) => q.type === "choice").length}`, label: "选择题正确", color: "var(--green-500)" },
+            { value: `${questions.filter((q) => q.type === "short_answer").length}题`, label: "简答题", color: "var(--orange-500)" },
+            { value: `${questions.filter((q) => q.type === "essay").length}题`, label: "论述题", color: "var(--brand-500)" },
           ].map((s) => (
-            <div key={s.label} className="p-4 rounded-xl text-center" style={{ background: 'rgba(255,255,255,0.03)' }}>
+            <div key={s.label} className="p-4 rounded-xl text-center" style={{ background: 'var(--glass-03)' }}>
               <div className="text-2xl font-bold" style={{ color: s.color }}>{s.value}</div>
               <div className="text-xs text-gray-400 mt-1">{s.label}</div>
             </div>
@@ -512,14 +512,14 @@ export default function MockExamPage() {
               <div className="flex items-center gap-2 mb-3">
                 <span className="font-bold text-blue-400">第{i + 1}题</span>
                 <span className="text-xs px-2 py-0.5 rounded-lg"
-                  style={{ background: 'rgba(139,92,246,0.15)', color: '#a78bfa' }}>
+                  style={{ background: 'color-mix(in srgb,var(--violet-500) 15%,transparent)', color: 'var(--violet-500)' }}>
                   {typeLabel[q.type]} · {q.score}分
                 </span>
                 {isCorrect !== undefined && (
                   <span className="text-xs px-2 py-0.5 rounded-lg"
                     style={{
-                      background: isCorrect ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)',
-                      color: isCorrect ? '#34d399' : '#f87171',
+                      background: isCorrect ? 'color-mix(in srgb,var(--green-500) 15%,transparent)' : 'color-mix(in srgb,var(--red-500) 15%,transparent)',
+                      color: isCorrect ? 'var(--green-500)' : 'var(--red-500)',
                     }}>
                     {isCorrect ? "✓ 正确" : "✗ 错误"}
                   </span>
@@ -534,7 +534,7 @@ export default function MockExamPage() {
                 <span className="text-gray-400">正确答案: </span>
                 <span className="text-green-400">{q.answer}</span>
               </div>
-              <div className="p-3 rounded-xl text-xs" style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.2)' }}>
+              <div className="p-3 rounded-xl text-xs" style={{ background: 'color-mix(in srgb,var(--orange-500) 8%,transparent)', border: '1px solid color-mix(in srgb,var(--orange-500) 20%,transparent)' }}>
                 <span className="font-semibold text-yellow-400">解析: </span>
                 <span className="text-gray-300">{q.explanation}</span>
               </div>

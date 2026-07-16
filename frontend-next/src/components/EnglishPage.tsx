@@ -107,10 +107,10 @@ export default function EnglishPage() {
   }
 
   const cardStyle = {
-    background: 'rgba(255, 255, 255, 0.55)',
-    border: '1px solid rgba(0, 0, 0, 0.05)',
+    background: "var(--surface)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: '16px',
-    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03)',
+    boxShadow: "var(--shadow-xs)",
   };
 
   const currentSection = sections.find(s => s.id === activeSection) || sections[0];
@@ -129,8 +129,8 @@ export default function EnglishPage() {
   return (
     <div className="animate-fade-in max-w-5xl mx-auto">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold" style={{ color: '#3D3A37' }}>英语二专项</h2>
-        <p className="text-sm mt-1" style={{ color: '#9B9590' }}>阅读 · 完形 · 翻译 · 写作 · 新题型</p>
+        <h2 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>英语二专项</h2>
+        <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>阅读 · 完形 · 翻译 · 写作 · 新题型</p>
       </div>
 
       {/* Section Tabs */}
@@ -141,8 +141,8 @@ export default function EnglishPage() {
             onClick={() => { setActiveSection(s.id); setShowVocab(false); }}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-medium transition-all"
             style={activeSection === s.id && !showVocab ? {
-              background: '#7A8B6F', color: '#fff',
-            } : { background: 'rgba(255,255,255,0.5)', color: '#6B6560' }}
+              background: 'var(--green-500)', color: 'var(--on-brand)',
+            } : { background: 'color-mix(in srgb,var(--on-brand) 50%,transparent)', color: 'var(--text-muted)' }}
           >
             <span>{s.icon}</span>
             {s.title}
@@ -152,8 +152,8 @@ export default function EnglishPage() {
           onClick={() => setShowVocab(!showVocab)}
           className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-medium transition-all"
           style={showVocab ? {
-            background: '#C4AA7A', color: '#fff',
-          } : { background: 'rgba(255,255,255,0.5)', color: '#6B6560' }}
+            background: 'var(--orange-500)', color: 'var(--on-brand)',
+          } : { background: 'color-mix(in srgb,var(--on-brand) 50%,transparent)', color: 'var(--text-muted)' }}
         >
           <span>📚</span>
           核心词汇
@@ -164,21 +164,21 @@ export default function EnglishPage() {
         /* Vocabulary Section */
         <div className="space-y-3">
           <div className="p-5 rounded-2xl" style={cardStyle}>
-            <h3 className="font-semibold mb-2" style={{ color: '#3D3A37' }}>考研英语二核心词汇</h3>
-            <p className="text-sm" style={{ color: '#9B9590' }}>高频词汇，每日积累</p>
+            <h3 className="font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>考研英语二核心词汇</h3>
+            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>高频词汇，每日积累</p>
           </div>
           {vocabPoints.length === 0 ? (
             <div className="p-5 rounded-2xl text-center" style={cardStyle}>
-              <p style={{ color: '#9B9590' }}>暂无词汇数据</p>
+              <p style={{ color: 'var(--text-muted)' }}>暂无词汇数据</p>
             </div>
           ) : vocabPoints.map((v) => (
             <div key={v.id} className="p-5 rounded-2xl" style={cardStyle}>
               <div className="flex items-center gap-3 mb-2">
-                <span className="text-lg font-bold" style={{ color: '#7A8B6F' }}>{v.title}</span>
+                <span className="text-lg font-bold" style={{ color: 'var(--green-500)' }}>{v.title}</span>
               </div>
-              <p className="text-sm mb-2 whitespace-pre-line" style={{ color: '#3D3A37' }}>{v.content}</p>
+              <p className="text-sm mb-2 whitespace-pre-line" style={{ color: 'var(--text-primary)' }}>{v.content}</p>
               {v.exam_tips && (
-                <p className="text-xs italic mt-2" style={{ color: '#6B6560' }}>💡 {v.exam_tips}</p>
+                <p className="text-xs italic mt-2" style={{ color: 'var(--text-muted)' }}>💡 {v.exam_tips}</p>
               )}
             </div>
           ))}
@@ -192,20 +192,20 @@ export default function EnglishPage() {
                 <div className="flex items-center gap-3 mb-4">
                   <span className="text-3xl">{currentSection.icon}</span>
                   <div>
-                    <h3 className="text-lg font-bold" style={{ color: '#3D3A37' }}>{currentSection.title}</h3>
-                    <p className="text-sm" style={{ color: '#9B9590' }}>{currentSection.description}</p>
+                    <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>{currentSection.title}</h3>
+                    <p className="text-sm" style={{ color: 'var(--text-muted)' }}>{currentSection.description}</p>
                   </div>
                 </div>
               </div>
 
               {currentSection.content.length === 0 ? (
                 <div className="p-6 rounded-2xl text-center" style={cardStyle}>
-                  <p style={{ color: '#9B9590' }}>暂无该章节知识点</p>
+                  <p style={{ color: 'var(--text-muted)' }}>暂无该章节知识点</p>
                 </div>
               ) : currentSection.content.map((item, i) => (
                 <div key={i} className="p-6 rounded-2xl" style={cardStyle}>
-                  <h4 className="font-semibold mb-3" style={{ color: '#7A8B6F' }}>{item.title}</h4>
-                  <div className="text-sm leading-relaxed whitespace-pre-line" style={{ color: '#3D3A37' }}>
+                  <h4 className="font-semibold mb-3" style={{ color: 'var(--green-500)' }}>{item.title}</h4>
+                  <div className="text-sm leading-relaxed whitespace-pre-line" style={{ color: 'var(--text-primary)' }}>
                     {item.detail}
                   </div>
                 </div>
@@ -213,7 +213,7 @@ export default function EnglishPage() {
             </>
           ) : (
             <div className="p-6 rounded-2xl text-center" style={cardStyle}>
-              <p style={{ color: '#9B9590' }}>暂无英语知识点数据</p>
+              <p style={{ color: 'var(--text-muted)' }}>暂无英语知识点数据</p>
             </div>
           )}
         </div>

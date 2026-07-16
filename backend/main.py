@@ -1,5 +1,5 @@
 """
-AI 考研学习操作系统 - FastAPI Backend v3.0
+佳乐考研 - FastAPI Backend v3.0
 兼容版本：SQLite + JWT认证
 """
 import sys
@@ -58,7 +58,7 @@ async def lifespan(_: FastAPI):
 
 app = FastAPI(
     title=APP_NAME,
-    description="一站式 AI 考研平台 API",
+    description="一站式 佳乐考研平台 API",
     version=APP_VERSION,
     lifespan=lifespan,
 )

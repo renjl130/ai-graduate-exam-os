@@ -25,7 +25,7 @@ load_env()
 
 ENVIRONMENT = os.getenv("ENVIRONMENT", "development").strip().lower()
 IS_PRODUCTION = ENVIRONMENT == "production"
-APP_NAME = os.getenv("APP_NAME", "AI 考研学习操作系统")
+APP_NAME = os.getenv("APP_NAME", "佳乐考研")
 APP_VERSION = os.getenv("APP_VERSION", "3.1.0")
 DEBUG = os.getenv("DEBUG", "false").lower() == "true" and not IS_PRODUCTION
 HOST = os.getenv("HOST", "0.0.0.0")

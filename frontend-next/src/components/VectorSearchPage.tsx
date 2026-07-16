@@ -51,21 +51,21 @@ export default function VectorSearchPage() {
   }
 
   const cardStyle = {
-    background: 'rgba(255, 255, 255, 0.03)',
-    border: '1px solid rgba(255, 255, 255, 0.06)',
+    background: "var(--surface)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: '16px',
   };
 
   const inputStyle = {
-    background: 'rgba(255, 255, 255, 0.06)',
-    border: '1px solid rgba(255, 255, 255, 0.1)',
+    background: 'var(--glass-06)',
+    border: '1px solid var(--glass-10)',
     borderRadius: '12px',
   };
 
   const subjectColors: Record<string, { bg: string; text: string }> = {
-    "subject_xinchuan": { bg: 'rgba(16,185,129,0.15)', text: '#34d399' },
-    "subject_politics": { bg: 'rgba(239,68,68,0.15)', text: '#f87171' },
-    "subject_english": { bg: 'rgba(59,130,246,0.15)', text: '#60a5fa' },
+    "subject_xinchuan": { bg: 'color-mix(in srgb,var(--green-500) 15%,transparent)', text: 'var(--green-500)' },
+    "subject_politics": { bg: 'color-mix(in srgb,var(--red-500) 15%,transparent)', text: 'var(--red-500)' },
+    "subject_english": { bg: 'color-mix(in srgb,var(--brand-500) 15%,transparent)', text: 'var(--brand-400)' },
   };
 
   const subjectNames: Record<string, string> = {
@@ -98,8 +98,8 @@ export default function VectorSearchPage() {
             disabled={searching || !query.trim()}
             className="px-6 py-3 rounded-xl text-sm font-medium transition-all"
             style={{
-              background: searching || !query.trim() ? 'rgba(59, 130, 246, 0.3)' : 'linear-gradient(135deg, #3b82f6, #2563eb)',
-              color: '#fff',
+              background: searching || !query.trim() ? 'color-mix(in srgb,var(--brand-500) 30%,transparent)' : 'linear-gradient(135deg, var(--brand-500), var(--brand-500))',
+              color: 'var(--on-brand)',
               cursor: searching || !query.trim() ? 'not-allowed' : 'pointer',
             }}
           >
@@ -133,7 +133,7 @@ export default function VectorSearchPage() {
                         <span className="text-xs px-2 py-0.5 rounded-lg" style={{ background: colors.bg, color: colors.text }}>
                           {subjectName}
                         </span>
-                        <span className="text-xs px-2 py-0.5 rounded-lg" style={{ background: 'rgba(139,92,246,0.15)', color: '#a78bfa' }}>
+                        <span className="text-xs px-2 py-0.5 rounded-lg" style={{ background: 'color-mix(in srgb,var(--violet-500) 15%,transparent)', color: 'var(--violet-500)' }}>
                           {result.search_type === 'vector' ? '语义' : '关键词'}
                         </span>
                       </div>
@@ -148,7 +148,7 @@ export default function VectorSearchPage() {
 
                 {expandedId === result.id && (
                   <div className="px-5 pb-5 animate-fade-in">
-                    <div className="p-4 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)' }}>
+                    <div className="p-4 rounded-xl" style={{ background: 'var(--glass-03)' }}>
                       <h4 className="text-sm font-semibold text-white mb-2">详细内容</h4>
                       <p className="text-sm text-gray-300 leading-relaxed whitespace-pre-line">{result.content}</p>
                     </div>

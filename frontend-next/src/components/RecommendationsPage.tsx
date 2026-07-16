@@ -90,15 +90,15 @@ export default function RecommendationsPage() {
   }
 
   const cardStyle = {
-    background: 'rgba(255, 255, 255, 0.03)',
-    border: '1px solid rgba(255, 255, 255, 0.06)',
+    background: "var(--surface)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: '16px',
   };
 
   const priorityColors: Record<string, { bg: string; text: string }> = {
-    "high": { bg: 'rgba(239,68,68,0.15)', text: '#f87171' },
-    "medium": { bg: 'rgba(245,158,11,0.15)', text: '#fbbf24' },
-    "low": { bg: 'rgba(59,130,246,0.15)', text: '#60a5fa' },
+    "high": { bg: 'color-mix(in srgb,var(--red-500) 15%,transparent)', text: 'var(--red-500)' },
+    "medium": { bg: 'color-mix(in srgb,var(--orange-500) 15%,transparent)', text: 'var(--orange-500)' },
+    "low": { bg: 'color-mix(in srgb,var(--brand-500) 15%,transparent)', text: 'var(--brand-400)' },
   };
 
   const subjectNames: Record<string, string> = {
@@ -137,8 +137,8 @@ export default function RecommendationsPage() {
             onClick={() => setActiveTab(tab.id as any)}
             className="px-4 py-2.5 rounded-xl text-xs font-medium transition-all"
             style={activeTab === tab.id ? {
-              background: 'linear-gradient(135deg, #3b82f6, #2563eb)', color: '#fff',
-            } : { background: 'rgba(255,255,255,0.05)', color: '#9ca3af' }}
+              background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))', color: 'var(--on-brand)',
+            } : { background: 'var(--glass-05)', color: 'var(--text-muted)' }}
           >
             {tab.label}
           </button>
@@ -170,7 +170,7 @@ export default function RecommendationsPage() {
                     <p className="text-sm text-gray-400 mb-2">{rec.reason}</p>
                     <div className="flex gap-1.5 flex-wrap">
                       {rec.tags?.map((tag) => (
-                        <span key={tag} className="text-xs px-2 py-0.5 rounded-md" style={{ background: 'rgba(255,255,255,0.05)', color: '#6b7280' }}>
+                        <span key={tag} className="text-xs px-2 py-0.5 rounded-md" style={{ background: 'var(--glass-05)', color: 'var(--text-muted)' }}>
                           {tag}
                         </span>
                       ))}
@@ -205,7 +205,7 @@ export default function RecommendationsPage() {
                   <h3 className="text-base font-semibold text-white mb-2">{wp.title}</h3>
                   <div className="flex gap-1.5 flex-wrap">
                     {wp.tags?.map((tag) => (
-                      <span key={tag} className="text-xs px-2 py-0.5 rounded-md" style={{ background: 'rgba(255,255,255,0.05)', color: '#6b7280' }}>
+                      <span key={tag} className="text-xs px-2 py-0.5 rounded-md" style={{ background: 'var(--glass-05)', color: 'var(--text-muted)' }}>
                         {tag}
                       </span>
                     ))}
@@ -242,15 +242,15 @@ export default function RecommendationsPage() {
                   <h4 className="text-base font-semibold text-white">第 {day.day} 天</h4>
                   <p className="text-xs text-gray-400">{day.date}</p>
                 </div>
-                <span className="text-xs px-2 py-1 rounded-lg" style={{ background: 'rgba(59,130,246,0.15)', color: '#60a5fa' }}>
+                <span className="text-xs px-2 py-1 rounded-lg" style={{ background: 'color-mix(in srgb,var(--brand-500) 15%,transparent)', color: 'var(--brand-400)' }}>
                   约 {day.estimated_minutes} 分钟
                 </span>
               </div>
 
               <div className="space-y-2">
                 {day.points.slice(0, 5).map((point) => (
-                  <div key={point.id} className="flex items-center gap-2 p-2 rounded-lg" style={{ background: 'rgba(255,255,255,0.03)' }}>
-                    <span className="text-xs px-2 py-0.5 rounded-md" style={{ background: 'rgba(255,255,255,0.05)', color: '#6b7280' }}>
+                  <div key={point.id} className="flex items-center gap-2 p-2 rounded-lg" style={{ background: 'var(--glass-03)' }}>
+                    <span className="text-xs px-2 py-0.5 rounded-md" style={{ background: 'var(--glass-05)', color: 'var(--text-muted)' }}>
                       {subjectNames[point.subject_id] || point.subject_id}
                     </span>
                     <span className="text-sm text-gray-300">{point.title}</span>

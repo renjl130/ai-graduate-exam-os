@@ -146,14 +146,14 @@ export default function DocumentImportPage() {
   }
 
   const cardStyle = {
-    background: 'rgba(255, 255, 255, 0.03)',
-    border: '1px solid rgba(255, 255, 255, 0.06)',
+    background: "var(--surface)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: '16px',
   };
 
   const inputStyle = {
-    background: 'rgba(255, 255, 255, 0.06)',
-    border: '1px solid rgba(255, 255, 255, 0.1)',
+    background: 'var(--glass-06)',
+    border: '1px solid var(--glass-10)',
     borderRadius: '12px',
   };
 
@@ -210,7 +210,7 @@ export default function DocumentImportPage() {
               className="w-full px-4 py-3 rounded-xl text-sm text-white"
               style={inputStyle}
             >
-              <option value="">???????????</option>
+              <option value="">自动匹配首个章节</option>
               {chapters.map((chapter) => <option key={chapter.id} value={chapter.id}>{chapter.name}</option>)}
             </select>
           </div>
@@ -221,8 +221,8 @@ export default function DocumentImportPage() {
             disabled={importing || !file}
             className="w-full px-6 py-3 rounded-xl text-sm font-medium transition-all"
             style={{
-              background: importing || !file ? 'rgba(59, 130, 246, 0.3)' : 'linear-gradient(135deg, #3b82f6, #2563eb)',
-              color: '#fff',
+              background: importing || !file ? 'color-mix(in srgb,var(--brand-500) 30%,transparent)' : 'linear-gradient(135deg, var(--brand-500), var(--brand-500))',
+              color: 'var(--on-brand)',
               cursor: importing || !file ? 'not-allowed' : 'pointer',
             }}
           >
@@ -232,14 +232,14 @@ export default function DocumentImportPage() {
 
         {/* 错误信息 */}
         {error && (
-          <div className="mt-4 p-4 rounded-xl" style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)' }}>
+          <div className="mt-4 p-4 rounded-xl" style={{ background: 'color-mix(in srgb,var(--red-500) 10%,transparent)', border: '1px solid color-mix(in srgb,var(--red-500) 20%,transparent)' }}>
             <p className="text-sm text-red-400">{error}</p>
           </div>
         )}
 
         {/* 成功信息 */}
         {result && (
-          <div className="mt-4 p-4 rounded-xl" style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.2)' }}>
+          <div className="mt-4 p-4 rounded-xl" style={{ background: 'color-mix(in srgb,var(--green-500) 10%,transparent)', border: '1px solid color-mix(in srgb,var(--green-500) 20%,transparent)' }}>
             <p className="text-sm text-green-400">{result.message}</p>
             <p className="text-xs text-gray-400 mt-1">导入了 {result.knowledge_count} 个知识点</p>
           </div>
@@ -255,7 +255,7 @@ export default function DocumentImportPage() {
         ) : (
           <div className="space-y-3">
             {history.map((job) => (
-              <div key={job.id} className="p-4 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)' }}>
+              <div key={job.id} className="p-4 rounded-xl" style={{ background: 'var(--glass-03)' }}>
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm text-white">{job.filename}</p>
@@ -264,8 +264,8 @@ export default function DocumentImportPage() {
                     </p>
                   </div>
                   <span className="text-xs px-2 py-1 rounded-lg" style={{
-                    background: job.status === 'completed' ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)',
-                    color: job.status === 'completed' ? '#34d399' : '#f87171',
+                    background: job.status === 'completed' ? 'color-mix(in srgb,var(--green-500) 15%,transparent)' : 'color-mix(in srgb,var(--red-500) 15%,transparent)',
+                    color: job.status === 'completed' ? 'var(--green-500)' : 'var(--red-500)',
                   }}>
                     {job.status === 'completed' ? '完成' : '失败'}
                   </span>

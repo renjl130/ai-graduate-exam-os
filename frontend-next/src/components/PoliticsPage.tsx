@@ -121,10 +121,10 @@ export default function PoliticsPage() {
   }
 
   const cardStyle = {
-    background: 'rgba(255, 255, 255, 0.55)',
-    border: '1px solid rgba(0, 0, 0, 0.05)',
+    background: "var(--surface)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: '16px',
-    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03)',
+    boxShadow: "var(--shadow-xs)",
   };
 
   const currentSubject = subjects.find(s => s.id === activeSubject) || subjects[0];
@@ -143,8 +143,8 @@ export default function PoliticsPage() {
   return (
     <div className="animate-fade-in max-w-5xl mx-auto">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold" style={{ color: '#3D3A37' }}>政治专项</h2>
-        <p className="text-sm mt-1" style={{ color: '#9B9590' }}>马原 · 毛中特 · 史纲 · 思修 · 时政</p>
+        <h2 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>政治专项</h2>
+        <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>马原 · 毛中特 · 史纲 · 思修 · 时政</p>
       </div>
 
       {/* Subject Tabs */}
@@ -155,8 +155,8 @@ export default function PoliticsPage() {
             onClick={() => setActiveSubject(s.id)}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-medium transition-all"
             style={activeSubject === s.id ? {
-              background: '#7A8B6F', color: '#fff',
-            } : { background: 'rgba(255,255,255,0.5)', color: '#6B6560' }}
+              background: 'var(--green-500)', color: 'var(--on-brand)',
+            } : { background: 'color-mix(in srgb,var(--on-brand) 50%,transparent)', color: 'var(--text-muted)' }}
           >
             <span>{s.icon}</span>
             {s.title.substring(0, 6)}
@@ -168,8 +168,8 @@ export default function PoliticsPage() {
       <div className="grid grid-cols-5 gap-3 mb-6">
         {subjects.map((s) => (
           <div key={s.id} className="p-4 rounded-2xl text-center" style={cardStyle}>
-            <div className="text-2xl font-bold" style={{ color: '#7A8B6F' }}>{s.score}</div>
-            <div className="text-xs mt-1" style={{ color: '#9B9590' }}>{s.title.substring(0, 4)}</div>
+            <div className="text-2xl font-bold" style={{ color: 'var(--green-500)' }}>{s.score}</div>
+            <div className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>{s.title.substring(0, 4)}</div>
           </div>
         ))}
       </div>
@@ -181,28 +181,28 @@ export default function PoliticsPage() {
             <div className="flex items-center gap-3 mb-2">
               <span className="text-3xl">{currentSubject.icon}</span>
               <div>
-                <h3 className="text-lg font-bold" style={{ color: '#3D3A37' }}>{currentSubject.title}</h3>
-                <p className="text-sm" style={{ color: '#9B9590' }}>{currentSubject.description}</p>
+                <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>{currentSubject.title}</h3>
+                <p className="text-sm" style={{ color: 'var(--text-muted)' }}>{currentSubject.description}</p>
               </div>
             </div>
           </div>
 
           {currentSubject.chapters.map((chapter, i) => (
             <div key={i} className="p-6 rounded-2xl" style={cardStyle}>
-              <h4 className="font-semibold mb-3" style={{ color: '#7A8B6F' }}>
+              <h4 className="font-semibold mb-3" style={{ color: 'var(--green-500)' }}>
                 {chapter.name}
               </h4>
               <div className="space-y-3">
                 {chapter.keyPoints.length === 0 ? (
-                  <p className="text-sm" style={{ color: '#9B9590' }}>暂无知识点</p>
+                  <p className="text-sm" style={{ color: 'var(--text-muted)' }}>暂无知识点</p>
                 ) : chapter.keyPoints.map((point) => (
-                  <div key={point.id} className="p-3 rounded-xl" style={{ background: 'rgba(122, 139, 111, 0.05)' }}>
-                    <div className="font-medium text-sm mb-1" style={{ color: '#3D3A37' }}>{point.title}</div>
-                    <div className="text-xs leading-relaxed whitespace-pre-line" style={{ color: '#6B6560' }}>
+                  <div key={point.id} className="p-3 rounded-xl" style={{ background: 'color-mix(in srgb,var(--green-500) 5%,transparent)' }}>
+                    <div className="font-medium text-sm mb-1" style={{ color: 'var(--text-primary)' }}>{point.title}</div>
+                    <div className="text-xs leading-relaxed whitespace-pre-line" style={{ color: 'var(--text-muted)' }}>
                       {point.content.length > 200 ? point.content.substring(0, 200) + '...' : point.content}
                     </div>
                     {point.exam_tips && (
-                      <div className="text-xs mt-2" style={{ color: '#C4AA7A' }}>💡 {point.exam_tips}</div>
+                      <div className="text-xs mt-2" style={{ color: 'var(--orange-500)' }}>💡 {point.exam_tips}</div>
                     )}
                   </div>
                 ))}
@@ -212,14 +212,14 @@ export default function PoliticsPage() {
         </div>
       ) : (
         <div className="p-6 rounded-2xl text-center" style={cardStyle}>
-          <p style={{ color: '#9B9590' }}>暂无政治知识点数据</p>
+          <p style={{ color: 'var(--text-muted)' }}>暂无政治知识点数据</p>
         </div>
       )}
 
       {/* Exam Tips */}
-      <div className="mt-6 p-6 rounded-2xl" style={{ ...cardStyle, background: 'rgba(122, 139, 111, 0.08)', border: '1px solid rgba(122, 139, 111, 0.15)' }}>
-        <h4 className="font-semibold mb-3" style={{ color: '#7A8B6F' }}>📝 备考建议</h4>
-        <div className="space-y-2 text-sm" style={{ color: '#3D3A37' }}>
+      <div className="mt-6 p-6 rounded-2xl" style={{ ...cardStyle, background: 'color-mix(in srgb,var(--green-500) 8%,transparent)', border: '1px solid color-mix(in srgb,var(--green-500) 15%,transparent)' }}>
+        <h4 className="font-semibold mb-3" style={{ color: 'var(--green-500)' }}>📝 备考建议</h4>
+        <div className="space-y-2 text-sm" style={{ color: 'var(--text-primary)' }}>
           <p>• <strong>选择题</strong>：重点掌握马原辩证法、认识论，毛中特新思想，史纲重要事件时间线</p>
           <p>• <strong>分析题</strong>：背诵肖四肖八，掌握答题框架（原理+分析+总结）</p>
           <p>• <strong>时政</strong>：关注二十大报告、政府工作报告、重大时事</p>

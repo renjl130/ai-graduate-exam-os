@@ -138,14 +138,14 @@ export default function FlashcardsPage() {
 
   // iOS 26 样式
   const cardStyle = {
-    background: 'rgba(255, 255, 255, 0.03)',
-    border: '1px solid rgba(255, 255, 255, 0.06)',
+    background: "var(--surface)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: '20px',
   };
 
   const inputStyle = {
-    background: 'rgba(255, 255, 255, 0.06)',
-    border: '1px solid rgba(255, 255, 255, 0.1)',
+    background: 'var(--glass-06)',
+    border: '1px solid var(--glass-10)',
     borderRadius: '12px',
   };
 
@@ -154,7 +154,7 @@ export default function FlashcardsPage() {
       <div className="animate-fade-in flex items-center justify-center h-full">
         <div className="text-center">
           <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-4 mx-auto"
-            style={{ background: 'linear-gradient(135deg, rgba(139,92,246,0.2), rgba(59,130,246,0.2))' }}>
+            style={{ background: 'linear-gradient(135deg, color-mix(in srgb,var(--violet-500) 20%,transparent), color-mix(in srgb,var(--brand-500) 20%,transparent))' }}>
             🃏
           </div>
           <p className="text-gray-400">加载中...</p>
@@ -174,7 +174,7 @@ export default function FlashcardsPage() {
         <button
           onClick={() => { fetchDueCards(filterSubject); fetchStats(); }}
           className="px-4 py-2 rounded-xl text-xs font-medium text-gray-400 hover:text-white transition-all"
-          style={{ background: 'rgba(255,255,255,0.05)' }}
+          style={{ background: 'var(--glass-05)' }}
         >
           刷新
         </button>
@@ -205,11 +205,11 @@ export default function FlashcardsPage() {
               onClick={() => { setFilterSubject(s.key); setCurrentIndex(0); setFlipped(false); }}
               className="px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
               style={filterSubject === s.key ? {
-                background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-                color: '#fff',
+                background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))',
+                color: 'var(--on-brand)',
               } : {
-                background: 'rgba(255,255,255,0.05)',
-                color: '#9ca3af',
+                background: 'var(--glass-05)',
+                color: 'var(--text-muted)',
               }}
             >
               {s.label}
@@ -219,7 +219,7 @@ export default function FlashcardsPage() {
         <button
           onClick={() => setShowCreate(true)}
           className="px-4 py-2 rounded-xl text-xs font-medium text-blue-400 hover:text-blue-300 transition-all"
-          style={{ background: 'rgba(59,130,246,0.1)' }}
+          style={{ background: 'color-mix(in srgb,var(--brand-500) 10%,transparent)' }}
         >
           + 手动添加
         </button>
@@ -244,12 +244,12 @@ export default function FlashcardsPage() {
                   style={{
                     ...cardStyle,
                     backfaceVisibility: "hidden",
-                    background: 'linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1))',
+                    background: 'linear-gradient(135deg, color-mix(in srgb,var(--brand-500) 10%,transparent), color-mix(in srgb,var(--violet-500) 10%,transparent))',
                   }}
                 >
                   <div className="flex items-center justify-between mb-4">
                     <span className="px-3 py-1 rounded-lg text-xs font-medium"
-                      style={{ background: 'rgba(59,130,246,0.2)', color: '#60a5fa' }}>
+                      style={{ background: 'color-mix(in srgb,var(--brand-500) 20%,transparent)', color: 'var(--brand-400)' }}>
                       {card.subject || "通用"}
                     </span>
                     <span className="text-xs text-gray-400">复习{card.review_count}次</span>
@@ -264,15 +264,15 @@ export default function FlashcardsPage() {
                 <div
                   className="p-8 rounded-3xl min-h-[300px] flex flex-col absolute inset-0"
                   style={{
-                    background: 'linear-gradient(135deg, rgba(16,185,129,0.1), rgba(59,130,246,0.1))',
-                    border: '1px solid rgba(255,255,255,0.06)',
+                    background: 'linear-gradient(135deg, color-mix(in srgb,var(--green-500) 10%,transparent), color-mix(in srgb,var(--brand-500) 10%,transparent))',
+                    border: '1px solid var(--glass-06)',
                     backfaceVisibility: "hidden",
                     transform: "rotateY(180deg)",
                   }}
                 >
                   <div className="flex items-center justify-between mb-4">
                     <span className="px-3 py-1 rounded-lg text-xs font-medium"
-                      style={{ background: 'rgba(16,185,129,0.2)', color: '#34d399' }}>
+                      style={{ background: 'color-mix(in srgb,var(--green-500) 20%,transparent)', color: 'var(--green-500)' }}>
                       {card.card_type}
                     </span>
                     <span className="text-xs text-gray-400">稳定性 {card.stability.toFixed(1)}</span>
@@ -289,10 +289,10 @@ export default function FlashcardsPage() {
           {flipped && (
             <div className="flex justify-center gap-3 animate-fade-in mb-6">
               {[
-                { rating: 1, label: "😵 重来", color: "#ef4444", bg: "rgba(239,68,68,0.1)" },
-                { rating: 2, label: "😐 困难", color: "#f59e0b", bg: "rgba(245,158,11,0.1)" },
-                { rating: 3, label: "😊 良好", color: "#10b981", bg: "rgba(16,185,129,0.1)" },
-                { rating: 4, label: "😎 简单", color: "#3b82f6", bg: "rgba(59,130,246,0.1)" },
+                { rating: 1, label: "😵 重来", color: "var(--red-500)", bg: "color-mix(in srgb,var(--red-500) 10%,transparent)" },
+                { rating: 2, label: "😐 困难", color: "var(--orange-500)", bg: "color-mix(in srgb,var(--orange-500) 10%,transparent)" },
+                { rating: 3, label: "😊 良好", color: "var(--green-500)", bg: "color-mix(in srgb,var(--green-500) 10%,transparent)" },
+                { rating: 4, label: "😎 简单", color: "var(--brand-500)", bg: "color-mix(in srgb,var(--brand-500) 10%,transparent)" },
               ].map((btn) => (
                 <button
                   key={btn.rating}
@@ -309,12 +309,12 @@ export default function FlashcardsPage() {
           {/* Progress */}
           <div className="text-center">
             <span className="text-xs text-gray-400">卡片 {currentIndex + 1}/{cards.length}</span>
-            <div className="mt-2 max-w-md mx-auto h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.05)' }}>
+            <div className="mt-2 max-w-md mx-auto h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--glass-05)' }}>
               <div
                 className="h-full rounded-full transition-all duration-300"
                 style={{
                   width: `${((currentIndex + 1) / cards.length) * 100}%`,
-                  background: 'linear-gradient(90deg, #3b82f6, #8b5cf6)',
+                  background: 'linear-gradient(90deg, var(--brand-500), var(--violet-500))',
                 }}
               />
             </div>
@@ -356,8 +356,8 @@ export default function FlashcardsPage() {
             disabled={generating}
             className="px-6 py-3 rounded-xl text-sm font-medium text-white transition-all disabled:opacity-50"
             style={{
-              background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
-              boxShadow: '0 4px 15px rgba(139,92,246,0.4)',
+              background: 'linear-gradient(135deg, var(--violet-500), var(--violet-500))',
+              boxShadow: '0 4px 15px color-mix(in srgb,var(--violet-500) 40%,transparent)',
             }}
           >
             {generating ? "生成中..." : "生成10张"}
@@ -368,9 +368,9 @@ export default function FlashcardsPage() {
       {/* Create Modal */}
       {showCreate && (
         <div className="fixed inset-0 z-50 flex items-center justify-center"
-          style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(8px)' }}>
+          style={{ background: 'var(--overlay)', backdropFilter: 'blur(8px)' }}>
           <div className="w-full max-w-md p-6 rounded-2xl"
-            style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.1)' }}>
+            style={{ background: 'var(--surface)', border: '1px solid var(--glass-10)' }}>
             <h3 className="text-lg font-bold mb-4 text-white">手动创建闪卡</h3>
             <div className="space-y-3">
               <select
@@ -404,7 +404,7 @@ export default function FlashcardsPage() {
                 <button
                   onClick={() => setShowCreate(false)}
                   className="flex-1 py-3 rounded-xl text-sm font-medium text-gray-300 transition-all"
-                  style={{ background: 'rgba(255,255,255,0.05)' }}
+                  style={{ background: 'var(--glass-05)' }}
                 >
                   取消
                 </button>
@@ -413,8 +413,8 @@ export default function FlashcardsPage() {
                   disabled={creating || !newCard.front.trim() || !newCard.back.trim()}
                   className="flex-1 py-3 rounded-xl text-sm font-semibold text-white transition-all disabled:opacity-50"
                   style={{
-                    background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-                    boxShadow: '0 4px 15px rgba(59,130,246,0.4)',
+                    background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))',
+                    boxShadow: '0 4px 15px color-mix(in srgb,var(--brand-500) 40%,transparent)',
                   }}
                 >
                   {creating ? "创建中..." : "创建"}

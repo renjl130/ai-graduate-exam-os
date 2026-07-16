@@ -30,10 +30,10 @@ function today() {
 }
 
 const subjectColors: Record<string, string> = {
-  "440": "#f59e0b",
-  "334": "#10b981",
-  "英语二": "#3b82f6",
-  "政治": "#ef4444",
+  "440": "var(--orange-500)",
+  "334": "var(--green-500)",
+  "英语二": "var(--brand-500)",
+  "政治": "var(--red-500)",
 };
 
 type SyncState = "syncing" | "synced" | "offline";
@@ -50,14 +50,14 @@ export default function StudyPlanPage() {
   const [syncMessage, setSyncMessage] = useState("正在同步云端计划…");
 
   const cardStyle = {
-    background: "rgba(255, 255, 255, 0.03)",
-    border: "1px solid rgba(255, 255, 255, 0.06)",
+    background: "var(--surface)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: "20px",
   };
 
   const inputStyle = {
-    background: "rgba(255, 255, 255, 0.06)",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
+    background: "var(--glass-06)",
+    border: "1px solid var(--glass-10)",
     borderRadius: "12px",
   };
 
@@ -334,8 +334,8 @@ export default function StudyPlanPage() {
             disabled={generating}
             className="px-4 py-2 rounded-xl text-sm font-medium text-white transition-all disabled:opacity-50"
             style={{
-              background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
-              boxShadow: '0 4px 15px rgba(139,92,246,0.4)',
+              background: 'linear-gradient(135deg, var(--violet-500), var(--violet-500))',
+              boxShadow: '0 4px 15px color-mix(in srgb,var(--violet-500) 40%,transparent)',
             }}
           >
             {generating ? "生成中..." : "AI 生成计划"}
@@ -344,8 +344,8 @@ export default function StudyPlanPage() {
             onClick={() => setShowAdd(true)}
             className="px-4 py-2 rounded-xl text-sm font-medium text-white transition-all"
             style={{
-              background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-              boxShadow: '0 4px 15px rgba(59,130,246,0.4)',
+              background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))',
+              boxShadow: '0 4px 15px color-mix(in srgb,var(--brand-500) 40%,transparent)',
             }}
           >
             + 添加任务
@@ -355,14 +355,14 @@ export default function StudyPlanPage() {
 
       {genError && (
         <div className="mb-4 p-4 rounded-xl text-sm text-red-400"
-          style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)' }}>
+          style={{ background: 'color-mix(in srgb,var(--red-500) 8%,transparent)', border: '1px solid color-mix(in srgb,var(--red-500) 20%,transparent)' }}>
           {genError}
         </div>
       )}
 
       {generating && (
         <div className="mb-4 p-4 rounded-xl text-sm text-gray-400"
-          style={{ background: 'rgba(16,163,127,0.08)', border: '1px solid rgba(16,163,127,0.2)' }}>
+          style={{ background: 'color-mix(in srgb,var(--green-500) 8%,transparent)', border: '1px solid color-mix(in srgb,var(--green-500) 20%,transparent)' }}>
           AI 正在生成一周学习计划，预计需要 30-60 秒...
         </div>
       )}
@@ -383,12 +383,12 @@ export default function StudyPlanPage() {
               className="min-w-16 flex-1 rounded-xl p-3 text-center transition-all"
               style={{
                 background: isSelected
-                  ? 'linear-gradient(135deg, #3b82f6, #2563eb)'
+                  ? 'linear-gradient(135deg, var(--brand-500), var(--brand-500))'
                   : isToday
-                  ? 'rgba(255,255,255,0.06)'
-                  : 'rgba(255,255,255,0.03)',
-                border: `1px solid ${isSelected ? 'rgba(59,130,246,0.3)' : 'rgba(255,255,255,0.06)'}`,
-                color: isSelected ? '#fff' : '#d1d5db',
+                  ? 'var(--glass-06)'
+                  : 'var(--glass-03)',
+                border: `1px solid ${isSelected ? 'color-mix(in srgb,var(--brand-500) 30%,transparent)' : 'var(--glass-06)'}`,
+                color: isSelected ? 'var(--on-brand)' : 'var(--text-secondary)',
               }}
             >
               <div className="text-xs opacity-70">周{dayNames[dateObj.getDay()]}</div>
@@ -404,10 +404,10 @@ export default function StudyPlanPage() {
       {/* Progress Overview */}
       <div className="mb-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
         {[
-          { value: dayTasks.length, label: "今日任务", color: "#3b82f6" },
-          { value: completedCount, label: "已完成", color: "#10b981" },
-          { value: `${Math.floor(totalMinutes / 60)}h${totalMinutes % 60}m`, label: "计划时长", color: "#f59e0b" },
-          { value: `${dayTasks.length > 0 ? Math.round((completedCount / dayTasks.length) * 100) : 0}%`, label: "完成率", color: "#8b5cf6" },
+          { value: dayTasks.length, label: "今日任务", color: "var(--brand-500)" },
+          { value: completedCount, label: "已完成", color: "var(--green-500)" },
+          { value: `${Math.floor(totalMinutes / 60)}h${totalMinutes % 60}m`, label: "计划时长", color: "var(--orange-500)" },
+          { value: `${dayTasks.length > 0 ? Math.round((completedCount / dayTasks.length) * 100) : 0}%`, label: "完成率", color: "var(--violet-500)" },
         ].map(s => (
           <div key={s.label} className="p-5 rounded-2xl text-center" style={cardStyle}>
             <div className="text-2xl font-bold" style={{ color: s.color }}>{s.value}</div>
@@ -419,14 +419,14 @@ export default function StudyPlanPage() {
       {/* Time Distribution */}
       <div className="p-6 rounded-2xl mb-6" style={cardStyle}>
         <h3 className="font-semibold mb-4 text-white">今日时间分配</h3>
-        <div className="flex gap-1 h-3 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.05)' }}>
+        <div className="flex gap-1 h-3 rounded-full overflow-hidden" style={{ background: 'var(--glass-05)' }}>
           {dayTasks.map((t) => (
             <div
               key={t.id}
               className="h-full rounded-full transition-all"
               style={{
                 width: `${(t.duration / Math.max(totalMinutes, 1)) * 100}%`,
-                background: t.completed ? subjectColors[t.subject] || '#3b82f6' : 'rgba(255,255,255,0.1)',
+                background: t.completed ? subjectColors[t.subject] || 'var(--brand-500)' : 'var(--glass-10)',
                 opacity: t.completed ? 1 : 0.4,
               }}
               title={`${t.title} (${t.duration}分钟)`}
@@ -461,8 +461,8 @@ export default function StudyPlanPage() {
               key={task.id}
               className="flex items-center gap-4 p-4 rounded-xl transition-all"
               style={{
-                background: task.completed ? 'rgba(255,255,255,0.02)' : 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.06)',
+                background: task.completed ? 'var(--glass-02)' : 'var(--glass-03)',
+                border: '1px solid var(--glass-06)',
                 opacity: task.completed ? 0.6 : 1,
               }}
             >
@@ -473,9 +473,9 @@ export default function StudyPlanPage() {
                 onClick={() => toggleTask(task.id)}
                 className="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 text-xs transition-all"
                 style={{
-                  background: task.completed ? '#10b981' : 'transparent',
-                  border: task.completed ? 'none' : '2px solid rgba(255,255,255,0.15)',
-                  color: task.completed ? '#fff' : 'transparent',
+                  background: task.completed ? 'var(--green-500)' : 'transparent',
+                  border: task.completed ? 'none' : '2px solid var(--glass-10)',
+                  color: task.completed ? 'var(--on-brand)' : 'transparent',
                 }}
               >
                 ✓
@@ -493,15 +493,15 @@ export default function StudyPlanPage() {
                 className="text-xs px-2 py-1 rounded-lg"
                 style={{
                   background: task.priority === 'high'
-                    ? 'rgba(239,68,68,0.12)'
+                    ? 'color-mix(in srgb,var(--red-500) 12%,transparent)'
                     : task.priority === 'medium'
-                    ? 'rgba(245,158,11,0.12)'
-                    : 'rgba(59,130,246,0.12)',
+                    ? 'color-mix(in srgb,var(--orange-500) 12%,transparent)'
+                    : 'color-mix(in srgb,var(--brand-500) 12%,transparent)',
                   color: task.priority === 'high'
-                    ? '#f87171'
+                    ? 'var(--red-500)'
                     : task.priority === 'medium'
-                    ? '#fbbf24'
-                    : '#60a5fa',
+                    ? 'var(--orange-500)'
+                    : 'var(--brand-400)',
                 }}
               >
                 {task.priority === 'high' ? '高' : task.priority === 'medium' ? '中' : '低'}
@@ -511,7 +511,7 @@ export default function StudyPlanPage() {
                 aria-label={`删除任务：${task.title}`}
                 onClick={() => deleteTask(task.id)}
                 className="text-xs px-3 py-1.5 rounded-lg text-gray-400 hover:text-red-400 transition-all"
-                style={{ background: 'rgba(255,255,255,0.03)' }}
+                style={{ background: 'var(--glass-03)' }}
               >
                 删除
               </button>
@@ -525,9 +525,9 @@ export default function StudyPlanPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
           role="presentation"
           onMouseDown={(event) => { if (event.target === event.currentTarget) setShowAdd(false); }}
-          style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(8px)' }}>
+          style={{ background: 'var(--overlay)', backdropFilter: 'blur(8px)' }}>
           <div className="w-full max-w-md p-6 rounded-2xl" role="dialog" aria-modal="true" aria-labelledby="add-task-title"
-            style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.1)' }}>
+            style={{ background: 'var(--surface)', border: '1px solid var(--glass-10)' }}>
             <h3 className="text-lg font-bold mb-4 text-white">添加学习任务</h3>
             <div className="space-y-3">
               <input
@@ -572,9 +572,9 @@ export default function StudyPlanPage() {
                     className="flex-1 py-2.5 rounded-xl text-sm font-medium transition-all"
                     style={{
                       background: newTask.priority === p
-                        ? 'linear-gradient(135deg, #3b82f6, #2563eb)'
-                        : 'rgba(255,255,255,0.05)',
-                      color: newTask.priority === p ? '#fff' : '#9ca3af',
+                        ? 'linear-gradient(135deg, var(--brand-500), var(--brand-500))'
+                        : 'var(--glass-05)',
+                      color: newTask.priority === p ? 'var(--on-brand)' : 'var(--text-muted)',
                     }}
                   >
                     {p === "high" ? "高优先" : p === "medium" ? "中优先" : "低优先"}
@@ -585,7 +585,7 @@ export default function StudyPlanPage() {
                 <button
                   onClick={() => setShowAdd(false)}
                   className="flex-1 py-3 rounded-xl text-sm font-medium text-gray-300 transition-all"
-                  style={{ background: 'rgba(255,255,255,0.05)' }}
+                  style={{ background: 'var(--glass-05)' }}
                 >
                   取消
                 </button>
@@ -593,8 +593,8 @@ export default function StudyPlanPage() {
                   onClick={addTask}
                   className="flex-1 py-3 rounded-xl text-sm font-semibold text-white transition-all"
                   style={{
-                    background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-                    boxShadow: '0 4px 15px rgba(59,130,246,0.4)',
+                    background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))',
+                    boxShadow: '0 4px 15px color-mix(in srgb,var(--brand-500) 40%,transparent)',
                   }}
                 >
                   添加

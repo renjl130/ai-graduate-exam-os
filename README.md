@@ -1,6 +1,6 @@
-# 研途 AI · 考研学习操作系统
+# 佳乐考研 · 考研学习操作系统
 
-> 以“计划 → 专注 → 复习 → 检测 → 复盘”为核心闭环的个人 AI 考研工作台。
+> 以“计划 → 专注 → 复习 → 检测 → 复盘”为核心闭环的佳乐考研个人学习工作台。
 
 ![Version](https://img.shields.io/badge/version-4.1.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
@@ -516,7 +516,7 @@ MIT License - 详见 [LICENSE](LICENSE) 文件
 
 ---
 
-**AI 考研OS** - 让考研更高效，让学习更智能 🎓
+**佳乐考研** - 让考研更高效，让学习更智能 🎓
 
 
 ## GitHub + Railway 公开部署

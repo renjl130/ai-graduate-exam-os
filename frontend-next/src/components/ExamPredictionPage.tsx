@@ -73,8 +73,8 @@ export default function ExamPredictionPage() {
   }
 
   const cardStyle = {
-    background: 'rgba(255, 255, 255, 0.03)',
-    border: '1px solid rgba(255, 255, 255, 0.06)',
+    background: "var(--surface)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: '16px',
   };
 
@@ -86,9 +86,9 @@ export default function ExamPredictionPage() {
   };
 
   const getScoreColor = (score: number) => {
-    if (score >= 80) return "#10b981";
-    if (score >= 60) return "#f59e0b";
-    return "#ef4444";
+    if (score >= 80) return "var(--green-500)";
+    if (score >= 60) return "var(--orange-500)";
+    return "var(--red-500)";
   };
 
   const getScoreLabel = (score: number) => {
@@ -125,8 +125,8 @@ export default function ExamPredictionPage() {
             onClick={() => setSubjectFilter(s)}
             className="px-4 py-2 rounded-xl text-xs font-medium transition-all"
             style={subjectFilter === s ? {
-              background: 'linear-gradient(135deg, #3b82f6, #2563eb)', color: '#fff',
-            } : { background: 'rgba(255,255,255,0.05)', color: '#9ca3af' }}
+              background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))', color: 'var(--on-brand)',
+            } : { background: 'var(--glass-05)', color: 'var(--text-muted)' }}
           >
             {subjectNames[s]}
           </button>
@@ -160,7 +160,7 @@ export default function ExamPredictionPage() {
                     className="h-2 rounded-full transition-all duration-500"
                     style={{
                       width: `${prediction.confidence * 100}%`,
-                      background: 'linear-gradient(90deg, #3b82f6, #8b5cf6)',
+                      background: 'linear-gradient(90deg, var(--brand-500), var(--violet-500))',
                     }}
                   />
                 </div>
@@ -200,19 +200,19 @@ export default function ExamPredictionPage() {
           <div className="p-6 rounded-2xl mb-6" style={cardStyle}>
             <h3 className="text-lg font-semibold text-white mb-4">数据摘要</h3>
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)' }}>
+              <div className="p-4 rounded-xl" style={{ background: 'var(--glass-03)' }}>
                 <div className="text-sm text-gray-400 mb-1">学习时长</div>
                 <div className="text-2xl font-bold text-blue-400">{prediction.data_summary.study_hours} 小时</div>
               </div>
-              <div className="p-4 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)' }}>
+              <div className="p-4 rounded-xl" style={{ background: 'var(--glass-03)' }}>
                 <div className="text-sm text-gray-400 mb-1">知识覆盖</div>
                 <div className="text-2xl font-bold text-green-400">{prediction.data_summary.knowledge_coverage}%</div>
               </div>
-              <div className="p-4 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)' }}>
+              <div className="p-4 rounded-xl" style={{ background: 'var(--glass-03)' }}>
                 <div className="text-sm text-gray-400 mb-1">记忆稳定性</div>
                 <div className="text-2xl font-bold text-purple-400">{prediction.data_summary.avg_stability}</div>
               </div>
-              <div className="p-4 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)' }}>
+              <div className="p-4 rounded-xl" style={{ background: 'var(--glass-03)' }}>
                 <div className="text-sm text-gray-400 mb-1">错题掌握</div>
                 <div className="text-2xl font-bold text-orange-400">{prediction.data_summary.wrong_mastery}%</div>
               </div>
@@ -224,7 +224,7 @@ export default function ExamPredictionPage() {
             <h3 className="text-lg font-semibold text-white mb-4">分析建议</h3>
             <div className="space-y-3">
               {prediction.analysis.map((item, index) => (
-                <div key={index} className="flex items-start gap-3 p-3 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)' }}>
+                <div key={index} className="flex items-start gap-3 p-3 rounded-xl" style={{ background: 'var(--glass-03)' }}>
                   <span className="text-blue-400 mt-0.5">•</span>
                   <p className="text-sm text-gray-300">{item}</p>
                 </div>
@@ -249,7 +249,7 @@ export default function ExamPredictionPage() {
                     className="w-full rounded-t-sm transition-all duration-300"
                     style={{
                       height: `${height}%`,
-                      background: day.study_minutes > 0 ? 'linear-gradient(180deg, #3b82f6, #2563eb)' : 'rgba(255,255,255,0.05)',
+                      background: day.study_minutes > 0 ? 'linear-gradient(180deg, var(--brand-500), var(--brand-500))' : 'var(--glass-05)',
                       minHeight: '4px',
                     }}
                   />

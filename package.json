@@ -1,22 +1,22 @@
 {
-    "name":  "ai-graduate-exam-os-cloudflare",
-    "version":  "3.2.0",
-    "private":  true,
-    "scripts":  {
-                    "build":  "npm --prefix frontend-next run build",
-                    "cf:types":  "wrangler types cloudflare/worker-configuration.d.ts",
-                    "cf:dev":  "wrangler dev --local",
-                    "cf:migrate:local":  "wrangler d1 migrations apply DB --local",
-                    "cf:migrate:remote":  "wrangler d1 migrations apply DB --remote",
-                    "cf:deploy":  "npm run build \u0026\u0026 npm run cf:migrate:remote \u0026\u0026 wrangler deploy",
-                    "check":  "tsc -p cloudflare/tsconfig.json --noEmit"
-                },
-    "dependencies":  {
-                         "hono":  "^4.12.30"
-                     },
-    "devDependencies":  {
-                            "@cloudflare/workers-types":  "^5.20260714.1",
-                            "typescript":  "^5.9.2",
-                            "wrangler":  "^4.110.0"
-                        }
+  "name": "jiale-graduate-cloudflare",
+  "version": "3.2.0",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix frontend-next run build",
+    "cf:types": "wrangler types cloudflare/worker-configuration.d.ts",
+    "cf:dev": "wrangler dev --local",
+    "cf:migrate:local": "wrangler d1 migrations apply DB --local",
+    "cf:migrate:remote": "wrangler d1 migrations apply DB --remote",
+    "cf:deploy": "npm run build && npm run cf:migrate:remote && wrangler deploy",
+    "check": "tsc -p cloudflare/tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "hono": "^4.12.30"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260714.1",
+    "typescript": "^5.9.2",
+    "wrangler": "^4.110.0"
+  }
 }

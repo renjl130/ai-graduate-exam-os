@@ -3,7 +3,7 @@ setlocal EnableExtensions
 set "ROOT=%~dp0"
 
 echo ========================================
-echo   Yantu AI Graduate Exam OS
+echo   Jiale Graduate
 echo ========================================
 echo.
 
@@ -34,11 +34,11 @@ if not exist "%ROOT%frontend-next\node_modules" (
 )
 
 echo [3/4] Starting API on port %BACKEND_PORT%...
-start "YantuAI-Backend" cmd /k call "%ROOT%start-backend.bat" "%BACKEND_PORT%" "%FRONTEND_PORT%"
+start "JialeGraduate-Backend" cmd /k call "%ROOT%start-backend.bat" "%BACKEND_PORT%" "%FRONTEND_PORT%"
 
 echo [4/4] Starting web app on port %FRONTEND_PORT%...
 timeout /t 3 /nobreak >nul
-start "YantuAI-Frontend" cmd /k call "%ROOT%start-frontend.bat" "%FRONTEND_PORT%" "%BACKEND_PORT%"
+start "JialeGraduate-Frontend" cmd /k call "%ROOT%start-frontend.bat" "%FRONTEND_PORT%" "%BACKEND_PORT%"
 
 echo.
 echo ========================================

@@ -10,14 +10,14 @@ export default function SchoolInfoPage() {
   const schoolData = getSchoolById(selectedSchoolId) || schools[0];
 
   const cardStyle = {
-    background: 'rgba(255, 255, 255, 0.03)',
-    border: '1px solid rgba(255, 255, 255, 0.06)',
+    background: "var(--surface)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: '16px',
   };
 
   const inputStyle = {
-    background: 'rgba(255, 255, 255, 0.06)',
-    border: '1px solid rgba(255, 255, 255, 0.1)',
+    background: 'var(--glass-06)',
+    border: '1px solid var(--glass-10)',
     borderRadius: '12px',
   };
 
@@ -54,10 +54,10 @@ export default function SchoolInfoPage() {
 
       <div className="grid grid-cols-4 gap-4 mb-6">
         {[
-          { value: `~${reportRatio}:1`, label: "报录比", color: "#ef4444" },
-          { value: `${latestScore?.enrolled || 0}+`, label: "年录取", color: "#10b981" },
-          { value: `${(latestScore?.total || 0) + 15}+`, label: "建议目标", color: "#f59e0b" },
-          { value: "500分", label: "满分", color: "#3b82f6" },
+          { value: `~${reportRatio}:1`, label: "报录比", color: "var(--red-500)" },
+          { value: `${latestScore?.enrolled || 0}+`, label: "年录取", color: "var(--green-500)" },
+          { value: `${(latestScore?.total || 0) + 15}+`, label: "建议目标", color: "var(--orange-500)" },
+          { value: "500分", label: "满分", color: "var(--brand-500)" },
         ].map((s) => (
           <div key={s.label} className="p-5 rounded-2xl text-center" style={cardStyle}>
             <div className="text-2xl font-bold" style={{ color: s.color }}>{s.value}</div>
@@ -73,8 +73,8 @@ export default function SchoolInfoPage() {
             onClick={() => setActiveTab(tab.id)}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-medium transition-all"
             style={activeTab === tab.id ? {
-              background: 'linear-gradient(135deg, #3b82f6, #2563eb)', color: '#fff',
-            } : { background: 'rgba(255,255,255,0.05)', color: '#9ca3af' }}
+              background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))', color: 'var(--on-brand)',
+            } : { background: 'var(--glass-05)', color: 'var(--text-muted)' }}
           >
             <span>{tab.icon}</span>
             {tab.label}
@@ -97,7 +97,7 @@ export default function SchoolInfoPage() {
                 { label: "学制", value: schoolData.duration },
                 { label: "学费", value: schoolData.tuition },
               ].map((item) => (
-                <div key={item.label} className="flex justify-between py-2" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                <div key={item.label} className="flex justify-between py-2" style={{ borderBottom: '1px solid var(--glass-05)' }}>
                   <span className="text-sm text-gray-400">{item.label}</span>
                   <span className="text-sm text-white">{item.value}</span>
                 </div>
@@ -109,9 +109,9 @@ export default function SchoolInfoPage() {
             <div className="space-y-3">
               {schoolData.examSubjects.map((sub) => (
                 <div key={sub.code} className="flex items-center gap-3 p-3 rounded-xl"
-                  style={{ background: 'rgba(255,255,255,0.03)' }}>
+                  style={{ background: 'var(--glass-03)' }}>
                   <span className="text-xs px-2 py-1 rounded-lg font-mono"
-                    style={{ background: 'rgba(59,130,246,0.15)', color: '#60a5fa' }}>
+                    style={{ background: 'color-mix(in srgb,var(--brand-500) 15%,transparent)', color: 'var(--brand-400)' }}>
                     {sub.code}
                   </span>
                   <span className="flex-1 text-sm text-gray-200">{sub.name}</span>
@@ -140,7 +140,7 @@ export default function SchoolInfoPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr style={{ borderBottom: '2px solid rgba(255,255,255,0.1)' }}>
+                <tr style={{ borderBottom: '2px solid var(--glass-10)' }}>
                   <th className="py-3 px-4 text-left font-semibold text-gray-300">年份</th>
                   <th className="py-3 px-4 text-center font-semibold text-gray-300">总分线</th>
                   <th className="py-3 px-4 text-center font-semibold text-gray-300">政治</th>
@@ -152,7 +152,7 @@ export default function SchoolInfoPage() {
               </thead>
               <tbody>
                 {schoolData.scoreLines.map((line) => (
-                  <tr key={line.year} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                  <tr key={line.year} style={{ borderBottom: '1px solid var(--glass-05)' }}>
                     <td className="py-3 px-4 font-semibold text-white">{line.year}</td>
                     <td className="py-3 px-4 text-center font-bold text-blue-400">{line.total}</td>
                     <td className="py-3 px-4 text-center text-gray-300">{line.politics}</td>
@@ -175,7 +175,7 @@ export default function SchoolInfoPage() {
             <div className="space-y-3">
               {schoolData.referenceBooks334.map((book) => (
                 <div key={book.name} className="flex items-center gap-3 p-3 rounded-xl"
-                  style={{ background: 'rgba(255,255,255,0.03)' }}>
+                  style={{ background: 'var(--glass-03)' }}>
                   <span className="text-yellow-400 text-xs">{importanceStars(book.importance)}</span>
                   <div className="flex-1">
                     <span className="text-sm text-white">{book.name}</span>
@@ -190,7 +190,7 @@ export default function SchoolInfoPage() {
             <div className="space-y-3">
               {schoolData.referenceBooks440.map((book) => (
                 <div key={book.name} className="flex items-center gap-3 p-3 rounded-xl"
-                  style={{ background: 'rgba(255,255,255,0.03)' }}>
+                  style={{ background: 'var(--glass-03)' }}>
                   <span className="text-yellow-400 text-xs">{importanceStars(book.importance)}</span>
                   <div className="flex-1">
                     <span className="text-sm text-white">{book.name}</span>

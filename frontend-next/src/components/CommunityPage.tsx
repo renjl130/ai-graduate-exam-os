@@ -26,14 +26,14 @@ export default function CommunityPage() {
   const [newPost, setNewPost] = useState({ title: "", content: "", tags: "" });
 
   const cardStyle = {
-    background: 'rgba(255, 255, 255, 0.03)',
-    border: '1px solid rgba(255, 255, 255, 0.06)',
+    background: "var(--surface)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: '16px',
   };
 
   const inputStyle = {
-    background: 'rgba(255, 255, 255, 0.06)',
-    border: '1px solid rgba(255, 255, 255, 0.1)',
+    background: 'var(--glass-06)',
+    border: '1px solid var(--glass-10)',
     borderRadius: '12px',
   };
 
@@ -108,8 +108,8 @@ export default function CommunityPage() {
           onClick={() => setShowCreate(true)}
           className="px-5 py-2.5 rounded-xl text-sm font-medium text-white transition-all"
           style={{
-            background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-            boxShadow: '0 4px 15px rgba(59,130,246,0.4)',
+            background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))',
+            boxShadow: '0 4px 15px color-mix(in srgb,var(--brand-500) 40%,transparent)',
           }}
         >
           + 发帖
@@ -121,8 +121,8 @@ export default function CommunityPage() {
           onClick={() => setFilterTag("all")}
           className="px-4 py-2 rounded-xl text-xs font-medium transition-all"
           style={filterTag === "all" ? {
-            background: 'linear-gradient(135deg, #3b82f6, #2563eb)', color: '#fff',
-          } : { background: 'rgba(255,255,255,0.05)', color: '#9ca3af' }}
+            background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))', color: 'var(--on-brand)',
+          } : { background: 'var(--glass-05)', color: 'var(--text-muted)' }}
         >
           全部
         </button>
@@ -132,8 +132,8 @@ export default function CommunityPage() {
             onClick={() => setFilterTag(tag)}
             className="px-4 py-2 rounded-xl text-xs font-medium transition-all"
             style={filterTag === tag ? {
-              background: 'linear-gradient(135deg, #3b82f6, #2563eb)', color: '#fff',
-            } : { background: 'rgba(255,255,255,0.05)', color: '#9ca3af' }}
+              background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))', color: 'var(--on-brand)',
+            } : { background: 'var(--glass-05)', color: 'var(--text-muted)' }}
           >
             {tag}
           </button>
@@ -155,7 +155,7 @@ export default function CommunityPage() {
             <div key={post.id} className="p-6 rounded-2xl transition-all duration-200 hover:scale-[1.01]" style={cardStyle}>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-                  style={{ background: 'linear-gradient(135deg, rgba(59,130,246,0.2), rgba(139,92,246,0.2))' }}>
+                  style={{ background: 'linear-gradient(135deg, color-mix(in srgb,var(--brand-500) 20%,transparent), color-mix(in srgb,var(--violet-500) 20%,transparent))' }}>
                   <span className="text-lg">👤</span>
                 </div>
                 <div>
@@ -171,7 +171,7 @@ export default function CommunityPage() {
                 <div className="flex gap-1.5 flex-wrap">
                   {post.tags.map((tag) => (
                     <span key={tag} className="text-xs px-2 py-0.5 rounded-md"
-                      style={{ background: 'rgba(255,255,255,0.05)', color: '#6b7280' }}>
+                      style={{ background: 'var(--glass-05)', color: 'var(--text-muted)' }}>
                       #{tag}
                     </span>
                   ))}
@@ -194,9 +194,9 @@ export default function CommunityPage() {
       {/* 创建帖子弹窗 */}
       {showCreate && (
         <div className="fixed inset-0 z-50 flex items-center justify-center"
-          style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(8px)' }}>
+          style={{ background: 'var(--overlay)', backdropFilter: 'blur(8px)' }}>
           <div className="w-full max-w-lg p-6 rounded-2xl"
-            style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.1)' }}>
+            style={{ background: 'var(--surface)', border: '1px solid var(--glass-10)' }}>
             <h3 className="text-lg font-bold mb-4 text-white">发帖</h3>
             <div className="space-y-3">
               <input
@@ -227,7 +227,7 @@ export default function CommunityPage() {
                 <button
                   onClick={() => setShowCreate(false)}
                   className="flex-1 py-3 rounded-xl text-sm font-medium text-gray-300 transition-all"
-                  style={{ background: 'rgba(255,255,255,0.05)' }}
+                  style={{ background: 'var(--glass-05)' }}
                 >
                   取消
                 </button>
@@ -236,8 +236,8 @@ export default function CommunityPage() {
                   disabled={!newPost.title.trim() || !newPost.content.trim()}
                   className="flex-1 py-3 rounded-xl text-sm font-semibold text-white transition-all disabled:opacity-50"
                   style={{
-                    background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-                    boxShadow: '0 4px 15px rgba(59,130,246,0.4)',
+                    background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))',
+                    boxShadow: '0 4px 15px color-mix(in srgb,var(--brand-500) 40%,transparent)',
                   }}
                 >
                   发布

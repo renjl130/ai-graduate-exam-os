@@ -1,4 +1,4 @@
-# AI 考研学习操作系统 - 前端 Dockerfile
+# 佳乐考研 - 前端 Dockerfile
 FROM node:20-alpine AS base
 
 # 安装依赖阶段

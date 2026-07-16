@@ -26,10 +26,10 @@ interface Analysis {
 }
 
 const subjectColors: Record<string, string> = {
-  "440": "#f59e0b",
-  "334": "#10b981",
-  "英语二": "#3b82f6",
-  "政治": "#ef4444",
+  "440": "var(--orange-500)",
+  "334": "var(--green-500)",
+  "英语二": "var(--brand-500)",
+  "政治": "var(--red-500)",
 };
 
 export default function WrongQuestionsPage() {
@@ -42,14 +42,14 @@ export default function WrongQuestionsPage() {
   const [newQ, setNewQ] = useState({ subject: "440", chapter: "", question: "", user_answer: "", correct_answer: "", explanation: "", error_reason: "", tags: "" });
 
   const cardStyle = {
-    background: 'rgba(255, 255, 255, 0.03)',
-    border: '1px solid rgba(255, 255, 255, 0.06)',
+    background: "var(--surface)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: '16px',
   };
 
   const inputStyle = {
-    background: 'rgba(255, 255, 255, 0.06)',
-    border: '1px solid rgba(255, 255, 255, 0.1)',
+    background: 'var(--glass-06)',
+    border: '1px solid var(--glass-10)',
     borderRadius: '12px',
   };
 
@@ -128,7 +128,7 @@ export default function WrongQuestionsPage() {
       <div className="animate-fade-in flex items-center justify-center h-full">
         <div className="text-center">
           <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-4 mx-auto"
-            style={{ background: 'linear-gradient(135deg, rgba(239,68,68,0.2), rgba(245,158,11,0.2))' }}>
+            style={{ background: 'linear-gradient(135deg, color-mix(in srgb,var(--red-500) 20%,transparent), color-mix(in srgb,var(--orange-500) 20%,transparent))' }}>
             ❌
           </div>
           <p className="text-gray-400">加载中...</p>
@@ -149,8 +149,8 @@ export default function WrongQuestionsPage() {
           onClick={() => setShowAdd(true)}
           className="px-5 py-2.5 rounded-xl text-sm font-medium text-white transition-all"
           style={{
-            background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-            boxShadow: '0 4px 15px rgba(59,130,246,0.4)',
+            background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))',
+            boxShadow: '0 4px 15px color-mix(in srgb,var(--brand-500) 40%,transparent)',
           }}
         >
           + 添加错题
@@ -160,10 +160,10 @@ export default function WrongQuestionsPage() {
       {/* Stats */}
       <div className="grid grid-cols-4 gap-4 mb-6">
         {[
-          { value: `${questions.length}`, label: "错题总数", color: "#ef4444" },
-          { value: `${questions.filter(q => q.mastery < 50).length}`, label: "未掌握", color: "#f59e0b" },
-          { value: `${questions.filter(q => q.mastery >= 80).length}`, label: "已掌握", color: "#10b981" },
-          { value: `${avgMastery}%`, label: "平均掌握度", color: "#3b82f6" },
+          { value: `${questions.length}`, label: "错题总数", color: "var(--red-500)" },
+          { value: `${questions.filter(q => q.mastery < 50).length}`, label: "未掌握", color: "var(--orange-500)" },
+          { value: `${questions.filter(q => q.mastery >= 80).length}`, label: "已掌握", color: "var(--green-500)" },
+          { value: `${avgMastery}%`, label: "平均掌握度", color: "var(--brand-500)" },
         ].map(s => (
           <div key={s.label} className="p-5 rounded-2xl text-center" style={cardStyle}>
             <div className="text-3xl font-bold" style={{ color: s.color }}>{s.value}</div>
@@ -184,12 +184,12 @@ export default function WrongQuestionsPage() {
               .map(item => (
                 <div key={item.name} className="flex items-center gap-3">
                   <span className="text-xs w-32 truncate text-gray-300">{item.name}</span>
-                  <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.05)' }}>
+                  <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ background: 'var(--glass-05)' }}>
                     <div
                       className="h-full rounded-full transition-all duration-300"
                       style={{
                         width: `${item.avgMastery}%`,
-                        background: item.avgMastery < 40 ? '#ef4444' : item.avgMastery < 70 ? '#f59e0b' : '#10b981',
+                        background: item.avgMastery < 40 ? 'var(--red-500)' : item.avgMastery < 70 ? 'var(--orange-500)' : 'var(--green-500)',
                       }}
                     />
                   </div>
@@ -209,11 +209,11 @@ export default function WrongQuestionsPage() {
             onClick={() => setFilterSubject(s)}
             className="px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
             style={filterSubject === s ? {
-              background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-              color: '#fff',
+              background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))',
+              color: 'var(--on-brand)',
             } : {
-              background: 'rgba(255,255,255,0.05)',
-              color: '#9ca3af',
+              background: 'var(--glass-05)',
+              color: 'var(--text-muted)',
             }}
           >
             {s === "all" ? "全部" : s}
@@ -232,8 +232,8 @@ export default function WrongQuestionsPage() {
               <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center text-xs font-bold flex-shrink-0"
                 style={{
-                  background: `${subjectColors[q.subject] || '#3b82f6'}20`,
-                  color: subjectColors[q.subject] || '#3b82f6',
+                  background: `${subjectColors[q.subject] || 'var(--brand-500)'}20`,
+                  color: subjectColors[q.subject] || 'var(--brand-500)',
                 }}
               >
                 {(q.subject || "?").substring(0, 2)}
@@ -249,11 +249,11 @@ export default function WrongQuestionsPage() {
                 <div
                   className="w-14 h-14 rounded-full flex items-center justify-center"
                   style={{
-                    background: `conic-gradient(${q.mastery < 40 ? '#ef4444' : q.mastery < 70 ? '#f59e0b' : '#10b981'} ${q.mastery * 3.6}deg, rgba(255,255,255,0.05) 0deg)`,
+                    background: `conic-gradient(${q.mastery < 40 ? 'var(--red-500)' : q.mastery < 70 ? 'var(--orange-500)' : 'var(--green-500)'} ${q.mastery * 3.6}deg, var(--glass-05) 0deg)`,
                   }}
                 >
                   <div className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold"
-                    style={{ background: '#0f0f1e', color: '#fff' }}>
+                    style={{ background: 'var(--surface)', color: 'var(--on-brand)' }}>
                     {q.mastery}
                   </div>
                 </div>
@@ -263,7 +263,7 @@ export default function WrongQuestionsPage() {
             {expandedId === q.id && (
               <div className="px-5 pb-5 space-y-3 animate-fade-in">
                 {q.user_answer && (
-                  <div className="p-4 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)' }}>
+                  <div className="p-4 rounded-xl" style={{ background: 'var(--glass-03)' }}>
                     <div className="mb-2">
                       <span className="text-xs text-gray-400">你的答案: </span>
                       <span className="text-sm text-red-400">{q.user_answer}</span>
@@ -284,7 +284,7 @@ export default function WrongQuestionsPage() {
                 )}
 
                 {q.error_analysis && (
-                  <div className="p-4 rounded-xl" style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.2)' }}>
+                  <div className="p-4 rounded-xl" style={{ background: 'color-mix(in srgb,var(--orange-500) 8%,transparent)', border: '1px solid color-mix(in srgb,var(--orange-500) 20%,transparent)' }}>
                     <span className="font-semibold text-sm text-yellow-400">解析: </span>
                     <span className="text-sm text-gray-300">{q.error_analysis}</span>
                   </div>
@@ -298,9 +298,9 @@ export default function WrongQuestionsPage() {
                       onClick={() => updateMastery(q.id, level)}
                       className="px-3 py-1.5 rounded-lg text-xs transition-all"
                       style={{
-                        background: q.mastery >= level ? 'rgba(16,185,129,0.2)' : 'rgba(255,255,255,0.05)',
-                        color: q.mastery >= level ? '#34d399' : '#6b7280',
-                        border: `1px solid ${q.mastery >= level ? 'rgba(16,185,129,0.3)' : 'rgba(255,255,255,0.06)'}`,
+                        background: q.mastery >= level ? 'color-mix(in srgb,var(--green-500) 20%,transparent)' : 'var(--glass-05)',
+                        color: q.mastery >= level ? 'var(--green-500)' : 'var(--text-muted)',
+                        border: `1px solid ${q.mastery >= level ? 'color-mix(in srgb,var(--green-500) 30%,transparent)' : 'var(--glass-06)'}`,
                       }}
                     >
                       {level === 25 ? "不熟" : level === 50 ? "一般" : level === 75 ? "较熟" : "已掌握"}
@@ -309,7 +309,7 @@ export default function WrongQuestionsPage() {
                   <button
                     onClick={() => handleDelete(q.id)}
                     className="ml-auto text-xs px-3 py-1.5 rounded-lg text-gray-400 hover:text-red-400 transition-all"
-                    style={{ background: 'rgba(255,255,255,0.03)' }}
+                    style={{ background: 'var(--glass-03)' }}
                   >
                     删除
                   </button>
@@ -330,9 +330,9 @@ export default function WrongQuestionsPage() {
       {/* Add Modal */}
       {showAdd && (
         <div className="fixed inset-0 z-50 flex items-center justify-center"
-          style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(8px)' }}>
+          style={{ background: 'var(--overlay)', backdropFilter: 'blur(8px)' }}>
           <div className="w-full max-w-lg p-6 rounded-2xl max-h-[90vh] overflow-y-auto"
-            style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.1)' }}>
+            style={{ background: 'var(--surface)', border: '1px solid var(--glass-10)' }}>
             <h3 className="text-lg font-bold mb-4 text-white">添加错题</h3>
             <div className="space-y-3">
               <div className="grid grid-cols-2 gap-3">
@@ -410,7 +410,7 @@ export default function WrongQuestionsPage() {
                 <button
                   onClick={() => setShowAdd(false)}
                   className="flex-1 py-3 rounded-xl text-sm font-medium text-gray-300 transition-all"
-                  style={{ background: 'rgba(255,255,255,0.05)' }}
+                  style={{ background: 'var(--glass-05)' }}
                 >
                   取消
                 </button>
@@ -418,8 +418,8 @@ export default function WrongQuestionsPage() {
                   onClick={addQuestion}
                   className="flex-1 py-3 rounded-xl text-sm font-semibold text-white transition-all"
                   style={{
-                    background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-                    boxShadow: '0 4px 15px rgba(59,130,246,0.4)',
+                    background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))',
+                    boxShadow: '0 4px 15px color-mix(in srgb,var(--brand-500) 40%,transparent)',
                   }}
                 >
                   添加

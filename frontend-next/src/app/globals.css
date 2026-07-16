@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ============================================
-   AI 考研OS · 液态玻璃设计系统
+   佳乐考研 · 液态玻璃设计系统
    Liquid Glass · 深色沉浸 · 护眼舒适
    ============================================ */
 
@@ -55,8 +55,7 @@
 
 /* Base */
 html {
-  font-size: 14px;
-  scroll-behavior: smooth;
+  font-size: 16px;  scroll-behavior: smooth;
 }
 
 body {
@@ -65,7 +64,7 @@ body {
   background: var(--color-bg-primary);
   color: var(--color-text-primary);
   overflow: hidden;
-  height: 100vh;
+  height: 100dvh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -577,7 +576,7 @@ tr:hover td {
 }
 
 /* ============================================
-   研途 AI · 2026 application shell refresh
+   佳乐考研 · 2026 application shell refresh
    ============================================ */
 :root {
   --app-bg: #080d17;
@@ -602,7 +601,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .app-shell {
   display: flex;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   height: 100dvh;
   min-height: 0;
   overflow: hidden;

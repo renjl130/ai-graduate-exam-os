@@ -89,7 +89,7 @@ export default function AiTutorPage() {
 
   const mdComponents = {
     h1: ({ children }: { children?: React.ReactNode }) => <h1 className="text-lg font-bold mb-2 mt-3 text-white">{children}</h1>,
-    h2: ({ children }: { children?: React.ReactNode }) => <h2 className="text-base font-bold mb-2 mt-3 pb-1 text-white" style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>{children}</h2>,
+    h2: ({ children }: { children?: React.ReactNode }) => <h2 className="text-base font-bold mb-2 mt-3 pb-1 text-white" style={{ borderBottom: '1px solid var(--glass-10)' }}>{children}</h2>,
     h3: ({ children }: { children?: React.ReactNode }) => <h3 className="text-sm font-semibold mb-1 mt-2 text-white">{children}</h3>,
     p: ({ children }: { children?: React.ReactNode }) => <p className="text-sm leading-relaxed mb-2 text-gray-300">{children}</p>,
     ul: ({ children }: { children?: React.ReactNode }) => <ul className="list-disc pl-4 mb-2 space-y-1 text-sm text-gray-300">{children}</ul>,
@@ -100,25 +100,25 @@ export default function AiTutorPage() {
     code: ({ children, className }: { children?: React.ReactNode; className?: string }) => {
       const isInline = !className;
       return isInline ? (
-        <code className="px-1.5 py-0.5 rounded-md text-xs font-mono" style={{ background: 'rgba(59, 130, 246, 0.15)', color: '#60a5fa' }}>{children}</code>
+        <code className="px-1.5 py-0.5 rounded-md text-xs font-mono" style={{ background: 'color-mix(in srgb,var(--brand-500) 15%,transparent)', color: 'var(--brand-400)' }}>{children}</code>
       ) : (
-        <code className="block p-3 rounded-xl text-xs font-mono overflow-x-auto" style={{ background: 'rgba(0,0,0,0.3)', color: '#e5e7eb' }}>{children}</code>
+        <code className="block p-3 rounded-xl text-xs font-mono overflow-x-auto" style={{ background: 'var(--overlay)', color: 'var(--text-secondary)' }}>{children}</code>
       );
     },
     table: ({ children }: { children?: React.ReactNode }) => <div className="overflow-x-auto mb-3"><table className="w-full text-sm" style={{ borderCollapse: "collapse" }}>{children}</table></div>,
-    th: ({ children }: { children?: React.ReactNode }) => <th className="py-2 px-3 text-left font-semibold text-white" style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>{children}</th>,
-    td: ({ children }: { children?: React.ReactNode }) => <td className="py-2 px-3 text-gray-300" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>{children}</td>,
-    blockquote: ({ children }: { children?: React.ReactNode }) => <blockquote className="pl-4 mb-2 py-2 rounded-r-xl" style={{ borderLeft: "3px solid #3b82f6", background: 'rgba(59, 130, 246, 0.1)' }}>{children}</blockquote>,
-    hr: () => <hr className="my-3" style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.06)' }} />,
+    th: ({ children }: { children?: React.ReactNode }) => <th className="py-2 px-3 text-left font-semibold text-white" style={{ borderBottom: '1px solid var(--glass-10)' }}>{children}</th>,
+    td: ({ children }: { children?: React.ReactNode }) => <td className="py-2 px-3 text-gray-300" style={{ borderBottom: '1px solid var(--glass-05)' }}>{children}</td>,
+    blockquote: ({ children }: { children?: React.ReactNode }) => <blockquote className="pl-4 mb-2 py-2 rounded-r-xl" style={{ borderLeft: "3px solid var(--brand-500)", background: 'color-mix(in srgb,var(--brand-500) 10%,transparent)' }}>{children}</blockquote>,
+    hr: () => <hr className="my-3" style={{ border: 'none', borderTop: '1px solid var(--glass-06)' }} />,
   };
 
   return (
     <div className="flex flex-col h-full animate-fade-in">
       {/* Header */}
-      <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+      <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom: '1px solid var(--glass-06)' }}>
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)' }}>
+            style={{ background: 'linear-gradient(135deg, var(--brand-500), var(--violet-500))' }}>
             <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
             </svg>
@@ -131,7 +131,7 @@ export default function AiTutorPage() {
         <button
           onClick={clearChat}
           className="px-4 py-2 rounded-xl text-xs font-medium text-gray-400 hover:text-white transition-all"
-          style={{ background: 'rgba(255,255,255,0.05)' }}
+          style={{ background: 'var(--glass-05)' }}
         >
           新对话
         </button>
@@ -145,12 +145,12 @@ export default function AiTutorPage() {
             onClick={() => setMode(m.key)}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-medium transition-all duration-200"
             style={mode === m.key ? {
-              background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-              color: '#fff',
-              boxShadow: '0 4px 15px rgba(59, 130, 246, 0.3)',
+              background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))',
+              color: 'var(--on-brand)',
+              boxShadow: '0 4px 15px color-mix(in srgb,var(--brand-500) 30%,transparent)',
             } : {
-              background: 'rgba(255,255,255,0.05)',
-              color: '#9ca3af',
+              background: 'var(--glass-05)',
+              color: 'var(--text-muted)',
             }}
           >
             <span>{m.icon}</span>
@@ -164,11 +164,11 @@ export default function AiTutorPage() {
         {messages.length === 0 && (
           <div className="flex flex-col items-center justify-center h-full gap-4">
             <div className="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl"
-              style={{ background: 'linear-gradient(135deg, rgba(59,130,246,0.2), rgba(139,92,246,0.2))' }}>
+              style={{ background: 'linear-gradient(135deg, color-mix(in srgb,var(--brand-500) 20%,transparent), color-mix(in srgb,var(--violet-500) 20%,transparent))' }}>
               {mode === "chat" ? "💬" : "📋"}
             </div>
             <h3 className="text-lg font-semibold text-white">
-              {mode === "chat" ? "AI 考研导师" : "AI 资料整理"}
+              {mode === "chat" ? "佳乐考研 AI 导师" : "AI 资料整理"}
             </h3>
             <p className="text-sm text-center max-w-sm text-gray-400">
               {mode === "chat" ? "基于 Cloudflare 免费 AI 与系统知识库，支持知识点讲解、真题分析、答题指导" : "粘贴笔记内容，AI 生成结构化复习笔记"}
@@ -182,13 +182,13 @@ export default function AiTutorPage() {
               className="max-w-[80%] px-4 py-3 text-sm"
               style={{
                 background: msg.role === "user"
-                  ? 'linear-gradient(135deg, #3b82f6, #2563eb)'
-                  : 'rgba(255, 255, 255, 0.05)',
-                color: msg.role === "user" ? "#fff" : "#e5e7eb",
+                  ? 'linear-gradient(135deg, var(--brand-500), var(--brand-500))'
+                  : 'var(--glass-05)',
+                color: msg.role === "user" ? "var(--on-brand)" : "var(--text-secondary)",
                 borderRadius: msg.role === "user"
                   ? '20px 20px 4px 20px'
                   : '20px 20px 20px 4px',
-                border: msg.role === "assistant" ? '1px solid rgba(255,255,255,0.06)' : 'none',
+                border: msg.role === "assistant" ? '1px solid var(--glass-06)' : 'none',
               }}
             >
               {msg.role === "user" ? (
@@ -209,7 +209,7 @@ export default function AiTutorPage() {
         {statusText && (
           <div className="flex justify-start">
             <div className="px-4 py-2 rounded-full text-xs"
-              style={{ background: 'rgba(255,255,255,0.05)', color: '#9ca3af' }}>
+              style={{ background: 'var(--glass-05)', color: 'var(--text-muted)' }}>
               {statusText}
             </div>
           </div>
@@ -227,8 +227,8 @@ export default function AiTutorPage() {
                 onClick={() => sendMessage(q)}
                 className="text-xs px-3 py-2 rounded-xl text-gray-300 hover:text-white transition-all duration-200"
                 style={{
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(255,255,255,0.06)',
+                  background: 'var(--glass-05)',
+                  border: '1px solid var(--glass-06)',
                 }}
               >
                 {q}
@@ -239,11 +239,11 @@ export default function AiTutorPage() {
       )}
 
       {/* Input */}
-      <div className="px-6 py-4" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+      <div className="px-6 py-4" style={{ borderTop: '1px solid var(--glass-06)' }}>
         {mode === "organize" && (
           <input
             className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-gray-500 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}
+            style={{ background: 'var(--glass-06)', border: '1px solid var(--glass-10)' }}
             placeholder="整理主题（可选）"
             value={organizeTopic}
             onChange={(e) => setOrganizeTopic(e.target.value)}
@@ -252,7 +252,7 @@ export default function AiTutorPage() {
         <div className="flex gap-3">
           <textarea
             className="flex-1 px-4 py-3 rounded-xl text-sm text-white placeholder-gray-500 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}
+            style={{ background: 'var(--glass-06)', border: '1px solid var(--glass-10)' }}
             rows={2}
             placeholder={mode === "chat" ? "问我任何考研问题..." : "粘贴需要整理的内容..."}
             value={input}
@@ -268,11 +268,11 @@ export default function AiTutorPage() {
           <button
             className="self-end px-5 py-3 rounded-xl text-sm font-medium text-white transition-all duration-200 disabled:opacity-50"
             style={isStreaming ? {
-              background: 'rgba(255,255,255,0.05)',
-              color: '#9ca3af',
+              background: 'var(--glass-05)',
+              color: 'var(--text-muted)',
             } : {
-              background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-              boxShadow: '0 4px 15px rgba(59, 130, 246, 0.4)',
+              background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))',
+              boxShadow: '0 4px 15px color-mix(in srgb,var(--brand-500) 40%,transparent)',
             }}
             onClick={() => mode === "chat" ? sendMessage() : handleOrganize()}
             disabled={isStreaming}

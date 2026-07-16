@@ -14,7 +14,7 @@ from typing import Iterable
 
 from database import DB_PATH
 QUALITY_VERSION = 2
-SOURCE = "研途AI考研知识库·深度整理版 v2；动态范围以报考年度正式大纲、招生目录和官方通知为准"
+SOURCE = "佳乐考研考研知识库·深度整理版 v2；动态范围以报考年度正式大纲、招生目录和官方通知为准"
 
 NEW_COLUMNS = {
     "base_content": "TEXT",

@@ -1,9 +1,10 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
-import { Check, Download, RotateCcw, Save, ShieldCheck, Target, UserRound } from "lucide-react";
+import { Check, Download, Palette, RotateCcw, Save, ShieldCheck, Target, UserRound, type LucideIcon } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { DEFAULT_SETTINGS, ExamSettings, readSettings, SETTINGS_STORAGE_KEY, writeSettings } from "@/lib/preferences";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 export default function SettingsPage() {
   const { user, updateUser } = useAuth();
@@ -58,7 +59,7 @@ export default function SettingsPage() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `研途AI-本地数据-${new Date().toISOString().slice(0, 10)}.json`;
+    link.download = `佳乐考研-本地数据-${new Date().toISOString().slice(0, 10)}.json`;
     link.click();
     URL.revokeObjectURL(url);
     setMessage("本地学习数据已导出。");
@@ -133,6 +134,11 @@ export default function SettingsPage() {
       </section>
 
       <section className="surface-card mt-4 p-6">
+        <SectionTitle icon={Palette} title="外观与主题" description="浅色主题适合长时间阅读，深色主题适合夜间沉浸学习，也可以自动跟随系统。" />
+        <div className="mt-6 max-w-lg"><ThemeSwitcher /></div>
+      </section>
+
+      <section className="surface-card mt-4 p-6">
         <SectionTitle icon={ShieldCheck} title="数据与隐私" description="账户数据存储于本地后端；计划与部分界面偏好同时保留浏览器缓存。" />
         <div className="mt-6 grid gap-3 md:grid-cols-3">
           <DataAction icon={Download} title="导出本地数据" description="下载计划、偏好和本地记录的 JSON 备份。" onClick={exportData} />
@@ -144,7 +150,7 @@ export default function SettingsPage() {
   );
 }
 
-function SectionTitle({ icon: Icon, title, description }: { icon: typeof UserRound; title: string; description: string }) {
+function SectionTitle({ icon: Icon, title, description }: { icon: LucideIcon; title: string; description: string }) {
   return <div className="flex gap-3"><span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-400/10 text-blue-300"><Icon size={19} /></span><div><h3 className="font-medium text-slate-100">{title}</h3><p className="mt-1 text-xs leading-5 text-slate-500">{description}</p></div></div>;
 }
 

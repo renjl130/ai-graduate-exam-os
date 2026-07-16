@@ -142,8 +142,8 @@ export default function HotTopicsPage() {
   }
 
   const cardStyle = {
-    background: 'rgba(255, 255, 255, 0.03)',
-    border: '1px solid rgba(255, 255, 255, 0.06)',
+    background: "var(--surface)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: '16px',
   };
 
@@ -153,10 +153,10 @@ export default function HotTopicsPage() {
   });
 
   const heatColor = (heat: number) => {
-    if (heat >= 90) return "#ef4444";
-    if (heat >= 80) return "#f59e0b";
-    if (heat >= 70) return "#3b82f6";
-    return "#6b7280";
+    if (heat >= 90) return "var(--red-500)";
+    if (heat >= 80) return "var(--orange-500)";
+    if (heat >= 70) return "var(--brand-500)";
+    return "var(--text-muted)";
   };
 
   if (loading) {
@@ -184,8 +184,8 @@ export default function HotTopicsPage() {
             onClick={() => setFilterSubject(s)}
             className="px-4 py-2 rounded-xl text-xs font-medium transition-all"
             style={filterSubject === s ? {
-              background: 'linear-gradient(135deg, #3b82f6, #2563eb)', color: '#fff',
-            } : { background: 'rgba(255,255,255,0.05)', color: '#9ca3af' }}
+              background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))', color: 'var(--on-brand)',
+            } : { background: 'var(--glass-05)', color: 'var(--text-muted)' }}
           >
             {s === "all" ? "全部" : s}
           </button>
@@ -214,7 +214,7 @@ export default function HotTopicsPage() {
               <div className="flex gap-1.5 mb-3 flex-wrap">
                 {topic.keywords.slice(0, 3).map((kw) => (
                   <span key={kw} className="text-xs px-2 py-0.5 rounded-md"
-                    style={{ background: 'rgba(255,255,255,0.05)', color: '#6b7280' }}>
+                    style={{ background: 'var(--glass-05)', color: 'var(--text-muted)' }}>
                     {kw}
                   </span>
                 ))}
@@ -225,22 +225,22 @@ export default function HotTopicsPage() {
 
             {expandedId === topic.id && (
               <div className="px-5 pb-5 space-y-3 animate-fade-in">
-                <div className="p-4 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)' }}>
+                <div className="p-4 rounded-xl" style={{ background: 'var(--glass-03)' }}>
                   <h4 className="text-sm font-semibold text-white mb-2">📋 考题角度</h4>
                   <p className="text-sm text-gray-300">{topic.examAngle}</p>
                 </div>
-                <div className="p-4 rounded-xl" style={{ background: 'rgba(59,130,246,0.08)', border: '1px solid rgba(59,130,246,0.2)' }}>
+                <div className="p-4 rounded-xl" style={{ background: 'color-mix(in srgb,var(--brand-500) 8%,transparent)', border: '1px solid color-mix(in srgb,var(--brand-500) 20%,transparent)' }}>
                   <h4 className="text-sm font-semibold text-blue-400 mb-2">🔗 相关理论</h4>
                   <div className="flex flex-wrap gap-1.5">
                     {topic.relatedTheories.map((t) => (
                       <span key={t} className="text-xs px-2 py-0.5 rounded-md"
-                        style={{ background: 'rgba(59,130,246,0.15)', color: '#60a5fa' }}>
+                        style={{ background: 'color-mix(in srgb,var(--brand-500) 15%,transparent)', color: 'var(--brand-400)' }}>
                         {t}
                       </span>
                     ))}
                   </div>
                 </div>
-                <div className="p-4 rounded-xl" style={{ background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.2)' }}>
+                <div className="p-4 rounded-xl" style={{ background: 'color-mix(in srgb,var(--green-500) 8%,transparent)', border: '1px solid color-mix(in srgb,var(--green-500) 20%,transparent)' }}>
                   <h4 className="text-sm font-semibold text-green-400 mb-2">📝 答题框架</h4>
                   <pre className="text-xs text-gray-300 whitespace-pre-line">{topic.sampleOutline}</pre>
                 </div>

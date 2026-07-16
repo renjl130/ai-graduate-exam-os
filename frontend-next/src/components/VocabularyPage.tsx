@@ -134,11 +134,11 @@ export default function VocabularyPage() {
   const progress = totalCount > 0 ? Math.round((masteredCount / totalCount) * 100) : 0;
 
   const cardStyle = {
-    background: "rgba(255, 255, 255, 0.05)",
+    background: "var(--surface)",
     backdropFilter: "blur(20px) saturate(180%)",
-    border: "1px solid rgba(255, 255, 255, 0.08)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: "16px",
-    boxShadow: "0 4px 24px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
+    boxShadow: "var(--shadow-xs)",
   };
 
   if (loading) {
@@ -166,7 +166,7 @@ export default function VocabularyPage() {
           <button
             onClick={handleSeed}
             className="px-6 py-3 rounded-xl text-sm font-medium transition-all"
-            style={{ background: "linear-gradient(135deg, #3B82F6, #8B5CF6)", color: "#fff" }}
+            style={{ background: "linear-gradient(135deg, var(--brand-500), var(--violet-500))", color: "var(--on-brand)" }}
           >
             初始化词汇数据
           </button>
@@ -184,10 +184,10 @@ export default function VocabularyPage() {
 
       <div className="grid grid-cols-4 gap-3 mb-6">
         {[
-          { value: totalCount, label: "总词汇", color: "#3B82F6" },
-          { value: masteredCount, label: "已掌握", color: "#10B981" },
-          { value: dueCount, label: "待复习", color: "#F59E0B" },
-          { value: `${progress}%`, label: "完成度", color: "#8B5CF6" },
+          { value: totalCount, label: "总词汇", color: "var(--brand-500)" },
+          { value: masteredCount, label: "已掌握", color: "var(--green-500)" },
+          { value: dueCount, label: "待复习", color: "var(--orange-500)" },
+          { value: `${progress}%`, label: "完成度", color: "var(--violet-500)" },
         ].map((s) => (
           <div key={s.label} className="p-4 rounded-2xl text-center" style={cardStyle}>
             <div className="text-2xl font-bold" style={{ color: s.color }}>
@@ -201,14 +201,14 @@ export default function VocabularyPage() {
       <div className="mb-6 p-4 rounded-2xl" style={cardStyle}>
         <div className="flex justify-between text-sm mb-2">
           <span className="text-white">学习进度</span>
-          <span style={{ color: "#10B981" }}>
+          <span style={{ color: "var(--green-500)" }}>
             {masteredCount}/{totalCount}
           </span>
         </div>
-        <div className="h-2 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
+        <div className="h-2 rounded-full overflow-hidden" style={{ background: "var(--glass-06)" }}>
           <div
             className="h-full rounded-full transition-all duration-500"
-            style={{ width: `${progress}%`, background: "linear-gradient(90deg, #3B82F6, #8B5CF6)" }}
+            style={{ width: `${progress}%`, background: "linear-gradient(90deg, var(--brand-500), var(--violet-500))" }}
           />
         </div>
       </div>
@@ -255,8 +255,8 @@ export default function VocabularyPage() {
             className="px-4 py-2 rounded-xl text-xs font-medium transition-all"
             style={
               filter === f.key
-                ? { background: "linear-gradient(135deg, #3B82F6, #8B5CF6)", color: "#fff" }
-                : { background: "rgba(255,255,255,0.05)", color: "#9ca3af" }
+                ? { background: "linear-gradient(135deg, var(--brand-500), var(--violet-500))", color: "var(--on-brand)" }
+                : { background: "var(--glass-05)", color: "var(--text-muted)" }
             }
           >
             {f.label}
@@ -270,8 +270,8 @@ export default function VocabularyPage() {
             className="p-8 rounded-2xl text-center cursor-pointer min-h-[250px] flex flex-col items-center justify-center"
             style={{
               ...cardStyle,
-              background: showMeaning ? "rgba(59, 130, 246, 0.08)" : "rgba(255, 255, 255, 0.05)",
-              border: showMeaning ? "1px solid rgba(59, 130, 246, 0.2)" : "1px solid rgba(255, 255, 255, 0.08)",
+              background: showMeaning ? "color-mix(in srgb,var(--brand-500) 8%,transparent)" : "var(--glass-05)",
+              border: showMeaning ? "1px solid color-mix(in srgb,var(--brand-500) 20%,transparent)" : "1px solid var(--glass-08)",
             }}
             onClick={() => setShowMeaning(!showMeaning)}
           >
@@ -298,28 +298,28 @@ export default function VocabularyPage() {
             <button
               onClick={() => handleReview(currentWord.id, 1)}
               className="flex-1 py-3.5 rounded-xl text-sm font-medium transition-all"
-              style={{ background: "rgba(239, 68, 68, 0.15)", color: "#f87171" }}
+              style={{ background: "color-mix(in srgb,var(--red-500) 15%,transparent)", color: "var(--red-500)" }}
             >
               😅 忘记了
             </button>
             <button
               onClick={() => handleReview(currentWord.id, 2)}
               className="flex-1 py-3.5 rounded-xl text-sm font-medium transition-all"
-              style={{ background: "rgba(245, 158, 11, 0.15)", color: "#fbbf24" }}
+              style={{ background: "color-mix(in srgb,var(--orange-500) 15%,transparent)", color: "var(--orange-500)" }}
             >
               🤔 模糊
             </button>
             <button
               onClick={() => handleReview(currentWord.id, 3)}
               className="flex-1 py-3.5 rounded-xl text-sm font-medium transition-all"
-              style={{ background: "rgba(16, 185, 129, 0.15)", color: "#34d399" }}
+              style={{ background: "color-mix(in srgb,var(--green-500) 15%,transparent)", color: "var(--green-500)" }}
             >
               😊 记得
             </button>
             <button
               onClick={() => handleReview(currentWord.id, 4)}
               className="flex-1 py-3.5 rounded-xl text-sm font-medium transition-all"
-              style={{ background: "rgba(59, 130, 246, 0.15)", color: "#60a5fa" }}
+              style={{ background: "color-mix(in srgb,var(--brand-500) 15%,transparent)", color: "var(--brand-400)" }}
             >
               🤩 很熟
             </button>
@@ -332,7 +332,7 @@ export default function VocabularyPage() {
       ) : (
         <div className="text-center py-16 rounded-2xl" style={cardStyle}>
           <div className="text-5xl mb-4">🎉</div>
-          <p className="text-lg font-semibold" style={{ color: "#10B981" }}>
+          <p className="text-lg font-semibold" style={{ color: "var(--green-500)" }}>
             {filter === "mastered" ? "还没有已掌握的词汇" : "所有词汇已掌握！"}
           </p>
         </div>
@@ -346,7 +346,7 @@ export default function VocabularyPage() {
             className="flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-all"
             style={{
               ...cardStyle,
-              background: i === currentIndex ? "rgba(59, 130, 246, 0.08)" : "rgba(255, 255, 255, 0.03)",
+              background: i === currentIndex ? "color-mix(in srgb,var(--brand-500) 8%,transparent)" : "var(--glass-03)",
               opacity: w.mastery >= 80 ? 0.6 : 1,
             }}
             onClick={() => {
@@ -359,7 +359,7 @@ export default function VocabularyPage() {
             </span>
             <span className="text-xs flex-1 text-gray-400">{w.meaning}</span>
             <span className="text-xs text-gray-500">{w.mastery}%</span>
-            {w.mastery >= 80 && <span className="text-xs" style={{ color: "#10B981" }}>✓</span>}
+            {w.mastery >= 80 && <span className="text-xs" style={{ color: "var(--green-500)" }}>✓</span>}
           </div>
         ))}
         <div className="flex items-center justify-center gap-3 pt-4">

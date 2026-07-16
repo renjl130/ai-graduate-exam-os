@@ -146,8 +146,8 @@ export default function FocusTimer() {
               <button className="icon-button" onClick={() => setOpen(false)} aria-label="关闭"><X size={18} /></button>
             </div>
 
-            <div className="relative mx-auto my-7 flex h-56 w-56 items-center justify-center rounded-full" style={{ background: `conic-gradient(#60a5fa ${progress}%, rgba(255,255,255,.06) ${progress}% 100%)` }}>
-              <div className="absolute inset-[7px] rounded-full bg-[#101725]" />
+            <div className="relative mx-auto my-7 flex h-56 w-56 items-center justify-center rounded-full" style={{ background: `conic-gradient(var(--brand-400) ${progress}%, var(--glass-06) ${progress}% 100%)` }}>
+              <div className="absolute inset-[7px] rounded-full bg-[var(--surface-subtle)]" />
               <div className="relative text-center">
                 <div className="font-mono text-4xl font-semibold tracking-tight text-white">{formatTime(elapsed)}</div>
                 <p className="mt-2 text-xs text-slate-500">目标 {timer.targetMinutes} 分钟 · {Math.round(progress)}%</p>

@@ -22,14 +22,14 @@ export default function AISearchPage() {
   const [stats, setStats] = useState<{ total: number; by_type: Record<string, number> } | null>(null);
 
   const cardStyle = {
-    background: 'rgba(255, 255, 255, 0.03)',
-    border: '1px solid rgba(255, 255, 255, 0.06)',
+    background: "var(--surface)",
+    border: "1px solid var(--border-subtle)",
     borderRadius: '16px',
   };
 
   const inputStyle = {
-    background: 'rgba(255, 255, 255, 0.06)',
-    border: '1px solid rgba(255, 255, 255, 0.1)',
+    background: 'var(--glass-06)',
+    border: '1px solid var(--glass-10)',
     borderRadius: '12px',
   };
 
@@ -79,7 +79,7 @@ export default function AISearchPage() {
   };
 
   const typeColors: Record<string, string> = {
-    "理论": "#8b5cf6", "概念": "#10b981", "热点": "#f59e0b", "书目": "#3b82f6",
+    "理论": "var(--violet-500)", "概念": "var(--green-500)", "热点": "var(--orange-500)", "书目": "var(--brand-500)",
   };
 
   const highlightText = (text: string, q: string) => {
@@ -87,7 +87,7 @@ export default function AISearchPage() {
     const parts = text.split(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi"));
     return parts.map((part, i) =>
       part.toLowerCase() === q.toLowerCase() ? (
-        <span key={i} className="px-0.5 rounded" style={{ background: 'rgba(245,158,11,0.3)' }}>{part}</span>
+        <span key={i} className="px-0.5 rounded" style={{ background: 'color-mix(in srgb,var(--orange-500) 30%,transparent)' }}>{part}</span>
       ) : part
     );
   };
@@ -130,8 +130,8 @@ export default function AISearchPage() {
           <button key={type} onClick={() => handleFilter(type)}
             className="px-4 py-2 rounded-xl text-xs font-medium transition-all"
             style={filterType === type ? {
-              background: 'linear-gradient(135deg, #3b82f6, #2563eb)', color: '#fff',
-            } : { background: 'rgba(255,255,255,0.05)', color: '#9ca3af' }}>
+              background: 'linear-gradient(135deg, var(--brand-500), var(--brand-500))', color: 'var(--on-brand)',
+            } : { background: 'var(--glass-05)', color: 'var(--text-muted)' }}>
             {type === "all" ? "全部" : type}
           </button>
         ))}
@@ -157,7 +157,7 @@ export default function AISearchPage() {
             <div key={item.id} className="p-5 rounded-2xl transition-all duration-200 hover:scale-[1.01]" style={cardStyle}>
               <div className="flex items-start gap-3 mb-2">
                 <span className="px-2.5 py-1 rounded-lg text-xs font-medium"
-                  style={{ background: `${typeColors[item.content_type] || '#6b7280'}20`, color: typeColors[item.content_type] || '#6b7280' }}>
+                  style={{ background: `${typeColors[item.content_type] || 'var(--text-muted)'}20`, color: typeColors[item.content_type] || 'var(--text-muted)' }}>
                   {item.content_type}
                 </span>
                 {item.subject && <span className="text-xs text-gray-400">{item.subject}</span>}
@@ -168,7 +168,7 @@ export default function AISearchPage() {
                 <div className="flex flex-wrap gap-1.5">
                   {item.tags.map((tag) => (
                     <span key={tag} className="px-2 py-0.5 rounded-md text-xs"
-                      style={{ background: 'rgba(255,255,255,0.05)', color: '#6b7280' }}>
+                      style={{ background: 'var(--glass-05)', color: 'var(--text-muted)' }}>
                       #{tag}
                     </span>
                   ))}

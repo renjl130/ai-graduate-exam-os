@@ -1,6 +1,7 @@
 "use client";
 
 import React, { Component, ErrorInfo, ReactNode } from "react";
+import { AlertTriangle, RefreshCw } from "lucide-react";
 
 interface Props {
   children: ReactNode;
@@ -35,25 +36,11 @@ export class ErrorBoundary extends Component<Props, State> {
       }
 
       return (
-        <div className="flex flex-col items-center justify-center min-h-[400px] p-8">
-          <div className="text-center">
-            <div className="text-6xl mb-4">😵</div>
-            <h2 className="text-2xl font-bold text-white mb-2">
-              出错了
-            </h2>
-            <p className="text-gray-400 mb-6 max-w-md">
-              {this.state.error?.message || "发生了未知错误，请刷新页面重试"}
-            </p>
-            <button
-              onClick={() => {
-                this.setState({ hasError: false, error: null });
-                window.location.reload();
-              }}
-              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
-            >
-              刷新页面
-            </button>
-          </div>
+        <div className="product-error-state">
+          <span><AlertTriangle size={24} /></span>
+          <h2>页面遇到了一点问题</h2>
+          <p>{this.state.error?.message || "当前页面暂时无法正常显示，请刷新后重试。"}</p>
+          <button onClick={() => { this.setState({ hasError: false, error: null }); window.location.reload(); }} className="primary-action"><RefreshCw size={16} />重新加载</button>
         </div>
       );
     }
