@@ -1,0 +1,27 @@
+{
+  "$schema": "https://static.cloudbase.net/cli/cloudbaserc.schema.json",
+  "envId": "jiale-graduate-cn-d4d1wu4599e3d4",
+  "functionRoot": "cloudbase/functions",
+  "functions": [
+    {
+      "name": "api",
+      "runtime": "Nodejs20.19",
+      "handler": "index.main",
+      "timeout": 120,
+      "memorySize": 256,
+      "description": "佳乐考研国内免费同源 API 代理",
+      "envVariables": {
+        "CLOUDFLARE_UPSTREAM": "https://jiale-cloudbase-relay.pages.dev"
+      }
+    }
+  ],
+  "app": {
+    "serviceName": "jiale-graduate-cn",
+    "framework": "static",
+    "installCommand": "npm ci --prefix frontend-next",
+    "buildCommand": "npm --prefix frontend-next run build",
+    "outputDir": "frontend-next/out",
+    "root": ".",
+    "deployPath": "/"
+  }
+}

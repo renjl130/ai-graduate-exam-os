@@ -1,10 +1,10 @@
 # 佳乐考研长期项目上下文（PROJECT MEMORY）
 
 > 状态：已批准并正式生效
-> 最近更新：2026-07-16
+> 最近更新：2026-07-17
 > 项目路径：`C:\Users\jd-liverr\Desktop\ai-graduate-exam-os`
 > 生产主线：Cloudflare
-> 国内访问镜像：EdgeOne Pages
+> 国内免费入口：Tencent CloudBase（有效期至 2027-01-16）
 > 自托管兼容：FastAPI
 
 ## 1. 文档读取顺序
@@ -48,7 +48,8 @@
 
 - 登录后产品壳和主要功能页面已完成；
 - Cloudflare 商业生产链路已上线；
-- EdgeOne Pages 国内访问镜像已创建并连接 GitHub `main`，永久自定义域名待绑定；
+- Tencent CloudBase 免费国内统一入口已上线，无需购买域名，有效期至 2027-01-16；
+- EdgeOne Pages 镜像保留为已验证的备用方案，但其永久公开入口仍依赖自定义域名；
 - FastAPI 自托管链路保留；
 - 知识库、词汇、题库和学习数据已具备真实结构；
 - 自动化测试、安全防滥用、监控、备份和管理后台仍需建设。
@@ -73,12 +74,15 @@
 - Cloudflare D1、KV、Workers AI
 - Wrangler + GitHub Actions
 
-### 国内访问镜像（不改变数据权威）
+### 国内免费入口（不改变数据权威）
 
-- Tencent EdgeOne Pages 托管相同 Next.js 静态导出；
-- EdgeOne Cloud Functions 将同源 `/api/*` 流式转发到 Cloudflare Worker；
-- D1、KV、Workers AI 和认证仍由 Cloudflare 生产主线负责；
-- 国内镜像不复制数据库，不形成双写或第二生产数据源。
+- Tencent CloudBase 静态托管提供同一 Next.js 静态导出；
+- CloudBase HTTP 网关统一承载 `/` 与 `/api`，默认国内地址无需自购域名；
+- CloudBase `api` 云函数经固定 Cloudflare Pages Relay 转发到现有 Cloudflare Worker；
+- D1、KV、Workers AI、认证和业务逻辑仍由 Cloudflare 生产主线负责；
+- 国内入口不复制数据库，不形成双写或第二生产数据源；
+- 免费环境到期时间为 2027-01-16 23:59:59，需在到期前完成续期或迁移；
+- CloudBase 网关约 6MB，函数文本响应保护上限 5.5MB、二进制响应保护上限 4MB，不支持现有 25MB 大文件上传。
 
 ### Tier B 自托管兼容
 
@@ -92,7 +96,9 @@
 ```text
 frontend-next/     当前生产前端
 cloudflare/        Cloudflare Worker 与 D1 迁移
-cloud-functions/   EdgeOne `/api/*` 同源代理
+cloudbase/          CloudBase 国内入口云函数
+cloudflare-pages-relay/ 固定上游中继
+cloud-functions/   EdgeOne `/api/*` 备用代理
 backend/           FastAPI 自托管兼容后端
 data/              知识原始资料
 docs/              长期项目文档
@@ -146,7 +152,9 @@ D1 迁移验证后的基线：
 - 新功能是否同步 FastAPI 必须在任务分析中明确；
 - D1 已发布迁移不可回写，只能追加补偿迁移或修复脚本；
 - 大规模重构前必须先建立测试和契约保护；
-- EdgeOne 仅作为国内访问镜像，Cloudflare 仍是唯一数据与 API 权威。
+- CloudBase 仅作为免费国内访问入口，Cloudflare 仍是唯一数据与 API 权威；
+- CloudBase 通过固定目标的 Cloudflare Pages Relay 访问 Worker，不保存 Cloudflare 凭据；
+- EdgeOne 保留为备用镜像方案，不作为当前默认国内入口。
 
 ## 10. Design System 摘要
 
@@ -185,6 +193,8 @@ D1 迁移验证后的基线：
 - 2026-07-16：GitHub `main` 与 Cloudflare 生产环境完成同步；
 - 2026-07-16：修复顶部工具栏竖排/溢出和知识库文字可读性，已部署到 Cloudflare 生产环境；
 - 2026-07-16：EdgeOne 国内镜像项目已创建并完成首次生产部署，GitHub `main` 后续自动同步；永久入口待绑定自定义域名。
+- 2026-07-17：CloudBase 免费环境、静态站点、统一 HTTP 网关和 API 云函数部署完成；默认国内地址无需自购域名，有效期至 2027-01-16。
+- 2026-07-17：CloudBase 无法直连 `workers.dev`，新增固定 Cloudflare Pages Relay；Cloudflare 继续作为唯一数据与 API 权威。
 
 ## 14. 验证基线
 
@@ -198,4 +208,7 @@ D1 迁移验证后的基线：
 - 登录页、Dashboard、知识库深浅主题；
 - EdgeOne 代理 GET/POST、流式响应、压缩响应、重定向和 PDF Range 兼容性；
 - EdgeOne 线上首页与 `/api/health`，D1 健康且响应包含 `x-ai-exam-proxy: edgeone-pages`；
-- EdgeOne 线上 POST 登录请求已正确转发，上游无效凭据返回预期 401。
+- EdgeOne 线上 POST 登录请求已正确转发，上游无效凭据返回预期 401；
+- CloudBase 统一地址首页可渲染，1280px 无横向溢出；
+- CloudBase `/api/health` 返回 200 且 D1 `connected`，受保护路由和无效登录均返回预期 401；
+- CloudBase 响应包含 `x-ai-exam-proxy: cloudbase-http` 与 `x-ai-exam-relay: cloudflare-pages`。

@@ -1,16 +1,18 @@
 # 系统架构（ARCHITECTURE）
 
-> 最近更新：2026-07-16
+> 最近更新：2026-07-17
 
 ## 1. 总体架构
 
 ```mermaid
 flowchart LR
   U["考研学习者"] --> CFA["Cloudflare Worker Assets"]
-  U --> EO["EdgeOne Pages 国内镜像"]
+  U --> TCB["CloudBase 国内统一地址"]
   CFA --> CF["Cloudflare Worker / Hono"]
-  EO --> EOP["EdgeOne /api 同源代理"]
-  EOP --> CF
+  TCB --> STATIC["CloudBase 静态托管 /"]
+  TCB --> SCF["CloudBase API 云函数 /api"]
+  SCF --> RELAY["Cloudflare Pages Relay"]
+  RELAY --> CF
   CF --> D1["Cloudflare D1"]
   CF --> KV["Cloudflare KV"]
   CF --> AI["Cloudflare Workers AI"]
@@ -30,13 +32,20 @@ flowchart LR
 - 生产 API、D1 迁移、安全、监控和备份的权威来源；
 - 前端静态资源由 Worker Assets 提供。
 
-### 国内访问镜像：EdgeOne Pages
+### 国内免费入口：Tencent CloudBase
 
-- 托管与 Cloudflare 同一 Git Commit 生成的 Next.js 静态导出；
-- `cloud-functions/api/[[default]].js` 将同源 `/api/*` 转发到 Cloudflare Worker；
-- 透传 Authorization、请求体、NDJSON 响应流和 PDF Range；
+- 静态托管与 Cloudflare 使用同一 Next.js 静态导出；
+- 默认 HTTP 网关以 `/` 指向静态托管、以 `/api` 指向 `api` 云函数；
+- `cloudbase/functions/api/index.js` 透传方法、Authorization、请求体、查询参数、二进制响应、Range 和重定向；
+- CloudBase 运行时无法稳定直连 `workers.dev`，因此经 `jiale-cloudbase-relay.pages.dev` 固定目标中继到现有 Worker；
 - API 响应强制 `no-store`，避免边缘缓存用户数据；
-- 仅改善访问入口，不复制 D1/KV，不改变生产数据权威。
+- 仅改善访问入口，不复制 D1/KV，不改变生产数据权威；
+- 免费环境有效期至 2027-01-16 23:59:59；网关和函数响应大小限制使其不适合大于约 4–5.5MB 的响应或现有 25MB 上传。
+
+### 国内备用镜像：EdgeOne Pages
+
+- 已验证同源代理、流式响应、Range 和生产构建；
+- 永久公开入口需要自定义域名，因此不作为当前无域名免费方案。
 
 ### Tier B：FastAPI
 
@@ -135,6 +144,24 @@ wrangler d1 migrations apply DB --remote
 wrangler deploy
 ```
 
+### CloudBase
+
+```text
+统一地址 /
+  -> STATIC_STORE / staticstore
+统一地址 /api
+  -> SCF api
+  -> jiale-cloudbase-relay.pages.dev
+  -> Cloudflare Worker
+  -> D1 / KV / Workers AI
+```
+
+- 环境：`jiale-graduate-cn-d4d1wu4599e3d4`，上海，免费试用；
+- 静态构建：`npm ci --prefix frontend-next` → `npm --prefix frontend-next run build` → `frontend-next/out`；
+- 路由：`/` 使用 `STATIC_STORE`，`/api` 使用 `SCF api`，更具体的 `/api` 优先；
+- 部署当前使用 CloudBase CLI 手动执行，不在 GitHub Secrets 保存 CLI/API 凭据；
+- 到期前必须续期、重新部署或切换入口。
+
 ### EdgeOne Pages
 
 ```text
@@ -171,4 +198,6 @@ GitHub main
 - 页面中仍有直接 fetch；
 - localStorage 与服务端存在部分双数据源；
 - 两代 CSS Token 尚未完全收敛；
-- 缺少生产监控、告警和备份演练。
+- 缺少生产监控、告警和备份演练；
+- CloudBase 免费入口存在 6MB 级网关限制，暂不支持 25MB 上传；
+- CloudBase 部署尚未接入 GitHub 自动发布，续期和部署需人工维护。

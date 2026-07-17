@@ -80,6 +80,16 @@
 - 数据权威：Cloudflare Worker、D1、KV 和 Workers AI 仍是唯一商业生产数据面。
 - 约束：镜像不得保存用户密码、JWT 密钥、D1 或 KV 凭据；只配置公开上游 Origin。
 - 回滚：停止或删除 EdgeOne 项目即可，Cloudflare 主站不受影响。
+## ADR-014：CloudBase 作为无自有域名的免费国内入口
+
+- 状态：Accepted
+- 背景：用户不希望购买域名，EdgeOne 永久公开入口需要自定义域名；CloudBase 提供 6 个月免费环境和默认国内域名。
+- 决策：CloudBase 静态托管承载前端，HTTP 网关以 `/` 和 `/api` 提供统一地址，`api` 云函数经固定 Cloudflare Pages Relay 转发到现有 Worker。
+- 数据权威：Cloudflare Worker、D1、KV 和 Workers AI 仍是唯一商业生产数据/API 平面；CloudBase 不保存或复制业务数据库。
+- 安全：Relay 目标固定，不接收用户指定上游；CloudBase 仅保存公开 Relay Origin，不保存 Cloudflare OAuth/API Token、JWT Secret 或用户密码。
+- 限制：免费环境至 2027-01-16；约 6MB 网关限制导致现有 25MB 上传无法完整兼容；当前部署为人工 CLI 流程。
+- 回滚：删除 CloudBase 根路由或停用环境即可，Cloudflare 主站和数据不受影响。
+
 ## ADR 模板
 
 ```markdown

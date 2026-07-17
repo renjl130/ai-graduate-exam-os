@@ -1,6 +1,6 @@
 # 当前待办（TODO）
 
-> 最近更新：2026-07-16
+> 最近更新：2026-07-17
 
 ## P0 — 立即治理
 
@@ -14,8 +14,13 @@
 - [x] 加固并测试 EdgeOne `/api/*` 同源代理
 - [x] 创建 EdgeOne Pages 线上项目并连接 GitHub `main`
 - [x] 验证国内镜像首页、健康检查和 `/api` 代理
-- [ ] 绑定永久自定义域名
-- [ ] 在永久域名下验证登录、知识库、AI、上传和 PDF
+- [x] 创建 CloudBase 免费环境并完成静态站点与 API 部署
+- [x] 配置 CloudBase 统一网关 `/` 与 `/api` 路由
+- [x] 建立 Cloudflare Pages Relay 并验证 D1、鉴权和 POST 转发
+- [x] 删除临时 `network-test` 诊断云函数
+- [ ] 在国内不同运营商网络验证登录、知识库、AI、小文件上传和 PDF
+- [ ] 为大于 CloudBase 网关限制的上传/下载设计降级方案
+- [ ] 在 2027-01-16 前完成免费环境续期或迁移
 - [ ] 统一 README、package、Worker 和后端版本号
 - [ ] 建立 88 个共享 API 契约
 - [ ] 建立最小测试和 CI 门禁
@@ -68,3 +73,5 @@
 - [x] TypeScript 和生产构建通过
 - [x] EdgeOne 代理 GET/POST、响应流、压缩、重定向和 Range 测试通过
 - [x] EdgeOne 线上健康检查、未认证保护和登录 POST 转发通过
+- [x] CloudBase 统一首页无横向溢出，`/api/health`、鉴权保护和登录 POST 转发通过
+- [ ] CloudBase 国内核心业务与 4–5.5MB 边界文件验收

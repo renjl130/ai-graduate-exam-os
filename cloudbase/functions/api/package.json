@@ -1,0 +1,6 @@
+{
+  "name": "jiale-graduate-cloudbase-api-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CloudBase HTTP access proxy for the Cloudflare production API"
+}
