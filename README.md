@@ -3,6 +3,9 @@
 > 以“计划 → 专注 → 复习 → 检测 → 复盘”为核心闭环的佳乐考研个人学习工作台。
 
 ![Version](https://img.shields.io/badge/version-4.1.0-blue)
+> **跨电脑继续开发：** 请先阅读 [`CODEX_CONTINUATION_GUIDE.md`](./CODEX_CONTINUATION_GUIDE.md)。其中包含最终版架构、腾讯云 CloudBase 国内入口、安装启动、部署、安全边界和可直接交给 Codex 的启动提示词。
+
+> **当前生产链路：** 腾讯云 CloudBase 国内入口 + Cloudflare Worker API/数据服务。线上用户数据保存在云端，不随开发包分发。
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Python](https://img.shields.io/badge/python-3.11+-yellow)
 ![Next.js](https://img.shields.io/badge/Next.js-15-black)
